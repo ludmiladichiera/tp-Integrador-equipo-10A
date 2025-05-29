@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace Dominio
 {
-    internal class Imagen
+    public class Administrador : Usuario
     {
+        public string Nombre { get; set; }
     }
 }
