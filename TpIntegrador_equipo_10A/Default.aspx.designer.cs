@@ -15,183 +15,165 @@ namespace TpIntegrador_equipo_10A
     {
 
         /// <summary>
-        /// Control UpdatePanel1.
+        /// Control ImageCarrusel1.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.UpdatePanel UpdatePanel1;
+        protected global::System.Web.UI.WebControls.Image ImageCarrusel1;
 
         /// <summary>
-        /// Control textDni.
+        /// Control ImageCarrusel2.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox textDni;
+        protected global::System.Web.UI.WebControls.Image ImageCarrusel2;
 
         /// <summary>
-        /// Control lblErrorDni.
+        /// Control ImageCarrusel3.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblErrorDni;
+        protected global::System.Web.UI.WebControls.Image ImageCarrusel3;
 
         /// <summary>
-        /// Control textNombre.
+        /// Control Image4.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox textNombre;
+        protected global::System.Web.UI.WebControls.Image Image4;
 
         /// <summary>
-        /// Control lblErrorNombre.
+        /// Control LblTituloProducto1.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblErrorNombre;
+        protected global::System.Web.UI.WebControls.Label LblTituloProducto1;
 
         /// <summary>
-        /// Control textApellido.
+        /// Control LblPrecioProducto1.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox textApellido;
+        protected global::System.Web.UI.WebControls.Label LblPrecioProducto1;
 
         /// <summary>
-        /// Control lblErrorApellido.
+        /// Control ImgEspecialidad.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblErrorApellido;
+        protected global::System.Web.UI.WebControls.Image ImgEspecialidad;
 
         /// <summary>
-        /// Control textEmail.
+        /// Control LblNombreEspecialidad.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox textEmail;
+        protected global::System.Web.UI.WebControls.Label LblNombreEspecialidad;
 
         /// <summary>
-        /// Control lblErrorEmail.
+        /// Control LblDescripcionEspecialidad.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblErrorEmail;
+        protected global::System.Web.UI.WebControls.Label LblDescripcionEspecialidad;
 
         /// <summary>
-        /// Control textDireccion.
+        /// Control ImgChef1.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox textDireccion;
+        protected global::System.Web.UI.WebControls.Image ImgChef1;
 
         /// <summary>
-        /// Control lblErrorDireccion.
+        /// Control LblNombreChef1.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblErrorDireccion;
+        protected global::System.Web.UI.WebControls.Label LblNombreChef1;
 
         /// <summary>
-        /// Control textCiudad.
+        /// Control LblEspecialidadChef1.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox textCiudad;
+        protected global::System.Web.UI.WebControls.Label LblEspecialidadChef1;
 
         /// <summary>
-        /// Control lblErrorCiudad.
+        /// Control ImgChef2.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblErrorCiudad;
+        protected global::System.Web.UI.WebControls.Image ImgChef2;
 
         /// <summary>
-        /// Control textCP.
+        /// Control LblNombreChef2.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox textCP;
+        protected global::System.Web.UI.WebControls.Label LblNombreChef2;
 
         /// <summary>
-        /// Control lblErrorCp.
+        /// Control LblEspecialidadChef2.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblErrorCp;
+        protected global::System.Web.UI.WebControls.Label LblEspecialidadChef2;
 
         /// <summary>
-        /// Control chkbAcepto.
+        /// Control ImgChef3.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.CheckBox chkbAcepto;
+        protected global::System.Web.UI.WebControls.Image ImgChef3;
 
         /// <summary>
-        /// Control lblMensajeError.
+        /// Control LblNombreChef3.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblMensajeError;
+        protected global::System.Web.UI.WebControls.Label LblNombreChef3;
 
         /// <summary>
-        /// Control lblMensajeExito.
+        /// Control LblEspecialidadChef3.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblMensajeExito;
-
-        /// <summary>
-        /// Control lblError.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblError;
-
-        /// <summary>
-        /// Control btnParticipar.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnParticipar;
+        protected global::System.Web.UI.WebControls.Label LblEspecialidadChef3;
     }
 }

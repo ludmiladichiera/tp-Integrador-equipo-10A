@@ -79,7 +79,7 @@
                         <div class="card-body">
                             <asp:Label ID="LblTituloProducto1" runat="server" CssClass="card-title titulo" />
                             <asp:Label ID="LblPrecioProducto1" runat="server" CssClass="card-text d-block mb-2" />
-                            <a href="#" class="btn btn-pink">Ver más</a>
+                            <a href="#" class="btn btn-red">Ver más</a>
                         </div>
                     </div>
                 </div>
