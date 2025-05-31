@@ -41,13 +41,21 @@ CREATE TABLE Categoria (
 CREATE TABLE Producto (
     id_producto INT PRIMARY KEY IDENTITY(1,1),
     codigo VARCHAR(50) UNIQUE NOT NULL,
+	nombre VARCHAR(50) NOT NULL,
     descripcion TEXT NOT NULL,
     precio DECIMAL(10,2) NOT NULL,
     stock INT NOT NULL,
     unidad_venta VARCHAR(20) NOT NULL, -- 'unidad', 'docena', etc.
     id_categoria INT NOT NULL,
-	imagen_url VARCHAR(255) NOT NULL,
-    FOREIGN KEY (id_categoria) REFERENCES Categoria(id_categoria)
+	FOREIGN KEY (id_categoria) REFERENCES Categoria(id_categoria)
+);
+
+--Imagen
+CREATE TABLE Imagen (
+    id_imagen INT PRIMARY KEY IDENTITY(1,1),
+    id_producto INT NOT NULL,
+    url VARCHAR(255) NOT NULL,
+    FOREIGN KEY (id_producto) REFERENCES Producto(id_producto)
 );
 
 -- Carrito
