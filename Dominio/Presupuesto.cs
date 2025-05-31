@@ -8,10 +8,9 @@ namespace Dominio
 {
     public class Presupuesto
     {
-        public int Id { get; set; }
-        public Cliente Cliente { get; set; }
-        public DateTime FechaSolicitud { get; set; }
+        public int Id { get; set; }             
+        public int IdCliente { get; set; }      
+        public DateTime FechaSolicitud { get; set; } 
         public decimal Total { get; set; }
-        public List<PresupuestoItem> Items { get; set; }
     }
 }
