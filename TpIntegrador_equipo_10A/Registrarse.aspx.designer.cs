@@ -11,7 +11,7 @@ namespace TpIntegrador_equipo_10A
 {
 
 
-    public partial class _Default
+    public partial class Registrarse
     {
 
         /// <summary>
