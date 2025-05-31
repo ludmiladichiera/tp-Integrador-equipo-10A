@@ -6,7 +6,10 @@ using System.Threading.Tasks;
 
 namespace Dominio
 {
-    internal class Imagen
+    public class Imagen
     {
+        public int Id { get; set; }
+        public int IdProducto { get; set; }
+        public string ImagenUrl { get; set; }
     }
-}
+    }

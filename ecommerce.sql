@@ -34,7 +34,7 @@ CREATE TABLE Cliente (
 -- Categoría
 CREATE TABLE Categoria (
     id_categoria INT PRIMARY KEY IDENTITY(1,1),
-    nombre VARCHAR(100) NOT NULL
+    descripcion VARCHAR(100) NOT NULL
 );
 
 -- Producto

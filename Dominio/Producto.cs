@@ -16,6 +16,7 @@ namespace Dominio
         public int Stock { get; set; }
         public string UnidadVenta { get; set; } // unidad, docena  
 
+        public List<Imagen> Imagenes { get; set; }
         public Categoria Categoria { get; set; }
     }
 }
