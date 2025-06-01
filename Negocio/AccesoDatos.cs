@@ -69,7 +69,7 @@ namespace Negocio
             conexion.Close();
         }
 
-        public int obtenerIdArt(string codigo)
+        public int obtenerIdProducto(string codigo)
         {
             int id = 0;
             try
@@ -91,6 +91,7 @@ namespace Negocio
                 cerrarConexion();
             }
             return id;
+
 
 
         }

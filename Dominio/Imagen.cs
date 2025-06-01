@@ -10,6 +10,13 @@ namespace Dominio
     {
         public int Id { get; set; }
         public int IdProducto { get; set; }
-        public string ImagenUrl { get; set; }
+        public string Url { get; set; }
+
+        public Imagen() { }
+        public Imagen(string imagenUrl)
+        {
+            Url = imagenUrl;
+        }
+   
     }
     }

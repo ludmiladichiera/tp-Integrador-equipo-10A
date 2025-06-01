@@ -101,6 +101,21 @@ namespace Negocio
                 throw ex;
             }
         }
+        public bool existeCategoria(int idCategoria)
+        {
+            AccesoDatos datos = new AccesoDatos();
+            try
+            {
+                datos.setearConsulta("SELECT COUNT(*) FROM Categoria WHERE id_categoria = @id");
+                datos.setearParametro("@id", idCategoria);
+                datos.ejecutarLectura();
+                return datos.Lector.Read() && (int)datos.Lector[0] > 0;
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
+        }
     }
 }
 
