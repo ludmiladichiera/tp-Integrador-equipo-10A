@@ -1,6 +1,11 @@
 ﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Site.master.cs" Inherits="TpIntegrador_equipo_10A.SiteMaster" %>
 
 <!DOCTYPE html>
+<style>
+    .body-content {
+        margin-top: 70px; /* o más si tu navbar es más alta */
+    }
+</style>
 <html lang="es">
 <head runat="server">
     <meta charset="utf-8" />
@@ -17,14 +22,14 @@
         <%: Scripts.Render("~/bundles/modernizr") %>
     </asp:PlaceHolder>
 
-    <webopt:bundlereference runat="server" path="~/Content/css" />
+    <webopt:BundleReference runat="server" Path="~/Content/css" />
     <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
 </head>
 <body>
     <form runat="server">
         <asp:ScriptManager runat="server" />
 
-        <nav class="navbar fixed-top navbar-dark bg-dark">
+        <nav class="navbar navbar-dark bg-dark">
             <div class="container-fluid d-flex justify-content-between align-items-center">
 
                 <!-- Botón hamburguesa que abre offcanvas -->
@@ -33,7 +38,7 @@
                 </button>
 
                 <!-- Buscador -->
-                <form class="d-flex" role="search" action="~/Buscar.aspx" method="get" style="flex-grow:1; max-width:400px; margin-left:10px; margin-right:10px;">
+                <form class="d-flex" role="search" action="~/Buscar.aspx" method="get" style="flex-grow: 1; max-width: 400px; margin-left: 10px; margin-right: 10px;">
                     <input class="form-control form-control-sm me-2" type="search" name="q" placeholder="Buscar..." aria-label="Buscar" />
                     <button class="btn btn-outline-light btn-sm" type="submit"><i class="fas fa-search"></i></button>
                 </form>
@@ -81,7 +86,9 @@
                         <a class="nav-link text-light" href="~/Tartas.aspx">Tartas</a>
                     </li>
 
-                    <li><hr class="dropdown-divider bg-light" /></li>
+                    <li>
+                        <hr class="dropdown-divider bg-light" />
+                    </li>
 
                     <li class="nav-item">
                         <a class="nav-link text-light" href="~/Contacto.aspx">Contacto</a>
