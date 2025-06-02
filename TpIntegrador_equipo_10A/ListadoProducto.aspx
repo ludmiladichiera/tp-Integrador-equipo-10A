@@ -45,13 +45,14 @@
     <div class="contenedor-productos">
         <asp:Repeater ID="repProductos" runat="server">
             <ItemTemplate>
-                <div class="producto">
-                    <h3><%# Eval("Nombre") %></h3>
-                    <img src='<%# ObtenerUrlImagen(Container.DataItem) %>' alt='<%# Eval("Nombre") %>' />
-                    <p><strong>Categoría:</strong> <%# Eval("Categoria.Descripcion") %></p>
-                    <p><strong>Precio:</strong> $ <%# Eval("Precio") %></p>
-                </div>
-            </ItemTemplate>
+    <div class="producto">
+        <h3><%# Eval("Nombre") %></h3>
+        <img src='<%# ObtenerUrlImagen(Container.DataItem) %>' alt='<%# Eval("Nombre") %>' />
+        <p><strong>Categoría:</strong> <%# Eval("Categoria.Descripcion") %></p>
+        <p><strong>Precio:</strong> $ <%# Eval("Precio") %></p>
+        <a href='<%# Eval("Id", "ProductDetail.aspx?id={0}") %>' style="display:inline-block; margin-top:10px; padding:6px 12px; background-color:#007bff; color:white; border-radius:4px; text-decoration:none;">Ver más</a>
+    </div>
+</ItemTemplate>
         </asp:Repeater>
     </div>
 

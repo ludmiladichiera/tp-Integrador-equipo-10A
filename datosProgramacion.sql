@@ -1,7 +1,7 @@
 use Ecommerce
 go
 
-
+/*
 INSERT INTO Categoria
 VALUES
   ('Tortas Clásicas'),      -- ID 1
@@ -88,3 +88,9 @@ INSERT INTO Imagen (id_producto, url) VALUES
 (31, 'img/cookies.jpg'),
 (32, 'img/vasitos.jpg'),
 (33, 'img/mini_tartas.jpg');
+*/
+
+INSERT INTO Imagen (id_producto, url)
+VALUES 
+(21, 'img/humita.jpg'),
+(21, 'img/samosa.jpg');

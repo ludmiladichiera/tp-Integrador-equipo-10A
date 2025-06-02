@@ -42,7 +42,7 @@ CREATE TABLE Producto (
     id_producto INT PRIMARY KEY IDENTITY(1,1),
     codigo VARCHAR(50) UNIQUE NOT NULL,
 	nombre VARCHAR(50) NOT NULL,
-    descripcion VARCHAR(1000) NOT NULL,
+    descripcion VARCHAR (1000) NOT NULL,
     precio DECIMAL(10,2) NOT NULL,
     stock INT NOT NULL,
     unidad_venta VARCHAR(20) NOT NULL, -- 'unidad', 'docena', etc.

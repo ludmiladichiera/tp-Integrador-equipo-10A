@@ -1,9 +1,10 @@
-﻿<%@ Page Title="Home Page" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Default.aspx.cs" Inherits="TpIntegrador_equipo_10A._Default" %>
+﻿<%@ Page Title="Detalle del Producto" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="ProductDetail.aspx.cs" Inherits="TpIntegrador_equipo_10A.ProductDetail" %>
 
 <asp:Content ID="BodyContent" ContentPlaceHolderID="MainContent" runat="server">
     <head>
         <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
     </head>
+
     <script>
         function cambiarCantidad(delta) {
             var input = document.getElementById('<%= txtCantidad.ClientID %>');
@@ -13,40 +14,50 @@
             input.value = nuevoValor;
         }
     </script>
+
     <style>
         .carousel-control-next-icon,
         .carousel-control-prev-icon {
-            background-color: rgba(0, 0, 0, 0.5); /* Fondo oscuro semitransparente */
-            border-radius: 50%; /* Redondeado */
-            padding: 10px; /* Espaciado interno */
-            border: 2px solid white; /* Borde blanco */
-
-           /* width: 40px;
-            height: 40px;*/
+            background-color: rgba(0, 0, 0, 0.5);
+            border-radius: 50%;
+            padding: 10px;
+            border: 2px solid white;
         }
     </style>
+
     <main class="container mt-5">
         <div class="row">
-            <!-- Carrusel -->
+
+            <!-- Carrusel de imágenes -->
             <div class="col-md-6">
-                <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel" style="max-width: 100%;">
-                    <div class="carousel-inner rounded">
-                        <div class="carousel-item active">
-                            <asp:Image ID="ImageCarrusel1" runat="server"
-                                ImageUrl="https://cdn0.uncomo.com/es/posts/1/4/2/como_hacer_tarta_selva_negra_52241_orig.jpg"
-                                CssClass="d-block w-100 img-fluid rounded" AlternateText="Torta 1" />
-                        </div>
-                        <div class="carousel-item">
-                            <asp:Image ID="ImageCarrusel2" runat="server"
-                                ImageUrl="https://www.southernliving.com/thmb/_qXEROnwaluQ3Q3XjPIhpM0yM1U=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/2675801_SaveR_23326-2000-761aee90da684686816cf9e8fafd67d1-7fda54d01a594eaba1a296409addc689.jpg"
-                                CssClass="d-block w-100 img-fluid rounded" AlternateText="Torta 2" />
-                        </div>
-                        <div class="carousel-item">
-                            <asp:Image ID="ImageCarrusel3" runat="server"
-                                ImageUrl="https://i.blogs.es/45c847/15-recetas-de-tartas-que-siempre-quisiste-hacer-en-su-version-mas-facil-/1366_2000.jpeg"
-                                CssClass="d-block w-100 img-fluid rounded" AlternateText="Torta 3" />
-                        </div>
+                <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
+                    
+                    <!-- Indicadores -->
+                    <div class="carousel-indicators">
+                        <asp:Repeater ID="rptIndicadores" runat="server">
+                            <ItemTemplate>
+                                <button type="button" data-bs-target="#carouselExampleIndicators"
+                                    data-bs-slide-to='<%# Container.ItemIndex %>'
+                                    class='<%# Container.ItemIndex == 0 ? "active" : "" %>'
+                                    aria-current='<%# Container.ItemIndex == 0 ? "true" : "false" %>'
+                                    aria-label='Slide <%# Container.ItemIndex + 1 %>'>
+                                </button>
+                            </ItemTemplate>
+                        </asp:Repeater>
                     </div>
+
+                    <!-- Imágenes -->
+                    <div class="carousel-inner">
+                        <asp:Repeater ID="rptImagenes" runat="server">
+                            <ItemTemplate>
+                                <div class='<%# Container.ItemIndex == 0 ? "carousel-item active" : "carousel-item" %>'>
+                                    <img src='<%# Eval("Url") %>' class="d-block w-100 img-fluid" alt="Imagen del producto" />
+                                </div>
+                            </ItemTemplate>
+                        </asp:Repeater>
+                    </div>
+
+                    <!-- Controles -->
                     <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
                         <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                     </button>
@@ -58,26 +69,32 @@
 
             <!-- Detalles del producto -->
             <div class="col-md-6">
+
                 <!-- Categoría -->
                 <p class="text-muted small">
-                    <asp:Label ID="lblCategoria" runat="server" Text="categoria /"></asp:Label>
+                    <asp:Label ID="lblCategoria" runat="server" Text="Categoría / "></asp:Label>
                 </p>
 
-                <!-- Nombre producto -->
+                <!-- Nombre -->
                 <h2 class="fw-bold">
-                    <asp:Label ID="lblNombreProducto" runat="server" Text="Nombre producto"></asp:Label>
+                    <asp:Label ID="lblNombre" runat="server" Text="Nombre del producto"></asp:Label>
                 </h2>
 
                 <!-- Precio -->
-                <h4 class="text-success fw-semibold mb-3">$<asp:Label ID="lblPrecio" runat="server" Text="Precio"></asp:Label>
-                </h4>
+                <h4 class="text-success fw-semibold mb-3">$<asp:Label ID="lblPrecio" runat="server" Text="0.00"></asp:Label></h4>
 
                 <!-- Descripción -->
-                <p class="text-muted mb-4">
-                    <asp:Label ID="lblDescripcion" runat="server" Text="Descripcion producto"></asp:Label>
+                <p class="text-muted mb-2">
+                    <asp:Label ID="lblDescripcion" runat="server" Text="Descripción del producto"></asp:Label>
                 </p>
 
-                <!-- Selector de cantidad con botones -->
+                <!-- Stock -->
+                <p class="mb-1">Stock disponible: <asp:Label ID="lblStock" runat="server" Text="0"></asp:Label></p>
+
+                <!-- Unidad de venta -->
+                <p class="mb-4">Unidad de venta: <asp:Label ID="lblUnidadVenta" runat="server" Text="Unidad"></asp:Label></p>
+
+                <!-- Cantidad con botones -->
                 <div class="d-flex align-items-center mb-4">
                     <label for="txtCantidad" class="me-3 fw-semibold">Cantidad:</label>
                     <div class="input-group" style="width: 120px;">
@@ -87,14 +104,18 @@
                     </div>
                 </div>
 
-                <!-- Botones -->
-                <div class="d-flex gap-2">
+                <!-- Botones de acción -->
+                <div class="d-flex gap-2 mb-2">
                     <button type="button" class="btn btn-outline-primary">
                         <i class="bi bi-cart3 me-2"></i>Agregar al carrito
                     </button>
                     <asp:Button ID="btnComprarAhora" runat="server" Text="Comprar ahora" CssClass="btn btn-primary" />
                 </div>
-            </div>
-    </main>
 
+                <!-- Error -->
+                <asp:Label ID="lblError" runat="server" CssClass="text-danger fw-semibold"></asp:Label>
+
+            </div>
+        </div>
+    </main>
 </asp:Content>
