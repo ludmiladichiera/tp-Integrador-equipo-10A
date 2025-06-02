@@ -13,5 +13,13 @@ namespace TpIntegrador_equipo_10A
         {
 
         }
+        protected void btnBuscar_Click(object sender, EventArgs e)
+        {
+            string textoBusqueda = txtBuscar.Text.Trim();
+            if (!string.IsNullOrEmpty(textoBusqueda))
+            {
+                Response.Redirect($"Buscar.aspx?q={Server.UrlEncode(textoBusqueda)}");
+            }
+        }
     }
 }

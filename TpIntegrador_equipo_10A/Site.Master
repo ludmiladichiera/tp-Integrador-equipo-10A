@@ -37,11 +37,11 @@
                     <span class="navbar-toggler-icon"></span>
                 </button>
 
-                <!-- Buscador -->
-                <form class="d-flex" role="search" action="~/Buscar.aspx" method="get" style="flex-grow: 1; max-width: 400px; margin-left: 10px; margin-right: 10px;">
-                    <input class="form-control form-control-sm me-2" type="search" name="q" placeholder="Buscar..." aria-label="Buscar" />
-                    <button class="btn btn-outline-light btn-sm" type="submit"><i class="fas fa-search"></i></button>
-                </form>
+                <!-- buscador -->
+                <div class="d-flex" style="flex-grow: 1; max-width: 400px; margin-left: 10px; margin-right: 10px;">
+    <asp:TextBox ID="txtBuscar" runat="server" CssClass="form-control form-control-sm me-2" Placeholder="Buscar..." />
+    <asp:Button ID="btnBuscar" runat="server" CssClass="btn btn-outline-light btn-sm" Text="Buscar" OnClick="btnBuscar_Click" />
+</div>
 
                 <!-- Centro: logo y texto -->
                 <div class="text-center mx-3 flex-grow-1">
