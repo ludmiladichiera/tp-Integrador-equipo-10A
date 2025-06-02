@@ -122,6 +122,7 @@
     <Content Include="Default.aspx" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
+    <Content Include="ListadoProducto.aspx" />
     <Content Include="ProductDetail.aspx" />
     <Content Include="Registrarse.aspx" />
     <Content Include="Scripts\bootstrap.bundle.js" />
@@ -218,6 +219,13 @@
     </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="ListadoProducto.aspx.cs">
+      <DependentUpon>ListadoProducto.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ListadoProducto.aspx.designer.cs">
+      <DependentUpon>ListadoProducto.aspx</DependentUpon>
     </Compile>
     <Compile Include="ProductDetail.aspx.cs">
       <DependentUpon>ProductDetail.aspx</DependentUpon>

@@ -31,9 +31,14 @@ SELECT
     P.stock AS Stock,
     P.unidad_venta AS UnidadVenta,
     P.id_categoria AS IdCategoria,
-    C.descripcion AS Categoria
+    C.descripcion AS Categoria,
+    MIN(I.url) AS ImagenUrl
 FROM Producto P
-JOIN Categoria C ON P.id_categoria = C.id_categoria";
+JOIN Categoria C ON P.id_categoria = C.id_categoria
+LEFT JOIN Imagen I ON P.id_producto = I.id_producto
+GROUP BY
+    P.id_producto, P.codigo, P.nombre, P.descripcion, P.precio, P.stock, 
+    P.unidad_venta, P.id_categoria, C.descripcion";
 
                 comando.Connection = conexion;
 
@@ -56,7 +61,17 @@ JOIN Categoria C ON P.id_categoria = C.id_categoria";
                     aux.Categoria.Id = lector["IdCategoria"] != DBNull.Value ? (int)lector["IdCategoria"] : 0;
                     aux.Categoria.Descripcion = lector["Categoria"] != DBNull.Value ? lector["Categoria"].ToString() : "No especifica";
 
-                    aux.Imagenes = new List<Imagen>();
+                    if (aux.Imagenes == null)
+                        aux.Imagenes = new List<Imagen>();
+
+                    if (!(lector["ImagenUrl"] is DBNull))
+                    {
+                        aux.Imagenes.Add(new Imagen(lector["ImagenUrl"].ToString()));
+                    }
+                    else
+                    {
+                        aux.Imagenes.Add(new Imagen("https://media.istockphoto.com/id/1128826884/es/vector/ning%C3%BAn-s%C3%ADmbolo-de-vector-de-imagen-falta-icono-disponible-no-hay-galer%C3%ADa-para-este-momento.jpg?s=612x612&w=0&k=20&c=9vnjI4XI3XQC0VHfuDePO7vNJE7WDM8uzQmZJ1SnQgk="));
+                    }
 
                     lista.Add(aux);
                 }
@@ -436,4 +451,3 @@ SELECT SCOPE_IDENTITY();";
 
 
 }
-
