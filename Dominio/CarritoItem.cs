@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Dominio
 {
-    public class CarritoItem
+    public class CarritoItem //falta id carrito?
     {
         public Producto Producto { get; set; }
         public int Cantidad { get; set; }

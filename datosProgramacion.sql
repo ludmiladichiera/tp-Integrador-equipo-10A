@@ -1,7 +1,7 @@
 use Ecommerce
 go
 
-/*
+
 INSERT INTO Categoria
 VALUES
   ('Tortas Clásicas'),      -- ID 1
@@ -54,7 +54,7 @@ INSERT INTO Producto (codigo, nombre, descripcion, precio, stock, unidad_venta, 
 
 
 
-INSERT INTO Imagen (id_producto, url) VALUES
+INSERT INTO Imagen (id_producto, imagen_url) VALUES
 (1, 'img/tiramisu.jpg'),
 (2, 'img/chocotorta.jpg'),
 (3, 'img/cheesecake.jpg'),
@@ -88,9 +88,16 @@ INSERT INTO Imagen (id_producto, url) VALUES
 (31, 'img/cookies.jpg'),
 (32, 'img/vasitos.jpg'),
 (33, 'img/mini_tartas.jpg');
-*/
 
-INSERT INTO Imagen (id_producto, url)
+
+INSERT INTO Imagen (id_producto, imagen_url)
 VALUES 
 (21, 'img/humita.jpg'),
 (21, 'img/samosa.jpg');
+
+
+INSERT INTO TipoUsuario (descripcion) 
+VALUES ('Cliente'), ('Administrador');
+
+INSERT INTO Usuario (mail, pass, id_tipo_usuario)
+VALUES ('admin@ejemplo.com', 'admin123', 2);

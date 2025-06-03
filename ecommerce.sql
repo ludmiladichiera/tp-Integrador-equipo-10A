@@ -5,32 +5,25 @@ GO
 USE Ecommerce;
 GO
 
--- Usuario (base para Cliente y Administrador)
+CREATE TABLE TipoUsuario (
+    id_tipo_usuario INT IDENTITY(1,1) PRIMARY KEY,
+    descripcion VARCHAR(50) NOT NULL
+);
+
 CREATE TABLE Usuario (
-    usuario_id INT PRIMARY KEY, -- No es IDENTITY porque se hereda
-    email VARCHAR(100) NOT NULL UNIQUE,
-    contraseña VARCHAR(100) NOT NULL,
-    tipo_usuario VARCHAR(20) NOT NULL -- 'cliente' o 'administrador'
+    id_usuario INT IDENTITY(1,1) PRIMARY KEY,
+    mail VARCHAR(100) NOT NULL UNIQUE,
+    pass VARCHAR(50) NOT NULL,
+    id_tipo_usuario INT NOT NULL,
+    dni VARCHAR(20) NULL,
+    nombre VARCHAR(50) NULL,
+    apellido VARCHAR(50) NULL,
+    direccion VARCHAR(100) NULL,
+    ciudad VARCHAR(50) NULL,
+    codigo_postal INT NULL,
+    telefono VARCHAR(20) NULL,
+    FOREIGN KEY (id_tipo_usuario) REFERENCES TipoUsuario(id_tipo_usuario)
 );
-
--- Administrador
-CREATE TABLE Administrador (
-    admin_id INT PRIMARY KEY,
-    nombre VARCHAR(100) NOT NULL,
-    FOREIGN KEY (admin_id) REFERENCES Usuario(usuario_id)
-);
-
--- Cliente
-CREATE TABLE Cliente (
-    id_cliente INT PRIMARY KEY IDENTITY(1,1),
-    usuario_id INT NOT NULL UNIQUE,
-    nombre VARCHAR(50) NOT NULL,
-    apellido VARCHAR(50) NOT NULL,
-    direccion VARCHAR(255) NOT NULL,
-    telefono VARCHAR(20) NOT NULL,
-    FOREIGN KEY (usuario_id) REFERENCES Usuario(usuario_id)
-);
-
 -- Categoría
 CREATE TABLE Categoria (
     id_categoria INT PRIMARY KEY IDENTITY(1,1),
@@ -54,15 +47,15 @@ CREATE TABLE Producto (
 CREATE TABLE Imagen (
     id_imagen INT PRIMARY KEY IDENTITY(1,1),
     id_producto INT NOT NULL,
-    url VARCHAR(1000) NOT NULL,
+    imagen_url VARCHAR(1000) NOT NULL,
     FOREIGN KEY (id_producto) REFERENCES Producto(id_producto)
 );
 
 -- Carrito
 CREATE TABLE Carrito (
     id_carrito INT PRIMARY KEY IDENTITY(1,1),
-    id_cliente INT NOT NULL,
-    FOREIGN KEY (id_cliente) REFERENCES Cliente(id_cliente)
+    id_usuario INT NOT NULL,
+    FOREIGN KEY (id_usuario) REFERENCES Usuario(id_usuario)
 );
 
 -- Ítems del carrito
@@ -78,10 +71,10 @@ CREATE TABLE Carrito_Item (
 -- Presupuesto (reemplaza Lista de Deseos)
 CREATE TABLE Presupuesto (
     id_presupuesto INT PRIMARY KEY IDENTITY(1,1),
-    id_cliente INT NOT NULL,
+    id_usuario INT NOT NULL,
     fecha_solicitud DATETIME DEFAULT GETDATE() NOT NULL,
     total DECIMAL(10,2) NOT NULL,
-    FOREIGN KEY (id_cliente) REFERENCES Cliente(id_cliente)
+    FOREIGN KEY (id_usuario) REFERENCES Usuario(id_usuario)
 );
 
 -- Ítems del presupuesto
@@ -98,12 +91,12 @@ CREATE TABLE Presupuesto_Item (
 -- Pedido
 CREATE TABLE Pedido (
     id_pedido INT PRIMARY KEY IDENTITY(1,1),
-    id_cliente INT NOT NULL,
+    id_usuario INT NOT NULL,
     fecha_pedido DATETIME DEFAULT GETDATE() NOT NULL,
     metodo_entrega VARCHAR(20) NOT NULL, -- 'envio' o 'retiro'
     fecha_entrega DATE NOT NULL,
     precio_total DECIMAL(10,2) NOT NULL,
-    FOREIGN KEY (id_cliente) REFERENCES Cliente(id_cliente)
+    FOREIGN KEY (id_usuario) REFERENCES Usuario(id_usuario)
 );
 
 -- Ítems del pedido

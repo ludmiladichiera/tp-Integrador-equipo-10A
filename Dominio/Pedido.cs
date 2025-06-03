@@ -6,10 +6,10 @@ using System.Threading.Tasks;
 
 namespace Dominio
 {
-    public class Pedido
+    public class Pedido //falta un estado de pedido recepcionado, en preparacion, listo, enviado etc
     {
         public int Id { get; set; }
-        public Cliente Cliente { get; set; }
+        public Usuario Usuario { get; set; }
         public DateTime FechaPedido { get; set; }
         public string MetodoEntrega { get; set; } // 'envio' o 'retiro'
         public DateTime FechaEntrega { get; set; }

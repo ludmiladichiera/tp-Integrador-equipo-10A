@@ -3,7 +3,7 @@
 <!DOCTYPE html>
 <style>
     .body-content {
-        margin-top: 70px; /* o más si tu navbar es más alta */
+        margin-top: 70px; 
     }
 </style>
 <html lang="es">

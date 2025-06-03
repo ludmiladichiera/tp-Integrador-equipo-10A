@@ -32,7 +32,7 @@ SELECT
     P.unidad_venta AS UnidadVenta,
     P.id_categoria AS IdCategoria,
     C.descripcion AS Categoria,
-    MIN(I.url) AS ImagenUrl
+    MIN(I.imagen_url) AS ImagenUrl
 FROM Producto P
 JOIN Categoria C ON P.id_categoria = C.id_categoria
 LEFT JOIN Imagen I ON P.id_producto = I.id_producto
@@ -301,7 +301,7 @@ SELECT SCOPE_IDENTITY();";
                             P.stock AS Stock,
                             P.unidad_venta AS UnidadVenta,
                             C.descripcion AS Categoria,
-                            MIN(I.url) AS ImagenesUrl
+                            MIN(I.imagen_url) AS ImagenesUrl
                         FROM Producto P
                         LEFT JOIN Categoria C ON P.id_categoria = C.id_categoria
                         LEFT JOIN Imagen I ON P.id_producto = I.id_producto
@@ -461,7 +461,7 @@ SELECT SCOPE_IDENTITY();";
                     P.stock AS Stock,
                     P.unidad_venta AS UnidadVenta,
                     C.descripcion AS Categoria,
-                    MIN(I.url) AS ImagenesUrl
+                    MIN(I.imagen_url) AS ImagenesUrl
                 FROM Producto P
                 LEFT JOIN Categoria C ON P.id_categoria = C.id_categoria
                 LEFT JOIN Imagen I ON P.id_producto = I.id_producto

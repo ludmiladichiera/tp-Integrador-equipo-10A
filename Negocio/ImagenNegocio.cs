@@ -16,7 +16,7 @@ namespace Negocio
 
             try
             {
-                datos.setearConsulta("SELECT id_imagen, id_producto, url FROM Imagen WHERE id_producto = @idProducto");
+                datos.setearConsulta("SELECT id_imagen, id_producto,imagen_url FROM Imagen WHERE id_producto = @idProducto");
                 datos.setearParametro("@idProducto", idProducto);
                 datos.ejecutarLectura();
 
@@ -25,7 +25,7 @@ namespace Negocio
                     Imagen imagen = new Imagen();
                     imagen.Id = (int)datos.Lector["id_imagen"];
                     imagen.IdProducto = (int)datos.Lector["id_producto"];
-                    imagen.Url = datos.Lector["url"].ToString();
+                    imagen.Url = datos.Lector["imagen_url"].ToString();
 
                     lista.Add(imagen);
                 }
@@ -48,9 +48,9 @@ namespace Negocio
 
             try
             {
-                datos.setearConsulta("INSERT INTO Imagen (id_producto, url) VALUES (@idProducto, @url)");
+                datos.setearConsulta("INSERT INTO Imagen (id_producto, imagen_url) VALUES (@idProducto, @imagen_url)");
                 datos.setearParametro("@idProducto", imagen.IdProducto);
-                datos.setearParametro("@url", imagen.Url);
+                datos.setearParametro("@imagen_url", imagen.Url);
                 datos.ejecutarAccion();
             }
             catch (Exception ex)
@@ -95,9 +95,9 @@ namespace Negocio
 
                 foreach (Imagen imagen in imagenes)
                 {
-                    datos.setearConsulta("INSERT INTO Imagen (id_producto, url) VALUES (@idProducto, @url)");
+                    datos.setearConsulta("INSERT INTO Imagen (id_producto, imagen_url) VALUES (@idProducto, @imagen_url)");
                     datos.setearParametro("@idProducto", idProducto);
-                    datos.setearParametro("@url", imagen.Url);
+                    datos.setearParametro("@imagen_url", imagen.Url);
                     datos.ejecutarAccion();
                 }
             }

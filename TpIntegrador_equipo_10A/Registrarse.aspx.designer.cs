@@ -24,6 +24,15 @@ namespace TpIntegrador_equipo_10A
         protected global::System.Web.UI.UpdatePanel UpdatePanel1;
 
         /// <summary>
+        /// Control textEmail.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox textEmail;
+
+        /// <summary>
         /// Control textDni.
         /// </summary>
         /// <remarks>
@@ -31,15 +40,6 @@ namespace TpIntegrador_equipo_10A
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox textDni;
-
-        /// <summary>
-        /// Control lblErrorDni.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblErrorDni;
 
         /// <summary>
         /// Control textNombre.
@@ -51,15 +51,6 @@ namespace TpIntegrador_equipo_10A
         protected global::System.Web.UI.WebControls.TextBox textNombre;
 
         /// <summary>
-        /// Control lblErrorNombre.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblErrorNombre;
-
-        /// <summary>
         /// Control textApellido.
         /// </summary>
         /// <remarks>
@@ -69,31 +60,22 @@ namespace TpIntegrador_equipo_10A
         protected global::System.Web.UI.WebControls.TextBox textApellido;
 
         /// <summary>
-        /// Control lblErrorApellido.
+        /// Control textPassword.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblErrorApellido;
+        protected global::System.Web.UI.WebControls.TextBox textPassword;
 
         /// <summary>
-        /// Control textEmail.
+        /// Control textConfirmPassword.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox textEmail;
-
-        /// <summary>
-        /// Control lblErrorEmail.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblErrorEmail;
+        protected global::System.Web.UI.WebControls.TextBox textConfirmPassword;
 
         /// <summary>
         /// Control textDireccion.
@@ -105,13 +87,13 @@ namespace TpIntegrador_equipo_10A
         protected global::System.Web.UI.WebControls.TextBox textDireccion;
 
         /// <summary>
-        /// Control lblErrorDireccion.
+        /// Control textTelefono.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblErrorDireccion;
+        protected global::System.Web.UI.WebControls.TextBox textTelefono;
 
         /// <summary>
         /// Control textCiudad.
@@ -123,31 +105,13 @@ namespace TpIntegrador_equipo_10A
         protected global::System.Web.UI.WebControls.TextBox textCiudad;
 
         /// <summary>
-        /// Control lblErrorCiudad.
+        /// Control textCodigoPostal.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblErrorCiudad;
-
-        /// <summary>
-        /// Control textCP.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox textCP;
-
-        /// <summary>
-        /// Control lblErrorCp.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblErrorCp;
+        protected global::System.Web.UI.WebControls.TextBox textCodigoPostal;
 
         /// <summary>
         /// Control chkbAcepto.
@@ -159,39 +123,30 @@ namespace TpIntegrador_equipo_10A
         protected global::System.Web.UI.WebControls.CheckBox chkbAcepto;
 
         /// <summary>
-        /// Control lblMensajeError.
+        /// Control cvAcepto.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblMensajeError;
+        protected global::System.Web.UI.WebControls.CustomValidator cvAcepto;
 
         /// <summary>
-        /// Control lblMensajeExito.
+        /// Control btnRegistrar.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblMensajeExito;
+        protected global::System.Web.UI.WebControls.Button btnRegistrar;
 
         /// <summary>
-        /// Control lblError.
+        /// Control lblMensaje.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblError;
-
-        /// <summary>
-        /// Control btnParticipar.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnParticipar;
+        protected global::System.Web.UI.WebControls.Label lblMensaje;
     }
 }
