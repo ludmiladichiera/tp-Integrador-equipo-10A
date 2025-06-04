@@ -100,6 +100,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="About.aspx" />
+    <Content Include="AltaModificacion.aspx" />
     <Content Include="Buscar.aspx" />
     <Content Include="Carrito.aspx" />
     <Content Include="Contact.aspx" />
@@ -223,6 +224,13 @@
     <Content Include="Site.Mobile.Master" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AltaModificacion.aspx.cs">
+      <DependentUpon>AltaModificacion.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AltaModificacion.aspx.designer.cs">
+      <DependentUpon>AltaModificacion.aspx</DependentUpon>
+    </Compile>
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="About.aspx.cs">
       <DependentUpon>About.aspx</DependentUpon>
