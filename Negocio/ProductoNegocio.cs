@@ -508,6 +508,68 @@ SELECT SCOPE_IDENTITY();";
         }
 
 
+        public List<Producto> ListarPorCategoria(string categoria)
+        {
+            List<Producto> lista = new List<Producto>();
+            AccesoDatos datos = new AccesoDatos();
+
+            try
+            {
+                string consulta = @"
+        SELECT 
+            P.id_producto AS Id, 
+            P.codigo AS Codigo, 
+            P.nombre AS Nombre, 
+            P.descripcion AS Descripcion, 
+            P.precio AS Precio,
+            P.stock AS Stock,
+            P.unidad_venta AS UnidadVenta,
+            C.descripcion AS Categoria,
+            MIN(I.imagen_url) AS ImagenesUrl
+        FROM Producto P
+        LEFT JOIN Categoria C ON P.id_categoria = C.id_categoria
+        LEFT JOIN Imagen I ON P.id_producto = I.id_producto
+        WHERE 
+            C.descripcion = @categoria
+        GROUP BY 
+            P.id_producto, P.codigo, P.nombre, P.descripcion, P.precio, P.stock, P.unidad_venta, C.descripcion";
+
+                datos.setearConsulta(consulta);
+                datos.setearParametro("@categoria", categoria);
+                datos.ejecutarLectura();
+
+                while (datos.Lector.Read())
+                {
+                    Producto aux = new Producto();
+                    aux.Id = (int)datos.Lector["Id"];
+                    aux.Codigo = datos.Lector["Codigo"].ToString();
+                    aux.Nombre = datos.Lector["Nombre"].ToString();
+                    aux.Descripcion = datos.Lector["Descripcion"].ToString();
+                    aux.Precio = (decimal)datos.Lector["Precio"];
+                    aux.Stock = (int)datos.Lector["Stock"];
+                    aux.UnidadVenta = datos.Lector["UnidadVenta"].ToString();
+                    aux.Categoria = new Categoria { Descripcion = datos.Lector["Categoria"].ToString() };
+
+                    aux.Imagenes = new List<Imagen>();
+                    if (!(datos.Lector["ImagenesUrl"] is DBNull))
+                        aux.Imagenes.Add(new Imagen(datos.Lector["ImagenesUrl"].ToString()));
+
+                    lista.Add(aux);
+                }
+
+                return lista;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
+        }
+
+
 
     }
 

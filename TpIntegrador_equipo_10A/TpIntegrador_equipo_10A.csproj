@@ -125,6 +125,7 @@
     <Content Include="Content\Site.css" />
     <Content Include="Default.aspx" />
     <Content Include="favicon.ico" />
+    <Content Include="FiltroCategoria.aspx" />
     <Content Include="Global.asax" />
     <Content Include="img\alf_coco.jpg" />
     <Content Include="img\alf_nuez.jpg" />
@@ -284,6 +285,13 @@
     </Compile>
     <Compile Include="Default.aspx.designer.cs">
       <DependentUpon>Default.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="FiltroCategoria.aspx.cs">
+      <DependentUpon>FiltroCategoria.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="FiltroCategoria.aspx.designer.cs">
+      <DependentUpon>FiltroCategoria.aspx</DependentUpon>
     </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>

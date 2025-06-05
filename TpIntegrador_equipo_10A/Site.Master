@@ -54,14 +54,14 @@
                 <!-- Derecha: usuario y carrito -->
                 <ul class="navbar-nav flex-row align-items-center">
                     <li class="nav-item me-3">
-                        <a class="nav-link" href="~/Login.aspx" title="Usuario">
+                        <a class="nav-link" href="/MiPerfil.aspx" title="Mi Perfil">
                             <i class="fas fa-user fa-lg text-light"></i>
                         </a>
                     </li>
                     <li class="nav-item position-relative">
                         <a class="nav-link" href="/Carrito.aspx" title="Carrito">
                             <i class="fas fa-shopping-cart fa-lg text-light"></i>
-                            <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">0</span>
+                            <span id="badgeCarrito" runat="server" class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">0</span>
                         </a>
                     </li>
                 </ul>
@@ -69,7 +69,7 @@
             </div>
         </nav>
 
-        <!-- Menú lateral Offcanvas -->
+                <!-- Menú lateral Offcanvas -->
         <div class="offcanvas offcanvas-start text-bg-dark" tabindex="-1" id="offcanvasMenu" aria-labelledby="offcanvasMenuLabel">
             <div class="offcanvas-header">
                 <h5 class="offcanvas-title" id="offcanvasMenuLabel">Menú</h5>
@@ -78,16 +78,20 @@
             <div class="offcanvas-body">
                 <ul class="nav flex-column">
 
-                    <li class="nav-item">
-                        <a class="nav-link text-light" href="~/ServiciosLunch.aspx">Servicio de Lunch</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link text-light" href="~/Tortas.aspx">Tortas</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link text-light" href="~/Tartas.aspx">Tartas</a>
-                    </li>
-
+                    <ul class="nav flex-column">
+    <li class="nav-item">
+        <a class="nav-link text-light" href="FiltroCategoria.aspx?categoria=Servicio de Lunch">Servicio de Lunch</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link text-light" href="FiltroCategoria.aspx?categoria=Tortas clásicas">Tortas clásicas</a> 
+    </li>
+    <li class="nav-item">
+        <a class="nav-link text-light" href="FiltroCategoria.aspx?categoria=Tartas">Tartas</a>
+    </li>
+</ul>
+                    <a class="nav-link text-light" href="/ListadoProducto.aspx">Ver todos los productos</a>
+                    <a class="nav-link text-light" href="/Login.aspx">Iniciar sesión</a>
+                     <a class="nav-link text-light" href="/Registrarse.aspx">Registrarse</a>
                     <li>
                         <hr class="dropdown-divider bg-light" />
                     </li>
