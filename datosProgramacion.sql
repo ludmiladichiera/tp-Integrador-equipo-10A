@@ -99,5 +99,5 @@ VALUES
 INSERT INTO TipoUsuario (descripcion) 
 VALUES ('Cliente'), ('Administrador');
 
-INSERT INTO Usuario (mail, pass, id_tipo_usuario)
-VALUES ('admin@ejemplo.com', 'admin123', 2);
+INSERT INTO Usuario (mail, pass, id_tipo_usuario, dni, nombre, apellido, direccion, ciudad, codigo_postal, telefono)
+VALUES ('admin@miapp.com', 'admin123', 2, '12345678', 'Admin', 'Principal', 'Calle Falsa 123', 'Buenos Aires', 1000, '1234567890');

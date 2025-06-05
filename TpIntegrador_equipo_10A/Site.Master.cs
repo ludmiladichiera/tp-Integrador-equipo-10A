@@ -16,6 +16,14 @@ namespace TpIntegrador_equipo_10A
             {
                 ActualizarCantidadCarrito();
             }
+            if (Session["IdTipoUsuario"] != null && (int)Session["IdTipoUsuario"] == 2)
+            {
+                pnlAdminMenu.Visible = true; // mostrar admin
+            }
+            else
+            {
+                pnlAdminMenu.Visible = false; // ocultar admin
+            }
         }
         protected void btnBuscar_Click(object sender, EventArgs e)
         {
@@ -41,7 +49,7 @@ namespace TpIntegrador_equipo_10A
                 }
             }
 
-            // Actualizar el badge con la cantidad total
+            // Actualizar 
             badgeCarrito.InnerText = cantidadTotal.ToString();
         }
 

@@ -20,28 +20,27 @@ namespace TpIntegrador_equipo_10A
 
             try
             {
-                // usamos el método Loguear para obtener el usuario completo si el mail y pass coinciden
                 Usuario usuario = usuarioNegocio.Loguear(email, contraseña);
 
                 if (usuario == null)
                 {
-                    lblMensaje.Text = "Email o contraseña incorrectos, o el usuario no está registrado. Por favor, regístrese.";
+                    lblMensaje.Text = "Email o contraseña incorrectos.";
+                    lblMensaje.CssClass = "text-danger";
                     lblMensaje.Visible = true;
                     return;
                 }
 
-                // usuario válido: guardamos en sesión
+                // guardamos usuario y tipo en sesión
                 Session["usuario"] = usuario;
+                Session["IdTipoUsuario"] = usuario.TipoUsuario.Id;
 
-                lblMensaje.Text = "Se ha logueado correctamente.";
-                lblMensaje.CssClass = "text-success";
-                lblMensaje.Visible = true;
-                // redirigimos a la página ...
-                //Response.Redirect(".aspx", false);
+                // Mensaje y redirigir a otra página
+                Response.Redirect("Default.aspx");
             }
             catch (Exception ex)
             {
-                lblMensaje.Text = "Ocurrió un error al iniciar sesión: " + ex.Message;
+                lblMensaje.Text = "Error al iniciar sesión: " + ex.Message;
+                lblMensaje.CssClass = "text-danger";
                 lblMensaje.Visible = true;
             }
         }

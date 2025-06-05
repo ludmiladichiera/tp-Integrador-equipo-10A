@@ -102,6 +102,12 @@
                     <li class="nav-item">
                         <a class="nav-link text-light" href="~/ComoComprar.aspx">Cómo comprar</a>
                     </li>
+                                <asp:Panel ID="pnlAdminMenu" runat="server" Visible="false">
+    <li class="nav-item">
+        <a class="nav-link text-light" href="/AltaModificacion.aspx">Administrador</a>
+    </li>
+</asp:Panel>
+
                 </ul>
             </div>
         </div>
