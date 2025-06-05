@@ -54,7 +54,7 @@ CREATE TABLE Imagen (
 -- Carrito
 CREATE TABLE Carrito (
     id_carrito INT PRIMARY KEY IDENTITY(1,1),
-    id_usuario INT NOT NULL,
+    id_usuario INT NULL,
     FOREIGN KEY (id_usuario) REFERENCES Usuario(id_usuario)
 );
 
@@ -68,34 +68,16 @@ CREATE TABLE Carrito_Item (
     FOREIGN KEY (id_producto) REFERENCES Producto(id_producto)
 );
 
--- Presupuesto (reemplaza Lista de Deseos)
-CREATE TABLE Presupuesto (
-    id_presupuesto INT PRIMARY KEY IDENTITY(1,1),
-    id_usuario INT NOT NULL,
-    fecha_solicitud DATETIME DEFAULT GETDATE() NOT NULL,
-    total DECIMAL(10,2) NOT NULL,
-    FOREIGN KEY (id_usuario) REFERENCES Usuario(id_usuario)
-);
-
--- Ítems del presupuesto
-CREATE TABLE Presupuesto_Item (
-    id_presupuesto INT NOT NULL,
-    id_producto INT NOT NULL,
-    cantidad INT NOT NULL,
-    precio_unitario DECIMAL(10,2) NOT NULL,
-    PRIMARY KEY (id_presupuesto, id_producto),
-    FOREIGN KEY (id_presupuesto) REFERENCES Presupuesto(id_presupuesto),
-    FOREIGN KEY (id_producto) REFERENCES Producto(id_producto)
-);
 
 -- Pedido
 CREATE TABLE Pedido (
     id_pedido INT PRIMARY KEY IDENTITY(1,1),
     id_usuario INT NOT NULL,
     fecha_pedido DATETIME DEFAULT GETDATE() NOT NULL,
-    metodo_entrega VARCHAR(20) NOT NULL, -- 'envio' o 'retiro'
+    metodo_entrega VARCHAR(20) NOT NULL, -- 'envio' o 'retiro' o tendria que ser int?
     fecha_entrega DATE NOT NULL,
     precio_total DECIMAL(10,2) NOT NULL,
+	estado_pedido INT NOT NULL, --lo agregue dsps, ver dominio
     FOREIGN KEY (id_usuario) REFERENCES Usuario(id_usuario)
 );
 
@@ -130,4 +112,24 @@ CREATE TABLE Envio (
     ciudad VARCHAR(100) NOT NULL,
     codigo_postal INT NOT NULL,
     FOREIGN KEY (id_pedido) REFERENCES Pedido(id_pedido)
+);
+
+-- Presupuesto (reemplaza Lista de Deseos)
+CREATE TABLE Presupuesto (
+    id_presupuesto INT PRIMARY KEY IDENTITY(1,1),
+    id_usuario INT NOT NULL,
+    fecha_solicitud DATETIME DEFAULT GETDATE() NOT NULL,
+    total DECIMAL(10,2) NOT NULL,
+    FOREIGN KEY (id_usuario) REFERENCES Usuario(id_usuario)
+);
+
+-- Ítems del presupuesto
+CREATE TABLE Presupuesto_Item (
+    id_presupuesto INT NOT NULL,
+    id_producto INT NOT NULL,
+    cantidad INT NOT NULL,
+    precio_unitario DECIMAL(10,2) NOT NULL,
+    PRIMARY KEY (id_presupuesto, id_producto),
+    FOREIGN KEY (id_presupuesto) REFERENCES Presupuesto(id_presupuesto),
+    FOREIGN KEY (id_producto) REFERENCES Producto(id_producto)
 );

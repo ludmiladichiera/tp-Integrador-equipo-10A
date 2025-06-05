@@ -52,5 +52,44 @@ namespace TpIntegrador_equipo_10A
             }
 
         }
+        protected void btnAgregarCarrito_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                int idProducto = int.Parse(Request.QueryString["id"]);
+                int cantidad = 1;
+
+                if (!string.IsNullOrEmpty(txtCantidad.Text))
+                {
+                    if (!int.TryParse(txtCantidad.Text, out cantidad) || cantidad <= 0)
+                    {
+                        lblError.ForeColor = System.Drawing.Color.Red;
+                        lblError.Text = "Ingrese una cantidad válida.";
+                        return;
+                    }
+                }
+
+                if (Session["IdCarrito"] == null)
+                {
+                    CarritoNegocio carritoNegocio = new CarritoNegocio();
+                    int nuevoIdCarrito = carritoNegocio.CrearCarrito();
+                    Session["IdCarrito"] = nuevoIdCarrito;
+                }
+
+                int idCarrito = (int)Session["IdCarrito"];
+                CarritoItemNegocio itemNegocio = new CarritoItemNegocio();
+                itemNegocio.AgregarOActualizarItem(idCarrito, idProducto, cantidad);
+
+                lblError.ForeColor = System.Drawing.Color.Green;
+                lblError.Text = "Producto agregado al carrito correctamente.";
+            }
+            catch (Exception ex)
+            {
+                lblError.ForeColor = System.Drawing.Color.Red;
+                lblError.Text = "Error al agregar producto al carrito: " + ex.Message +
+                                (ex.InnerException != null ? " Detalle: " + ex.InnerException.Message : "");
+            }
+        }
     }
 }
+  

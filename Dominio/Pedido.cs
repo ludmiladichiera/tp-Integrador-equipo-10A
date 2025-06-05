@@ -6,7 +6,18 @@ using System.Threading.Tasks;
 
 namespace Dominio
 {
-    public class Pedido //falta un estado de pedido recepcionado, en preparacion, listo, enviado etc
+    public enum EstadoPedido
+    {
+        Pendiente = 1,
+        Recepcionado = 2,
+        EnPreparacion = 3,
+        ListoParaRetirar = 4,
+        ListoParaEnviar = 5,
+        Enviado = 6,
+        Entregado = 7,
+        Cancelado = 8
+    }
+    public class Pedido 
     {
         public int Id { get; set; }
         public Usuario Usuario { get; set; }
@@ -17,6 +28,6 @@ namespace Dominio
         public List<PedidoItem> Items { get; set; }
         public Pago Pago { get; set; }
         public Envio Envio { get; set; }
-        public string Estado { get; set; } // 'pendiente', 'en preparacion', 'listo', 'cancelado'
+        public EstadoPedido EstadoPedido { get; set; } 
     }
 }

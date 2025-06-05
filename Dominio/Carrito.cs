@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Dominio
 {
-    public class Carrito //se agrega el atributo subtotal o se maneja asi?
+    public class Carrito
     {
         public int Id { get; set; }
         public Usuario Usuario { get; set; }
@@ -15,3 +15,4 @@ namespace Dominio
         public decimal Subtotal => Items?.Sum(i => i.Subtotal) ?? 0;
     }
 }
+

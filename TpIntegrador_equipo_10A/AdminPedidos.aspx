@@ -35,7 +35,7 @@
           <p class="card-text">Metodo entrega: <%:  pedido.MetodoEntrega %></p>
           <p class="card-text">Pago: <%:  pedido.Pago %></p>
           <p class="card-text">Precio total: <%:  pedido.PrecioTotal %></p>
-          <p class="card-text">Estado: <%:  pedido.Estado %></p>
+          <p class="card-text">Estado: <%:  pedido.EstadoPedido %></p>
           <asp:DropDownList ID="ddlEstado" runat="server" CssClass="form-select">
     <asp:ListItem Text="Pendiente" Value="Pendiente" />
     <asp:ListItem Text="En preparación" Value="En preparación" />

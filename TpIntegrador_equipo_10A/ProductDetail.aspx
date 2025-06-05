@@ -106,9 +106,7 @@
 
                 <!-- Botones de acción -->
                 <div class="d-flex gap-2 mb-2">
-                    <button type="button" class="btn btn-outline-primary">
-                        <i class="bi bi-cart3 me-2"></i>Agregar al carrito
-                    </button>
+                    <asp:Button ID="btnAgregarCarrito" runat="server" CssClass="btn btn-outline-primary" OnClick="btnAgregarCarrito_Click" Text="Agregar al carrito" />
                     <asp:Button ID="btnComprarAhora" runat="server" Text="Comprar ahora" CssClass="btn btn-primary" />
                 </div>
 
