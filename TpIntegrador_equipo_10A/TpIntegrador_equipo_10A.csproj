@@ -100,6 +100,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="About.aspx" />
+    <Content Include="AdminEnvio.aspx" />
     <Content Include="AdminPedidos.aspx" />
     <Content Include="AltaModificacion.aspx" />
     <Content Include="Buscar.aspx" />
@@ -228,6 +229,13 @@
     <Content Include="Site.Mobile.Master" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AdminEnvio.aspx.cs">
+      <DependentUpon>AdminEnvio.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AdminEnvio.aspx.designer.cs">
+      <DependentUpon>AdminEnvio.aspx</DependentUpon>
+    </Compile>
     <Compile Include="AdminPedidos.aspx.cs">
       <DependentUpon>AdminPedidos.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

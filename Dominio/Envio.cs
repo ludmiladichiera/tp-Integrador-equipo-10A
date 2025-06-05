@@ -15,5 +15,7 @@ namespace Dominio
         public string Barrio { get; set; }
         public string Ciudad { get; set; }
         public int CodigoPostal { get; set; }
+        public string EstadoEnvio { get; set; } //pendiente, en camino, entregado
+        public string CodigoSeguimiento { get; set; }
     }
 }
