@@ -17,5 +17,6 @@ namespace Dominio
         public List<PedidoItem> Items { get; set; }
         public Pago Pago { get; set; }
         public Envio Envio { get; set; }
+        public string Estado { get; set; } // 'pendiente', 'en preparacion', 'listo', 'cancelado'
     }
 }
