@@ -80,6 +80,8 @@ namespace TpIntegrador_equipo_10A
                 CarritoItemNegocio itemNegocio = new CarritoItemNegocio();
                 itemNegocio.AgregarOActualizarItem(idCarrito, idProducto, cantidad);
 
+                ((SiteMaster)this.Master).ActualizarCantidadCarrito();
+
                 lblError.ForeColor = System.Drawing.Color.Green;
                 lblError.Text = "Producto agregado al carrito correctamente.";
             }

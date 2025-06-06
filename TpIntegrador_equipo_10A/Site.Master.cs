@@ -33,7 +33,7 @@ namespace TpIntegrador_equipo_10A
                 Response.Redirect($"Buscar.aspx?q={Server.UrlEncode(textoBusqueda)}");
             }
         }
-        private void ActualizarCantidadCarrito()
+        public void ActualizarCantidadCarrito()
         {
             int cantidadTotal = 0;
 
