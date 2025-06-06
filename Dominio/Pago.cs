@@ -11,7 +11,7 @@ namespace Dominio
         public int Id { get; set; }
         public Pedido Pedido { get; set; }
         public DateTime FechaPago { get; set; }
-        public string MetodoPago { get; set; }
+        public string MetodoPago { get; set; }//ver, enumerador int, no string
         public decimal Monto { get; set; }
     }
 }

@@ -27,7 +27,7 @@ namespace Dominio
         public decimal PrecioTotal { get; set; }
         public List<PedidoItem> Items { get; set; }
         public Pago Pago { get; set; }
-        public Envio Envio { get; set; }
+        public Envio Envio { get; set; }//analizar a partir del metodo de entrega
         public EstadoPedido EstadoPedido { get; set; } 
     }
 }

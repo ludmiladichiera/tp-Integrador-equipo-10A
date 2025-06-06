@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Dominio
 {
-    public class Usuario
+    public class Usuario //abstraer direccion, cp, ciudad
 
     {
         public int Id { get; set; }
