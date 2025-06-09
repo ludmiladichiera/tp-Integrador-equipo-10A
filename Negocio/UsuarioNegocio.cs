@@ -31,21 +31,21 @@ namespace Negocio
                 {
                     Usuario usuario = new Usuario
                     {
-                        Id = (int)datos.Lector["id_usuario"],
-                        Mail = datos.Lector["mail"].ToString(),
-                        Pass = datos.Lector["pass"].ToString(),
+                        Id = datos.Lector["id_usuario"] != DBNull.Value ? (int)datos.Lector["id_usuario"] : 0,
+                        Mail = datos.Lector["mail"] != DBNull.Value ? datos.Lector["mail"].ToString() : "",
+                        Pass = datos.Lector["pass"] != DBNull.Value ? datos.Lector["pass"].ToString() : "",
                         TipoUsuario = new TipoUsuario
                         {
-                            Id = (int)datos.Lector["id_tipo_usuario"],
-                            Descripcion = datos.Lector["tipo_usuario"].ToString()
+                            Id = datos.Lector["id_tipo_usuario"] != DBNull.Value ? (int)datos.Lector["id_tipo_usuario"] : 0,
+                            Descripcion = datos.Lector["tipo_usuario"] != DBNull.Value ? datos.Lector["tipo_usuario"].ToString() : ""
                         },
-                        Dni = datos.Lector["dni"].ToString(),
-                        Nombre = datos.Lector["nombre"].ToString(),
-                        Apellido = datos.Lector["apellido"].ToString(),
-                        Direccion = datos.Lector["direccion"].ToString(),
-                        Ciudad = datos.Lector["ciudad"].ToString(),
-                        CodigoPostal = Convert.ToInt32(datos.Lector["codigo_postal"]),
-                        Telefono = datos.Lector["telefono"].ToString()
+                        Dni = datos.Lector["dni"] != DBNull.Value ? datos.Lector["dni"].ToString() : "",
+                        Nombre = datos.Lector["nombre"] != DBNull.Value ? datos.Lector["nombre"].ToString() : "",
+                        Apellido = datos.Lector["apellido"] != DBNull.Value ? datos.Lector["apellido"].ToString() : "",
+                        Direccion = datos.Lector["direccion"] != DBNull.Value ? datos.Lector["direccion"].ToString() : "",
+                        Ciudad = datos.Lector["ciudad"] != DBNull.Value ? datos.Lector["ciudad"].ToString() : "",
+                        CodigoPostal = datos.Lector["codigo_postal"] != DBNull.Value ? Convert.ToInt32(datos.Lector["codigo_postal"]) : 0,
+                        Telefono = datos.Lector["telefono"] != DBNull.Value ? datos.Lector["telefono"].ToString() : ""
                     };
 
                     lista.Add(usuario);

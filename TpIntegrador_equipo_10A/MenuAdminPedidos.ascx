@@ -1,36 +1,48 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="MenuAdminPedidos.ascx.cs" Inherits="TpIntegrador_equipo_10A.MenuAdminPedidos" %>
 
 <style>
-    .contenedor-pedidos {
-        display: flex;
-        flex-direction: column;
-        gap: 15px;
-        padding: 10px;
-    }
-
-    .pedido {
-        border: 1px solid #ccc;
-        padding: 15px;
-        border-radius: 6px;
-        background-color: #f5f5f5;
-    }
-
-    .pedido h4 {
-        margin-top: 0;
+    .card {
+        background-color: #ECEFF1;
     }
 </style>
 
-<div class="contenedor-pedidos">
-    <asp:Repeater ID="repPedidos" runat="server">
-        <ItemTemplate>
-            <div class="pedido">
-                <h4>Pedido N° <%# Eval("Id") %></h4>
-                <p><strong>ID Usuario:</strong> <%# Eval("Usuario") %></p>
-                <p><strong>Fecha Pedido:</strong> <%# Eval("FechaPedido", "{0:dd/MM/yyyy}") %></p>
-                <p><strong>Método Entrega:</strong> <%# Eval("MetodoEntrega") %></p>
-                <p><strong>Fecha Entrega:</strong> <%# Eval("FechaEntrega", "{0:dd/MM/yyyy}") %></p>
-                <p><strong>Precio Total:</strong> $ <%# Eval("PrecioTotal") %></p>
-            </div>
-        </ItemTemplate>
-    </asp:Repeater>
+<div class="container">
+    <h2 class="text-center titulo pt-2 ">Pedidos</h2>
+    <div class="row mt-4">
+        <asp:Repeater ID="repPedidos" runat="server">
+            <ItemTemplate>
+                <div class="col-md-4 mb-4">
+                    <div class="card border-0 shadow h-100">
+                        <div class="card-body">
+                            <h5 class="card-title">Pedido N° <%# Eval("Id") %></h5>
+                            <p class="card-text mb-1"><strong>ID Usuario:</strong> <%# Eval("Usuario") %></p>
+                            <p class="card-text mb-1"><strong>Fecha Pedido:</strong> <%# Eval("FechaPedido", "{0:dd/MM/yyyy}") %></p>
+                            <p class="card-text mb-1"><strong>Método Entrega:</strong> <%# Eval("MetodoEntrega") %></p>
+                            <p class="card-text mb-1"><strong>Fecha Entrega:</strong> <%# Eval("FechaEntrega", "{0:dd/MM/yyyy}") %></p>
+                            <p class="card-text"><strong>Precio Total:</strong> $ <%# Eval("PrecioTotal") %></p>
+
+                            <div class="mb-2">
+                                <asp:Label ID="LblEstado" runat="server" CssClass="badge bg-secondary">
+                                </asp:Label>
+                            </div>
+
+                            <div class="mb-2">
+                                <asp:DropDownList ID="ddlEstado" runat="server" CssClass="form-select form-select-sm">
+                                    <asp:ListItem Text="Pendiente" Value="Pendiente" />
+                                    <asp:ListItem Text="Enviado" Value="Enviado" />
+                                    <asp:ListItem Text="Entregado" Value="Entregado" />
+                                </asp:DropDownList>
+                            </div>
+
+                            <div class="d-flex justify-content-between">
+                                <asp:Button ID="btnCambiarEstado" runat="server" CssClass="btn btn-outline-primary btn-sm" Text="Cambiar estado" />
+                                <a href="#" class="btn btn-outline-danger btn-sm">Ver más</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </ItemTemplate>
+        </asp:Repeater>
+    </div>
 </div>
+

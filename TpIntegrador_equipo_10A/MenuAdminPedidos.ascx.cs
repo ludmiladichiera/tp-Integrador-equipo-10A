@@ -24,6 +24,7 @@ namespace TpIntegrador_equipo_10A
             {
                 repPedidos.DataSource = lista;
                 repPedidos.DataBind();
+
             }
         }
     }
