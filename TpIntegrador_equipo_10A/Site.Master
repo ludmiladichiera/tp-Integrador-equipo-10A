@@ -3,7 +3,7 @@
 <!DOCTYPE html>
 <style>
     .body-content {
-        margin-top: 70px; 
+        margin-top: 70px;
     }
 </style>
 <html lang="es">
@@ -41,9 +41,9 @@
 
                 <!-- buscador -->
                 <div class="d-flex" style="flex-grow: 1; max-width: 400px; margin-left: 10px; margin-right: 10px;">
-    <asp:TextBox ID="txtBuscar" runat="server" CssClass="form-control form-control-sm me-2" Placeholder="Buscar..." />
-    <asp:Button ID="btnBuscar" runat="server" CssClass="btn btn-outline-light btn-sm" Text="Buscar" OnClick="btnBuscar_Click" />
-</div>
+                    <asp:TextBox ID="txtBuscar" runat="server" CssClass="form-control form-control-sm me-2" Placeholder="Buscar..." />
+                    <asp:Button ID="btnBuscar" runat="server" CssClass="btn btn-outline-light btn-sm" Text="Buscar" OnClick="btnBuscar_Click" />
+                </div>
 
                 <!-- Centro: logo y texto -->
                 <div class="text-center mx-3 flex-grow-1">
@@ -69,7 +69,7 @@
             </div>
         </nav>
 
-                <!-- Menú lateral Offcanvas -->
+        <!-- Menú lateral Offcanvas -->
         <div class="offcanvas offcanvas-start text-bg-dark" tabindex="-1" id="offcanvasMenu" aria-labelledby="offcanvasMenuLabel">
             <div class="offcanvas-header">
                 <h5 class="offcanvas-title" id="offcanvasMenuLabel">Menú</h5>
@@ -79,19 +79,19 @@
                 <ul class="nav flex-column">
 
                     <ul class="nav flex-column">
-    <li class="nav-item">
-        <a class="nav-link text-light" href="FiltroCategoria.aspx?categoria=Servicio de Lunch">Servicio de Lunch</a>
-    </li>
-    <li class="nav-item">
-        <a class="nav-link text-light" href="FiltroCategoria.aspx?categoria=Tortas clásicas">Tortas clásicas</a> 
-    </li>
-    <li class="nav-item">
-        <a class="nav-link text-light" href="FiltroCategoria.aspx?categoria=Tartas">Tartas</a>
-    </li>
-</ul>
+                        <li class="nav-item">
+                            <a class="nav-link text-light" href="FiltroCategoria.aspx?categoria=Servicio de Lunch">Servicio de Lunch</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-light" href="FiltroCategoria.aspx?categoria=Tortas clásicas">Tortas clásicas</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-light" href="FiltroCategoria.aspx?categoria=Tartas">Tartas</a>
+                        </li>
+                    </ul>
                     <a class="nav-link text-light" href="/ListadoProducto.aspx">Ver todos los productos</a>
                     <a class="nav-link text-light" href="/Login.aspx">Iniciar sesión</a>
-                     <a class="nav-link text-light" href="/Registrarse.aspx">Registrarse</a>
+                    <a class="nav-link text-light" href="/Registrarse.aspx">Registrarse</a>
                     <li>
                         <hr class="dropdown-divider bg-light" />
                     </li>
@@ -102,11 +102,11 @@
                     <li class="nav-item">
                         <a class="nav-link text-light" href="~/ComoComprar.aspx">Cómo comprar</a>
                     </li>
-                                <asp:Panel ID="pnlAdminMenu" runat="server" Visible="false">
-    <li class="nav-item">
-        <a class="nav-link text-light" href="/AltaModificacion.aspx">Administrador</a>
-    </li>
-</asp:Panel>
+                    <asp:Panel ID="pnlAdminMenu" runat="server" Visible="false">
+                        <li class="nav-item">
+                            <a class="nav-link text-light" href="/AltaModificacion.aspx">Administrador</a>
+                        </li>
+                    </asp:Panel>
 
                 </ul>
             </div>
