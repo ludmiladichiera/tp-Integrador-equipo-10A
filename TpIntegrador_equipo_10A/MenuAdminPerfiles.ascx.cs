@@ -13,6 +13,7 @@ namespace TpIntegrador_equipo_10A
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+
             UsuarioNegocio negocio = new UsuarioNegocio();
             List<Usuario> lista = negocio.Listar();
             if (!IsPostBack)

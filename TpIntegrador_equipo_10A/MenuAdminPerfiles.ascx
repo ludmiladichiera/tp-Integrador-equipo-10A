@@ -5,8 +5,7 @@
     }
 </style>
 <div class="container">
-    <h2 class="text-center titulo pt-2">Perfiles de Usuarios</h2>
-    <div class="row mt-4">
+    <div class="row pt-3">
         <asp:Repeater ID="repPerfiles" runat="server">
             <ItemTemplate>
                 <div class="col-md-4 mb-4">

@@ -4,11 +4,11 @@
     .card {
         background-color: #ECEFF1;
     }
+    
 </style>
 
 <div class="container">
-    <h2 class="text-center titulo pt-2 ">Pedidos</h2>
-    <div class="row mt-4">
+    <div class="row pt-4">
         <asp:Repeater ID="repPedidos" runat="server">
             <ItemTemplate>
                 <div class="col-md-4 mb-4">

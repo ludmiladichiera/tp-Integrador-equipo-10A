@@ -11,6 +11,7 @@ namespace TpIntegrador_equipo_10A
     {
         protected void Page_Load(object sender, EventArgs e)
         { 
+            
             // Siempre se intenta recrear el control si hay uno guardado
             if (ViewState["ControlActual"] != null)
             {
