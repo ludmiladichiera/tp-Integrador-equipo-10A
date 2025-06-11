@@ -35,6 +35,13 @@
                  <asp:Label ID="lblDescripcion" runat="server" CssClass="form-label" AssociatedControlID="txtDescripcion" Text="Descripcion" />
                  <asp:TextBox ID="txtDescripcion" runat="server" CssClass="form-control" placeholder="Ingrese la Descripcion" />
             </div>
+            
+            <div class="mb3">
+                 <asp:Label ID="lblDescripcionCat" runat="server" CssClass="form-label" AssociatedControlID="txtDescripcionCat" Text="Descripcion" />
+                 <asp:TextBox ID="txtDescripcionCat" AutoPostBack="true" runat="server" CssClass="form-control" placeholder="Ingrese la Descripcion"  OnTextChanged="txtDescripcionCat_TextChanged"/>
+            </div>        
+
+
     <div class="mb3">
               <asp:Label ID="lblPrecio" runat="server" CssClass="form-label" AssociatedControlID="txtPrecio" Text="Precio" />
               <asp:TextBox ID="txtPrecio" runat="server" CssClass="form-control" placeholder="Ingrese el Precio"/>
@@ -49,18 +56,17 @@
         </div>
 
        <div>
-            <asp:DropDownList ID="ddlCategoria" runat="server" CssClass="form-select" AutoPostBack="true" OnSelectedIndexChanged="ddlCategoria_SelectedIndexChanged">
-            <asp:ListItem Text="Seleccione la Categoria" Value="0" Selected="True"/>
-            <asp:ListItem Text="Pastelito" value="1" />
-            <asp:ListItem Text="Tortas" value="2" />
-            <asp:ListItem Text="Lunch" value="3" />
-            </asp:DropDownList>
+            <asp:DropDownList ID="ddlCategoria" runat="server" CssClass="form-select" AutoPostBack="true" OnSelectedIndexChanged="ddlCategoria_SelectedIndexChanged"> </asp:DropDownList>
         </div>
     <br />
     <div class="mb3">
           <asp:Label ID="lblImagenURL" runat="server" CssClass="form-label" AssociatedControlID="txtImagenURL" Text="URL" />
           <asp:TextBox ID="txtImagenURL" runat="server" CssClass="form-control" placeholder="Ingrese la URL"/>
     </div>
+    <div>
+        <asp:Button ID="btnGuardar" runat="server" CssClass="btn btn-primary" Text="Guardar" OnClick="btnGuardar_Click" Visible="false" />
+    </div>
+    <div> <asp:Label ID="lblExito" runat="server" CssClass="form-label" Text="Exito al agregar" Visible="false"></asp:Label> </div>
 
        
    

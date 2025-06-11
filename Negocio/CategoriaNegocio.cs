@@ -116,6 +116,28 @@ namespace Negocio
                 datos.cerrarConexion();
             }
         }
+        public Categoria categoriaXdescripcion(string descripcion)
+        {
+            AccesoDatos datos = new AccesoDatos();
+            Categoria categoria = new Categoria();
+            try
+            {
+                datos.setearConsulta("SELECT id_categoria,descripcion From Categoria WHERE descripcion=@descripcion");
+                datos.setearParametro("@descripcion", descripcion);
+                datos.ejecutarLectura();
+                if (datos.Lector.Read())
+                {
+                    categoria.Id = (int)datos.Lector["id_categoria"];
+                    categoria.Descripcion = (string)datos.Lector["descripcion"];
+                    
+                }
+                return categoria;
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
+        }
     }
 }
 

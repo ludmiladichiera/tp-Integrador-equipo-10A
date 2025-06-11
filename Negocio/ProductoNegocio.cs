@@ -569,10 +569,41 @@ SELECT SCOPE_IDENTITY();";
             }
         }
 
+        public Producto buscarXcodigo(string cod)
+        {
+            AccesoDatos datos = new AccesoDatos();
+            try
+            {
+                datos.setearConsulta("SELECT id_producto,codigo,nombre,descripcion,precio,stock,unidad_venta,id_categoria from Producto WHERE codigo=@cod");
+                datos.setearParametro("@cod", cod);
+                datos.ejecutarLectura();
+                Producto aux = new Producto();
+                if (datos.Lector.Read())
+                {
+                    
+                    aux.Id = (int)datos.Lector["id_producto"];
+                    aux.Codigo = datos.Lector["codigo"].ToString();
+                    aux.Nombre = datos.Lector["nombre"].ToString();
+                    aux.Descripcion = datos.Lector["descripcion"].ToString();
+                    aux.Precio = (decimal)datos.Lector["precio"];
+                    aux.Stock = (int)datos.Lector["stock"];
+                    aux.UnidadVenta = datos.Lector["unidad_venta"].ToString();
+                    aux.Categoria = new Categoria { Id = (int)datos.Lector["id_categoria"] };
+                }
+                
+                return aux;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
 
-
+        }
     }
-
 
 }
 
