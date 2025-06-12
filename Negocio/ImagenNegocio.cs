@@ -131,6 +131,31 @@ namespace Negocio
                 datos.cerrarConexion();
             }
         }
+        public int obtenerIDproduto(int idImgn)
+        {
+            int idProd = 0;
+            AccesoDatos datos = new AccesoDatos();
+            try
+            {
+                datos.setearConsulta("select id_producto from Imagen where id_imagen=@idImgn");
+                datos.setearParametro("@idImgn", idImgn);
+                datos.ejecutarLectura();
+                if (datos.Lector.Read())
+                {
+                    idProd = (int)datos.Lector["id_producto"];
+                }
+                return idProd;
+            }
+
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
+        }
     }
 }
 

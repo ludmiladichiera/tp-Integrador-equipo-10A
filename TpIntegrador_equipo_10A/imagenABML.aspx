@@ -23,6 +23,14 @@
     <div>
         <asp:PlaceHolder ID="contenedorImagenes" runat="server" ></asp:PlaceHolder>
     </div>
+    <div class="mb3"<asp:Label ID="lblUrl" runat="server" CssClass="form-label" AssociatedControlID="txtUrl" Text="Nueva imagen" Visible="false" />
+        <asp:TextBox ID="txtUrl" runat="server" CssClass="form-control" placeholder="Ingrese la URL" Visible="false"></asp:TextBox>
+        </div>
+    <div>
+        <asp:Button ID="btnAgregar" runat="server" CssClass="btn btn-primary" Text="Agregar Imagen" OnClick="btnAgregar_Click" Visible="false" />
+    </div>
+    <div class="mb3"<asp:Label ID="lblAgregadoExito" runat="server" CssClass="form-label" Text="Imagen agregada con exito!" Visible="false" /></div>
+    
 
     
 

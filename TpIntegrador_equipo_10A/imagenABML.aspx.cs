@@ -14,42 +14,86 @@ namespace TpIntegrador_equipo_10A
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (IsPostBack && !string.IsNullOrEmpty(txtCodigo.Text))
+            if (!IsPostBack)
             {
+                
+                txtUrl.Visible = false;
+                lblUrl.Visible = false;
+                lblExistente.Visible = false;
 
-                ProductoNegocio negocio = new ProductoNegocio();
-                Producto producto = negocio.buscarXcodigo(txtCodigo.Text);
 
-                if (producto != null && producto.Id != 0)
+            }
+
+            else
+            {
+                if (Session["imagenes"] != null)
                 {
-                    List<Imagen> imagenes = obtenerImagenes(producto.Id);
+                    var imagenes = (List<Imagen>)Session["imagenes"];
                     crearTarjetasImagenes(imagenes);
+                    contenedorImagenes.Visible = true;
                 }
             }
+
         }
+
 
         protected void txtCodigo_TextChanged(object sender, EventArgs e)
         {
             ProductoNegocio negocio = new ProductoNegocio();
             Producto producto = negocio.buscarXcodigo(txtCodigo.Text);
-            
-            if (producto==null || producto.Id==0)
+            if (producto == null)
             {
-                lblExistente.Visible = true;
-               lblExistente.Text = "El producto no existe";
+                cargarPantalla(0);
             }
-            else 
+            else
             {
-                List<Imagen> listaImagenes = obtenerImagenes(producto.Id);
-                if(listaImagenes.Count == 0)
+                cargarPantalla(producto.Id);
+            }
+                
+
+
+        }
+        protected void cargarPantalla(int id)
+        {
+            if (id == 0)
+            {
+                Session.Remove("imagenes");
+                contenedorImagenes.Controls.Clear();
+
+                lblExistente.Visible = true;
+                lblExistente.Text = "El producto no existe";
+                lblUrl.Visible = false;
+                txtUrl.Visible = false;
+                btnAgregar.Visible = false;
+                lblAgregadoExito.Visible = false;
+
+            }
+            else
+            {
+
+                List<Imagen> listaImagenes = obtenerImagenes(id);
+                if (listaImagenes.Count == 0)
                 {
+                    contenedorImagenes.Visible = false;
+                    lblAgregadoExito.Visible = false;
                     lblExistente.Text = "El producto no tiene imágenes";
+                    lblUrl.Visible = true;
+                    txtUrl.Visible = true;
+                    btnAgregar.Visible = true;
+                    btnAgregar.CommandArgument = id.ToString();
                 }
                 else
                 {
+                    lblExistente.Visible = false;
+                    lblAgregadoExito.Visible = false;
+                    Session["imagenes"] = listaImagenes;
                     crearTarjetasImagenes(listaImagenes);
+                    lblUrl.Visible = true;
+                    txtUrl.Visible = true;
+                    btnAgregar.Visible = true;
+                    btnAgregar.CommandArgument = id.ToString();
                 }
-                
+
             }
         }
         protected List<Imagen> obtenerImagenes(int prodID)
@@ -62,8 +106,7 @@ namespace TpIntegrador_equipo_10A
             }
             catch (Exception ex)
             {
-                // Manejo de excepciones, por ejemplo, mostrar un mensaje de error
-                //lblError.Text = "Error al cargar las imágenes: " + ex.Message;
+                lblExistente.Text = "Error al cargar las imágenes: " + ex.Message;
             }
             return listaImagenes;
         }
@@ -75,14 +118,14 @@ namespace TpIntegrador_equipo_10A
             int index = 0;
             foreach (var img in imagenes)
             {
-                
 
-                // Contenedor de la card
+
+                
                 Panel card = new Panel();
                 card.CssClass = "card m-2 d-inline-block";
                 card.Style["width"] = "18rem";
 
-                // Imagen arriba (como card-img-top)
+                
                 Image vista = new Image
                 {
                     ImageUrl = img.Url,
@@ -90,15 +133,14 @@ namespace TpIntegrador_equipo_10A
                     AlternateText = "Imagen " + index
                 };
 
-                // Cuerpo de la tarjeta
+                
                 Panel cardBody = new Panel();
                 cardBody.CssClass = "card-body";
 
-                // Título opcional
                 Literal titulo = new Literal();
                 titulo.Text = $"<h5 class='card-title'>Imagen {index + 1}</h5>";
 
-                // TextBox editable con la URL
+               
                 TextBox txt = new TextBox
                 {
                     ID = img.Id.ToString(),
@@ -106,7 +148,6 @@ namespace TpIntegrador_equipo_10A
                     CssClass = "form-control mb-2"
                 };
 
-                // Botón para redireccionar (opcional)
                 Button btnModificar = new Button
                 {
                     Text = "Modificar",
@@ -136,7 +177,7 @@ namespace TpIntegrador_equipo_10A
                 // Agrupar botones en un panel para alinearlos
                 Panel grupoBotones = new Panel();
                 grupoBotones.CssClass = "d-flex justify-content-between mt-2";
-                
+
 
                 cardBody.Controls.Add(grupoBotones);
 
@@ -152,43 +193,90 @@ namespace TpIntegrador_equipo_10A
         protected void btnModificar_Command(object sender, CommandEventArgs e)
         {
             int idImagen = int.Parse(e.CommandArgument.ToString());
+            lblExistente.Visible = false;
 
-            // Buscar el TextBox que tiene ese ID
             TextBox txtUrl = (TextBox)contenedorImagenes.FindControl(idImagen.ToString());
 
             if (txtUrl != null)
             {
                 string nuevaUrl = txtUrl.Text;
 
-                // 🔥 Acá modificás la imagen en la base de datos
-                ImagenNegocio negocio = new ImagenNegocio();
-                negocio.modificarImagenPorID(idImagen, nuevaUrl); // Supongamos que este método existe
+                ImagenNegocio negocioImg = new ImagenNegocio();
+                negocioImg.modificarImagenPorID(idImagen, nuevaUrl);
+                lblAgregadoExito.Text = "Imagen modificada correctamente";
+                lblAgregadoExito.Visible = true;
 
-                lblExistente.Text = "Imagen modificada correctamente";
-                lblExistente.Visible = true;
+                lblUrl.Visible = false;
+                txtUrl.Visible = false;
+                btnAgregar.Visible = false;
+                int idProducto = negocioImg.obtenerIDproduto(idImagen); 
+                Session["imagenes"] = negocioImg.listar(idProducto);
+
+                contenedorImagenes.Visible = false;
+
+
             }
+
         }
         protected void btnEliminar_Command(object sender, CommandEventArgs e)
         {
             int idImagen = int.Parse(e.CommandArgument.ToString());
+            lblExistente.Visible = false;
 
-            // Buscar el TextBox que tiene ese ID
             TextBox txtUrl = (TextBox)contenedorImagenes.FindControl(idImagen.ToString());
 
             if (txtUrl != null)
             {
                 string nuevaUrl = txtUrl.Text;
 
-                // 🔥 Acá modificás la imagen en la base de datos
-                ImagenNegocio negocio = new ImagenNegocio();
-                negocio.eliminarImagen(idImagen); // Supongamos que este método existe
 
-                lblExistente.Text = "Imagen eliminada";
-                lblExistente.Visible = true;
+                ImagenNegocio negocioImg = new ImagenNegocio();
+                negocioImg.eliminarImagen(idImagen);
+
+                lblAgregadoExito.Text = "Imagen eliminada";
+                lblAgregadoExito.Visible = true;
+                lblUrl.Visible = false;
+                txtUrl.Visible = false;
+                btnAgregar.Visible = false;
+
+                int idProducto = negocioImg.obtenerIDproduto(idImagen); 
+                Session["imagenes"] = negocioImg.listar(idProducto);
+                contenedorImagenes.Visible = false;
             }
+
         }
 
+        protected void btnAgregar_Click(object sender, EventArgs e)
+        {
+            Imagen imagen = new Imagen();
+            imagen.IdProducto = int.Parse(btnAgregar.CommandArgument);
+            imagen.Url = txtUrl.Text;
+            ImagenNegocio negocioImg = new ImagenNegocio();
+            try
+            {
 
+                negocioImg.Agregar(imagen);
+                lblAgregadoExito.Text = "Imagen agregada correctamente";
+                lblAgregadoExito.Visible = true;
+
+                txtUrl.Text = string.Empty;
+                lblUrl.Visible = false;
+                txtUrl.Visible = false;
+                btnAgregar.Visible = false;
+                int idProducto = negocioImg.obtenerIDproduto(imagen.Id); 
+                Session["imagenes"] = negocioImg.listar(idProducto);
+                contenedorImagenes.Visible = false;
+
+
+            }
+            catch (Exception ex)
+            {
+                lblAgregadoExito.Text = "Error al agregar la imagen: " + ex.Message;
+                lblAgregadoExito.Visible = true;
+            }
+
+        }
     }
 
 }
+
