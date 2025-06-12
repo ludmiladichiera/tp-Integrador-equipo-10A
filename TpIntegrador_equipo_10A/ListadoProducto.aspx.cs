@@ -18,7 +18,7 @@ namespace TpIntegrador_equipo_10A
             if (!IsPostBack)
             {
                 ProductoNegocio negocio = new ProductoNegocio();
-                listaProductos = negocio.listar();
+                listaProductos = negocio.listar(false);
                 Session["listaProductos"] = listaProductos;
 
                 repProductos.DataSource = listaProductos;

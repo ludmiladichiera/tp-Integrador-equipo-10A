@@ -22,12 +22,14 @@ CREATE TABLE Usuario (
     ciudad VARCHAR(50) NULL,
     codigo_postal INT NULL,
     telefono VARCHAR(20) NULL,
+	estado BIT NOT NULL, --activo es 1
     FOREIGN KEY (id_tipo_usuario) REFERENCES TipoUsuario(id_tipo_usuario)
 );
 -- Categoría
 CREATE TABLE Categoria (
     id_categoria INT PRIMARY KEY IDENTITY(1,1),
-    descripcion VARCHAR(100) NOT NULL
+    descripcion VARCHAR(100) NOT NULL,
+	estado BIT NOT NULL --activo es 1
 );
 
 -- Producto
@@ -40,6 +42,7 @@ CREATE TABLE Producto (
     stock INT NOT NULL,
     unidad_venta VARCHAR(20) NOT NULL, -- 'unidad', 'docena', etc.
     id_categoria INT NOT NULL,
+	estado BIT NOT NULL, --activo es 1
 	FOREIGN KEY (id_categoria) REFERENCES Categoria(id_categoria)
 );
 
@@ -102,19 +105,8 @@ CREATE TABLE Pago (
     FOREIGN KEY (id_pedido) REFERENCES Pedido(id_pedido)
 );
 
--- Envío
-CREATE TABLE Envio (
-    id_envio INT PRIMARY KEY IDENTITY(1,1),
-    id_pedido INT NOT NULL,
-    fecha_entrega DATE NOT NULL,
-    direccion VARCHAR(255) NOT NULL,
-    barrio VARCHAR(100) NOT NULL,
-    ciudad VARCHAR(100) NOT NULL,
-    codigo_postal INT NOT NULL,
-    FOREIGN KEY (id_pedido) REFERENCES Pedido(id_pedido)
-);
 
--- Presupuesto (reemplaza Lista de Deseos)
+-- Presupuesto 
 CREATE TABLE Presupuesto (
     id_presupuesto INT PRIMARY KEY IDENTITY(1,1),
     id_usuario INT NOT NULL,

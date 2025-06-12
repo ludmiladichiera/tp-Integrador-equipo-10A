@@ -11,7 +11,7 @@ namespace TpIntegrador_equipo_10A
 {
     public partial class AdminEnvio : System.Web.UI.Page
     {
-        public List<Envio> ListaEnvios { get; set; }
+        /*public List<Envio> ListaEnvios { get; set; }
         protected void Page_Load(object sender, EventArgs e)
         {
             cargarEnvios();
@@ -57,6 +57,6 @@ namespace TpIntegrador_equipo_10A
         protected void btnModificar_Click(object sender, EventArgs e)
         {
             cargarEnvios();
-        }
+        }*/
     }
 }

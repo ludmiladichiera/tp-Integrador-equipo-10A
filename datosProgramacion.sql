@@ -99,5 +99,15 @@ VALUES
 INSERT INTO TipoUsuario (descripcion) 
 VALUES ('Cliente'), ('Administrador');
 
+--el otro admin no va porq tiene null
+
 INSERT INTO Usuario (mail, pass, id_tipo_usuario, dni, nombre, apellido, direccion, ciudad, codigo_postal, telefono)
 VALUES ('admin@miapp.com', 'admin123', 2, '12345678', 'Admin', 'Principal', 'Calle Falsa 123', 'Buenos Aires', 1000, '1234567890');
+
+--ejecutar esto solo si no quieren borrar la base de datos entera
+ALTER TABLE Usuario ADD estado BIT NOT NULL DEFAULT 1;
+ALTER TABLE Categoria ADD estado BIT NOT NULL DEFAULT 1;
+ALTER TABLE Producto ADD estado BIT NOT NULL DEFAULT 1;
+
+-- solo si no borraron la bd 
+DROP TABLE Envio;

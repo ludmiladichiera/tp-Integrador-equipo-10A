@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Dominio
 {
-    public class Producto //estado 
+    public class Producto 
     {
         public int Id { get; set; }
         public string Codigo { get; set; }
@@ -18,5 +18,7 @@ namespace Dominio
 
         public List<Imagen> Imagenes { get; set; }
         public Categoria Categoria { get; set; }
+
+        public bool Estado { get; set; }
     }
 }

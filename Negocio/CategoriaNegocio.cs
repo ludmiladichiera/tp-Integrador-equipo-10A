@@ -17,7 +17,7 @@ namespace Negocio
 
             try
             {
-                datos.setearConsulta("Select id_categoria, descripcion From CATEGORIA");
+                datos.setearConsulta("SELECT id_categoria, descripcion, estado FROM CATEGORIA");
                 datos.ejecutarLectura();
 
                 while (datos.Lector.Read())
@@ -25,6 +25,7 @@ namespace Negocio
                     Categoria aux = new Categoria();
                     aux.Id = (int)datos.Lector["id_categoria"];
                     aux.Descripcion = (string)datos.Lector["descripcion"];
+                    aux.Estado = (bool)datos.Lector["estado"];
 
                     lista.Add(aux);
                 }
@@ -47,8 +48,9 @@ namespace Negocio
 
             try
             {
-                datos.setearConsulta("INSERT INTO CATEGORIA (descripcion) VALUES (@Descripcion)");
+                datos.setearConsulta("INSERT INTO Categoria (descripcion, estado) VALUES (@Descripcion, @Estado)");
                 datos.setearParametro("@Descripcion", nuevaCategoria.Descripcion);
+                datos.setearParametro("@Estado", nuevaCategoria.Estado);
                 datos.ejecutarAccion();
             }
             catch (Exception ex)
@@ -65,13 +67,14 @@ namespace Negocio
             AccesoDatos datos = new AccesoDatos();
             modificarCategoria(modificar);
         }
-        public void modificarCategoria(Categoria modificar)
+        public void modificarCategoria(Categoria modificar) //tambien se puede usar para baja logica
         {
             AccesoDatos datos = new AccesoDatos();
             try
             {
-                datos.setearConsulta("UPDATE Categoria SET descripcion = @descripcion WHERE id_categoria = @id_categoria");
+                datos.setearConsulta("UPDATE Categoria SET descripcion = @descripcion, estado = @estado WHERE id_categoria = @id_categoria");
                 datos.setearParametro("@descripcion", modificar.Descripcion);
+                datos.setearParametro("@estado", modificar.Estado);
                 datos.setearParametro("@id_categoria", modificar.Id);
 
                 datos.ejecutarAccion();
@@ -86,21 +89,8 @@ namespace Negocio
                 datos.cerrarConexion();
             }
         }
-        public void eliminarCategorias(int id)
-        {
 
-            try
-            {
-                AccesoDatos datos = new AccesoDatos();
-                datos.setearConsulta("DELETE FROM CATEGORIA WHERE id_categoria = @id");
-                datos.setearParametro("@id", id);
-                datos.ejecutarAccion();
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-        }
+
         public bool existeCategoria(int idCategoria)
         {
             AccesoDatos datos = new AccesoDatos();
@@ -129,7 +119,7 @@ namespace Negocio
                 {
                     categoria.Id = (int)datos.Lector["id_categoria"];
                     categoria.Descripcion = (string)datos.Lector["descripcion"];
-                    
+
                 }
                 return categoria;
             }
@@ -140,6 +130,7 @@ namespace Negocio
         }
     }
 }
+
 
 
 

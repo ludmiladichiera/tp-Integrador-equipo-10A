@@ -10,7 +10,7 @@ namespace Negocio
 {
     public class ProductoNegocio
     {
-        public List<Producto> listar()
+        public List<Producto> listar(bool mostrarTodos = false)
         {
             List<Producto> lista = new List<Producto>();
             SqlConnection conexion = new SqlConnection();
@@ -21,25 +21,36 @@ namespace Negocio
             {
                 conexion.ConnectionString = "server=.\\SQLEXPRESS; database=Ecommerce; integrated security=true";
                 comando.CommandType = System.Data.CommandType.Text;
-                comando.CommandText = @"
-SELECT 
-    P.id_producto AS Id,
-    P.codigo AS Codigo,
-    P.nombre AS Nombre,
-    P.descripcion AS Descripcion,
-    P.precio AS Precio,
-    P.stock AS Stock,
-    P.unidad_venta AS UnidadVenta,
-    P.id_categoria AS IdCategoria,
-    C.descripcion AS Categoria,
-    MIN(I.imagen_url) AS ImagenUrl
-FROM Producto P
-JOIN Categoria C ON P.id_categoria = C.id_categoria
-LEFT JOIN Imagen I ON P.id_producto = I.id_producto
-GROUP BY
-    P.id_producto, P.codigo, P.nombre, P.descripcion, P.precio, P.stock, 
-    P.unidad_venta, P.id_categoria, C.descripcion";
 
+                string consulta = @"
+            SELECT 
+                P.id_producto AS Id,
+                P.codigo AS Codigo,
+                P.nombre AS Nombre,
+                P.descripcion AS Descripcion,
+                P.precio AS Precio,
+                P.stock AS Stock,
+                P.unidad_venta AS UnidadVenta,
+                P.id_categoria AS IdCategoria,
+                C.descripcion AS Categoria,
+                P.Estado AS ProductoEstado,
+                C.Estado AS CategoriaEstado,
+                MIN(I.imagen_url) AS ImagenUrl
+            FROM Producto P
+            JOIN Categoria C ON P.id_categoria = C.id_categoria
+            LEFT JOIN Imagen I ON P.id_producto = I.id_producto";
+
+                if (!mostrarTodos)
+                {
+                    consulta += " WHERE P.Estado = 1 AND C.Estado = 1 ";
+                }
+
+                consulta += @"
+            GROUP BY
+                P.id_producto, P.codigo, P.nombre, P.descripcion, P.precio, P.stock, 
+                P.unidad_venta, P.id_categoria, C.descripcion, P.Estado, C.Estado";
+
+                comando.CommandText = consulta;
                 comando.Connection = conexion;
 
                 conexion.Open();
@@ -53,13 +64,16 @@ GROUP BY
                     aux.Nombre = lector["Nombre"] != DBNull.Value ? lector["Nombre"].ToString() : "No especifica";
                     aux.Descripcion = lector["Descripcion"] != DBNull.Value ? lector["Descripcion"].ToString() : "No especifica";
                     aux.Precio = lector["Precio"] != DBNull.Value ? (decimal)lector["Precio"] : 0;
-                    aux.Stock = lector["Stock"] != DBNull.Value ? (int)lector["Stock"] : 0;                 // <- agregá esto
-                    aux.UnidadVenta = lector["UnidadVenta"] != DBNull.Value ? lector["UnidadVenta"].ToString() : "No especifica";  // <- y esto si lo necesitás
+                    aux.Stock = lector["Stock"] != DBNull.Value ? (int)lector["Stock"] : 0;
+                    aux.UnidadVenta = lector["UnidadVenta"] != DBNull.Value ? lector["UnidadVenta"].ToString() : "No especifica";
+
+                    aux.Estado = lector["ProductoEstado"] != DBNull.Value ? (bool)lector["ProductoEstado"] : false;
 
                     // Categoría
                     aux.Categoria = new Categoria();
                     aux.Categoria.Id = lector["IdCategoria"] != DBNull.Value ? (int)lector["IdCategoria"] : 0;
                     aux.Categoria.Descripcion = lector["Categoria"] != DBNull.Value ? lector["Categoria"].ToString() : "No especifica";
+                    aux.Categoria.Estado = lector["CategoriaEstado"] != DBNull.Value ? (bool)lector["CategoriaEstado"] : false;
 
                     if (aux.Imagenes == null)
                         aux.Imagenes = new List<Imagen>();
@@ -101,9 +115,9 @@ GROUP BY
                 comando.CommandType = System.Data.CommandType.Text;
                 comando.CommandText = @"
 INSERT INTO Producto 
-    (codigo, nombre, descripcion, precio, stock, unidad_venta, id_categoria) 
+    (codigo, nombre, descripcion, precio, stock, unidad_venta, id_categoria, estado) 
 VALUES 
-    (@Codigo, @Nombre, @Descripcion, @Precio, @Stock, @UnidadVenta, @IdCategoria);
+    (@Codigo, @Nombre, @Descripcion, @Precio, @Stock, @UnidadVenta, @IdCategoria, @Estado);
 SELECT SCOPE_IDENTITY();";
 
                 comando.Parameters.AddWithValue("@Codigo", string.IsNullOrWhiteSpace(nuevoProducto.Codigo)
@@ -128,6 +142,8 @@ SELECT SCOPE_IDENTITY();";
 
                 comando.Parameters.AddWithValue("@IdCategoria", nuevoProducto.Categoria?.Id ?? (object)DBNull.Value);
 
+                comando.Parameters.AddWithValue("@Estado", nuevoProducto.Estado);
+
 
                 conexion.Open();
                 idGenerado = Convert.ToInt32(comando.ExecuteScalar());
@@ -144,30 +160,7 @@ SELECT SCOPE_IDENTITY();";
 
         }
 
-        /*
-        public void agregarImagenUrl(int idProducto, List<Imagen> imagenes)
-        {
-            AccesoDatos datos = new AccesoDatos();
-            try
-            {
-                foreach (Imagen imagen in imagenes)
-                {
-                    datos.setearConsulta("INSERT INTO Imagen (id_producto, url) VALUES (@IdProducto, @Url)");
-                    datos.setearParametro("@IdProducto", idProducto);
-                    datos.setearParametro("@Url", imagen.Url); 
-                    datos.ejecutarAccion();
-                }
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-                datos.cerrarConexion();
-            }
-        }
-        */
+
 
         public Producto ObtenerProductoId(int idProducto)
         {
@@ -175,10 +168,10 @@ SELECT SCOPE_IDENTITY();";
             AccesoDatos datos = new AccesoDatos();
             try
             {
-                datos.setearConsulta("SELECT P.id_producto AS Id, P.codigo AS Codigo, P.nombre AS Nombre, P.descripcion AS Descripcion, P.precio AS Precio, P.stock AS Stock, P.unidad_venta AS UnidadVenta, P.id_categoria AS IdCategoria, C.descripcion AS Categoria " +
-                   "FROM Producto P " +
-                   "INNER JOIN Categoria C ON P.id_categoria = C.id_categoria " +
-                   "WHERE P.id_producto = @Id");
+                datos.setearConsulta("SELECT P.id_producto AS Id, P.codigo AS Codigo, P.nombre AS Nombre, P.descripcion AS Descripcion, P.precio AS Precio, P.stock AS Stock, P.unidad_venta AS UnidadVenta, P.id_categoria AS IdCategoria, C.descripcion AS Categoria, P.estado AS Estado " +
+              "FROM Producto P " +
+              "INNER JOIN Categoria C ON P.id_categoria = C.id_categoria " +
+              "WHERE P.id_producto = @Id");
 
                 datos.setearParametro("@Id", idProducto);
                 datos.ejecutarLectura();
@@ -194,6 +187,7 @@ SELECT SCOPE_IDENTITY();";
                     prod.Stock = (int)datos.Lector["Stock"];
                     prod.UnidadVenta = datos.Lector["UnidadVenta"].ToString();
                     prod.Categoria = new Categoria((int)datos.Lector["IdCategoria"], datos.Lector["Categoria"].ToString());
+                    prod.Estado = (bool)datos.Lector["Estado"];
                     producto = prod;
                 }
             }
@@ -208,21 +202,14 @@ SELECT SCOPE_IDENTITY();";
             }
             return producto;
         }
-        /*
-            public void Modificar(Producto modificar) //nose para que lo usamos
-            {
-                AccesoDatos datos = new AccesoDatos();
-                modificarProducto(modificar);
-                int idProducto = datos.obtenerIdProducto(modificar.Codigo);
-                
-            }*/
+
 
         public void modificarProducto(Producto modificar)
         {
             AccesoDatos datos = new AccesoDatos();
             try
             {
-                datos.setearConsulta("UPDATE Producto SET codigo = @Codigo, nombre = @Nombre, descripcion = @Descripcion, id_categoria = @IdCategoria, precio = @Precio, stock = @Stock, unidad_venta = @UnidadVenta WHERE id_producto = @Id");
+                datos.setearConsulta("UPDATE Producto SET codigo = @Codigo, nombre = @Nombre, descripcion = @Descripcion, id_categoria = @IdCategoria, precio = @Precio, stock = @Stock, unidad_venta = @UnidadVenta, estado = @Estado WHERE id_producto = @Id");
 
                 datos.setearParametro("@Codigo", modificar.Codigo);
                 datos.setearParametro("@Nombre", modificar.Nombre);
@@ -231,6 +218,7 @@ SELECT SCOPE_IDENTITY();";
                 datos.setearParametro("@Precio", modificar.Precio);
                 datos.setearParametro("@Stock", modificar.Stock);
                 datos.setearParametro("@UnidadVenta", modificar.UnidadVenta);
+                datos.setearParametro("@Estado", modificar.Estado);
                 datos.setearParametro("@Id", modificar.Id);
 
                 datos.ejecutarAccion();
@@ -246,45 +234,7 @@ SELECT SCOPE_IDENTITY();";
             }
         }
 
-        /*
-        public void modificarImagenUrl(int idProducto, List<Imagen> imagenes)
-        {
-            AccesoDatos datos = new AccesoDatos();
-            try
-            {
-                foreach (Imagen imagen in imagenes)
-                {
-                    datos.setearConsulta("INSERT INTO Imagen (id_producto, url) VALUES (@IdProducto, @Url)");
-                    datos.setearParametro("@IdProducto", idProducto);
-                    datos.setearParametro("@Url", imagen.Url);  // La propiedad debe llamarse Url
-                    datos.ejecutarAccion();
-                }
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-                datos.cerrarConexion();
-            }
-        }*/
-
-        public void EliminarProducto(int id)
-        {
-            try
-            {
-                AccesoDatos datos = new AccesoDatos();
-                datos.setearConsulta("DELETE FROM Producto WHERE id_producto = @id");
-                datos.setearParametro("@id", id);
-                datos.ejecutarAccion();
-            }
-            catch (Exception)
-            {
-
-                throw;
-            }
-        }
+        //revisar desde aca lo del estado, no solo cambiar aca sino tb en las paginas donde se usa, como el listar 
 
         public List<Producto> filtrar(string campo, string criterio, string filtro)
         {
@@ -445,6 +395,7 @@ SELECT SCOPE_IDENTITY();";
                 datos.cerrarConexion();
             }
         }
+
         public List<Producto> buscarRapido(string texto)
         {
             List<Producto> lista = new List<Producto>();
@@ -452,25 +403,29 @@ SELECT SCOPE_IDENTITY();";
 
             try
             {
-                string consulta = @"SELECT 
-                    P.id_producto AS Id, 
-                    P.codigo AS Codigo, 
-                    P.nombre AS Nombre, 
-                    P.descripcion AS Descripcion, 
-                    P.precio AS Precio,
-                    P.stock AS Stock,
-                    P.unidad_venta AS UnidadVenta,
-                    C.descripcion AS Categoria,
-                    MIN(I.imagen_url) AS ImagenesUrl
-                FROM Producto P
-                LEFT JOIN Categoria C ON P.id_categoria = C.id_categoria
-                LEFT JOIN Imagen I ON P.id_producto = I.id_producto
-                WHERE 
-                    P.nombre LIKE @texto OR 
-                    P.descripcion LIKE @texto OR 
-                    C.descripcion LIKE @texto
-                GROUP BY 
-                    P.id_producto, P.codigo, P.nombre, P.descripcion, P.precio, P.stock, P.unidad_venta, C.descripcion";
+                string consulta = @"
+        SELECT 
+            P.id_producto AS Id, 
+            P.codigo AS Codigo, 
+            P.nombre AS Nombre, 
+            P.descripcion AS Descripcion, 
+            P.precio AS Precio,
+            P.stock AS Stock,
+            P.unidad_venta AS UnidadVenta,
+            C.descripcion AS Categoria,
+            MIN(I.imagen_url) AS ImagenesUrl
+        FROM Producto P
+        JOIN Categoria C ON P.id_categoria = C.id_categoria
+        LEFT JOIN Imagen I ON P.id_producto = I.id_producto
+        WHERE 
+            (P.nombre LIKE @texto OR 
+            P.descripcion LIKE @texto OR 
+            C.descripcion LIKE @texto)
+            AND P.estado = 1
+            AND C.estado = 1
+        GROUP BY 
+            P.id_producto, P.codigo, P.nombre, P.descripcion, P.precio, P.stock, 
+            P.unidad_venta, C.descripcion";
 
                 datos.setearConsulta(consulta);
                 datos.setearParametro("@texto", "%" + texto + "%");
@@ -516,23 +471,25 @@ SELECT SCOPE_IDENTITY();";
             try
             {
                 string consulta = @"
-        SELECT 
-            P.id_producto AS Id, 
-            P.codigo AS Codigo, 
-            P.nombre AS Nombre, 
-            P.descripcion AS Descripcion, 
-            P.precio AS Precio,
-            P.stock AS Stock,
-            P.unidad_venta AS UnidadVenta,
-            C.descripcion AS Categoria,
-            MIN(I.imagen_url) AS ImagenesUrl
-        FROM Producto P
-        LEFT JOIN Categoria C ON P.id_categoria = C.id_categoria
-        LEFT JOIN Imagen I ON P.id_producto = I.id_producto
-        WHERE 
-            C.descripcion = @categoria
-        GROUP BY 
-            P.id_producto, P.codigo, P.nombre, P.descripcion, P.precio, P.stock, P.unidad_venta, C.descripcion";
+   SELECT 
+    P.id_producto AS Id, 
+    P.codigo AS Codigo, 
+    P.nombre AS Nombre, 
+    P.descripcion AS Descripcion, 
+    P.precio AS Precio,
+    P.stock AS Stock,
+    P.unidad_venta AS UnidadVenta,
+    C.descripcion AS Categoria,
+    MIN(I.imagen_url) AS ImagenesUrl
+FROM Producto P
+LEFT JOIN Categoria C ON P.id_categoria = C.id_categoria
+LEFT JOIN Imagen I ON P.id_producto = I.id_producto
+WHERE 
+    C.descripcion = @categoria AND 
+    P.estado = 1 AND 
+    C.estado = 1
+GROUP BY 
+    P.id_producto, P.codigo, P.nombre, P.descripcion, P.precio, P.stock, P.unidad_venta, C.descripcion";
 
                 datos.setearConsulta(consulta);
                 datos.setearParametro("@categoria", categoria);
@@ -580,7 +537,7 @@ SELECT SCOPE_IDENTITY();";
                 Producto aux = new Producto();
                 if (datos.Lector.Read())
                 {
-                    
+
                     aux.Id = (int)datos.Lector["id_producto"];
                     aux.Codigo = datos.Lector["codigo"].ToString();
                     aux.Nombre = datos.Lector["nombre"].ToString();
@@ -590,7 +547,7 @@ SELECT SCOPE_IDENTITY();";
                     aux.UnidadVenta = datos.Lector["unidad_venta"].ToString();
                     aux.Categoria = new Categoria { Id = (int)datos.Lector["id_categoria"] };
                 }
-                
+
                 return aux;
             }
             catch (Exception ex)
@@ -606,6 +563,7 @@ SELECT SCOPE_IDENTITY();";
     }
 
 }
+
 
 
 
