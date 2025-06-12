@@ -128,6 +128,7 @@
     <Content Include="favicon.ico" />
     <Content Include="FiltroCategoria.aspx" />
     <Content Include="Global.asax" />
+    <Content Include="imagenABML.aspx" />
     <Content Include="img\alf_coco.jpg" />
     <Content Include="img\alf_nuez.jpg" />
     <Content Include="img\brownie.jpg" />
@@ -306,6 +307,13 @@
     </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="imagenABML.aspx.cs">
+      <DependentUpon>imagenABML.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="imagenABML.aspx.designer.cs">
+      <DependentUpon>imagenABML.aspx</DependentUpon>
     </Compile>
     <Compile Include="ListadoProducto.aspx.cs">
       <DependentUpon>ListadoProducto.aspx</DependentUpon>

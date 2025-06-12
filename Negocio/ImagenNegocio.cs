@@ -110,7 +110,27 @@ namespace Negocio
                 datos.cerrarConexion();
             }
         }
-    }
+    
 
+        public void modificarImagenPorID(int idImagen, string url)
+        {
+            AccesoDatos datos = new AccesoDatos();
+            try
+            {
+                datos.setearConsulta("UPDATE Imagen SET imagen_url = @url WHERE id_imagen = @idImagen");
+                datos.setearParametro("@idImagen", idImagen);
+                datos.setearParametro("@url", url);
+                datos.ejecutarAccion();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
+        }
+    }
 }
 
