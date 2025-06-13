@@ -102,7 +102,7 @@
     <Content Include="About.aspx" />
     <Content Include="AdminEnvio.aspx" />
     <Content Include="AdminPedidos.aspx" />
-    <Content Include="AltaModificacion.aspx" />
+    <Content Include="categoriaABML.aspx" />
     <Content Include="Buscar.aspx" />
     <Content Include="Carrito.aspx" />
     <Content Include="Contact.aspx" />
@@ -170,6 +170,7 @@
     <Content Include="MenuAdminPerfiles.ascx" />
     <Content Include="MiPerfil.aspx" />
     <Content Include="ProductDetail.aspx" />
+    <Content Include="productoABML.aspx" />
     <Content Include="Registrarse.aspx" />
     <Content Include="Scripts\bootstrap.bundle.js" />
     <Content Include="Scripts\bootstrap.bundle.min.js" />
@@ -247,12 +248,12 @@
     <Compile Include="AdminPedidos.aspx.designer.cs">
       <DependentUpon>AdminPedidos.aspx</DependentUpon>
     </Compile>
-    <Compile Include="AltaModificacion.aspx.cs">
-      <DependentUpon>AltaModificacion.aspx</DependentUpon>
+    <Compile Include="categoriaABML.aspx.cs">
+      <DependentUpon>categoriaABML.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="AltaModificacion.aspx.designer.cs">
-      <DependentUpon>AltaModificacion.aspx</DependentUpon>
+    <Compile Include="categoriaABML.aspx.designer.cs">
+      <DependentUpon>categoriaABML.aspx</DependentUpon>
     </Compile>
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="About.aspx.cs">
@@ -363,6 +364,13 @@
     </Compile>
     <Compile Include="ProductDetail.aspx.designer.cs">
       <DependentUpon>ProductDetail.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="productoABML.aspx.cs">
+      <DependentUpon>productoABML.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="productoABML.aspx.designer.cs">
+      <DependentUpon>productoABML.aspx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Registrarse.aspx.cs">
