@@ -67,22 +67,19 @@ namespace Negocio
             AccesoDatos datos = new AccesoDatos();
             modificarCategoria(modificar);
         }
-        public void modificarCategoria(Categoria modificar) //tambien se puede usar para baja logica
+        public void modificarCategoria(Categoria modificar)
         {
             AccesoDatos datos = new AccesoDatos();
             try
             {
-                datos.setearConsulta("UPDATE Categoria SET descripcion = @descripcion, estado = @estado WHERE id_categoria = @id_categoria");
+                datos.setearConsulta("UPDATE Categoria SET descripcion = @descripcion WHERE id_categoria = @id");
                 datos.setearParametro("@descripcion", modificar.Descripcion);
-                datos.setearParametro("@estado", modificar.Estado);
-                datos.setearParametro("@id_categoria", modificar.Id);
-
+                datos.setearParametro("@id", modificar.Id);
                 datos.ejecutarAccion();
             }
             catch (Exception ex)
             {
-
-                throw ex;
+                throw new Exception("Error al modificar la categoría", ex);
             }
             finally
             {
@@ -90,6 +87,42 @@ namespace Negocio
             }
         }
 
+        public void DesactivarCategoria(int idCategoria)
+        {
+            AccesoDatos datos = new AccesoDatos();
+            try
+            {
+                datos.setearConsulta("UPDATE Categoria SET estado = 0 WHERE id_categoria = @id");
+                datos.setearParametro("@id", idCategoria);
+                datos.ejecutarAccion();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error al dar de baja la categoría", ex);
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
+        }
+        public void ReactivarCategoria(int idCategoria)
+        {
+            AccesoDatos datos = new AccesoDatos();
+            try
+            {
+                datos.setearConsulta("UPDATE Categoria SET estado = 1 WHERE id_categoria = @id");
+                datos.setearParametro("@id", idCategoria);
+                datos.ejecutarAccion();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error al reactivar la categoría", ex);
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
+        }
 
         public bool existeCategoria(int idCategoria)
         {
@@ -130,6 +163,9 @@ namespace Negocio
         }
     }
 }
+
+
+
 
 
 

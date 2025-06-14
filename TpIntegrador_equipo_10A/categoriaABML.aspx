@@ -4,32 +4,46 @@
 <asp:Content ID="BodyContent" ContentPlaceHolderID="MainContent" runat="server">
     <head>
         <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
-
     </head>
-    <div>
-        <h1>
-            <i class="bi bi-plus-circle"></i>Alta o Modificación de Categorías
-        </h1>
-    </div>
-      
-            <div class="mb3">
-                 <asp:Label ID="lblDescripcionCat" runat="server" CssClass="form-label" AssociatedControlID="txtDescripcionCat" Text="Categoria" />
-                 <asp:TextBox ID="txtDescripcionCat" AutoPostBack="true" runat="server" CssClass="form-control" placeholder="Ingrese la categoria"  OnTextChanged="txtDescripcionCat_TextChanged"/>
-            </div>     
-       <div>
-           <asp:Label ID="lblExistente" runat="server" CssClass="form-label" Text="Categoria existente" Visible="false" />"
-        </div>
-    <div> <asp:Label ID="lblExito" runat="server" CssClass="form-label" Text="Exito al agregar" Visible="false"></asp:Label> </div>
 
-    <div>
-        <asp:Button ID="btnGuardar" runat="server" CssClass="btn btn-primary" Text="Guardar" OnClick="btnGuardar_Click" Visible="false" />
-    </div>
-    <div>
-        <asp:Button ID="btnEliminar" runat="server" CssClass="btn btn-danger" Text="Eliminar" OnClick="btnEliminar_Click" Visible="false" />
-    </div>
-    
+    <div class="container mt-3">
+        <h1><i class="bi bi-tags-fill"></i> Gestión de Categorías</h1>
 
-       
-   
+        <asp:Button ID="btnNuevaCategoria" runat="server" CssClass="btn btn-success mb-3" Text="Nueva Categoría" OnClick="btnNuevaCategoria_Click" />
+        <asp:TextBox ID="txtBuscarDescripcion" runat="server" CssClass="form-control me-2" Placeholder="Buscar por descripción..." Width="250px" AutoPostBack="false" />
 
+    <asp:Button ID="btnBuscar" runat="server" CssClass="btn btn-primary" Text="Buscar" OnClick="btnBuscar_Click" />
+        <asp:GridView ID="gvCategorias" runat="server" AutoGenerateColumns="false" GridLines="Both"
+            CssClass="table table-striped table-bordered" DataKeyNames="Id" 
+            OnRowCommand="gvCategorias_RowCommand" EmptyDataText="No hay categorías registradas.">
+
+            <Columns>
+                <asp:BoundField DataField="Id" HeaderText="ID" />
+                <asp:BoundField DataField="Descripcion" HeaderText="Descripción" />
+                <asp:TemplateField HeaderText="Estado">
+                    <ItemTemplate>
+                        <%# (bool)Eval("Estado") ? "Activo" : "Inactivo" %>
+                    </ItemTemplate>
+                </asp:TemplateField>
+                <asp:ButtonField Text="Ver/Editar" CommandName="SeleccionarCategoria" ButtonType="Button" />
+            </Columns>
+        </asp:GridView>
+
+        <asp:Panel ID="pnlCategoria" runat="server" Visible="false" CssClass="card p-3 mt-4" BorderStyle="Solid" BorderWidth="1" BorderColor="#ccc" BackColor="#f9f9f9">
+            <asp:Label ID="lblIdCategoria" runat="server" Visible="false" />
+
+            <div class="mb-3">
+                <asp:Label ID="lblDescripcionCat" runat="server" CssClass="form-label" AssociatedControlID="txtDescripcionCat" Text="Descripción de Categoría" />
+                <asp:TextBox ID="txtDescripcionCat" runat="server" CssClass="form-control" placeholder="Ingrese la categoría" />
+            </div>
+
+            <asp:Label ID="lblExistente" runat="server" CssClass="form-text text-danger" Text="Categoría existente" Visible="false" />
+            <asp:Label ID="lblExito" runat="server" CssClass="form-text text-success" Text="Categoría guardada exitosamente" Visible="false" />
+
+            <asp:Button ID="btnGuardar" runat="server" CssClass="btn btn-primary me-2" Text="Guardar cambios" OnClick="btnGuardar_Click" />
+           <asp:Button ID="btnDesactivar" runat="server" CssClass="btn btn-warning me-2" Text="Desactivar" OnClick="btnDesactivar_Click" />
+<asp:Button ID="btnActivar" runat="server" CssClass="btn btn-success me-2" Text="Activar" OnClick="btnActivar_Click" />
+            <asp:Button ID="btnCancelar" runat="server" CssClass="btn btn-secondary" Text="Cancelar" OnClick="btnCancelar_Click" />
+        </asp:Panel>
+    </div>
 </asp:Content>
