@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Security.Policy;
 using System.Web;
@@ -275,6 +276,44 @@ namespace TpIntegrador_equipo_10A
                 lblAgregadoExito.Visible = true;
             }
 
+        }
+
+        protected void btnCargarImagen_Click(object sender, EventArgs e) //elegir img desde la compu
+        {
+
+            if (fileImagen.HasFile)
+            {
+                try
+                {
+                    // nombre real del archivo
+                    string nombreArchivo = Path.GetFileName(fileImagen.FileName);
+                    string carpetaImagenes = Server.MapPath("~/img/");
+
+                    // que la carpeta exista
+                    if (!Directory.Exists(carpetaImagenes))
+                        Directory.CreateDirectory(carpetaImagenes);
+
+                    // Ruta física donde guardar
+                    string rutaGuardar = Path.Combine(carpetaImagenes, nombreArchivo);
+                    fileImagen.SaveAs(rutaGuardar);
+
+                    // Ruta relativa para guardar en la BD
+                    string rutaBD = "img/" + nombreArchivo;
+
+                    // Mostrar en imagen y textbox
+                    imgNuevo.ImageUrl = rutaBD;
+                    imgNuevo.Visible = true;
+                    txtUrl.Text = rutaBD;
+                    txtUrl.Visible = true;
+                    lblUrl.Visible = true;
+                    btnAgregar.Visible = true;
+                }
+                catch (Exception ex)
+                {
+                    lblAgregadoExito.Text = "Error al subir la imagen: " + ex.Message;
+                    lblAgregadoExito.Visible = true;
+                }
+            }
         }
     }
 
