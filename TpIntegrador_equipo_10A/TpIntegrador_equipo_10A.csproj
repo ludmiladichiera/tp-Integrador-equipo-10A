@@ -103,6 +103,7 @@
     <Content Include="AdminEnvio.aspx" />
     <Content Include="AdminPedidos.aspx" />
     <Content Include="AdminPerfil.aspx" />
+    <Content Include="AgregarProductoAdmin.aspx" />
     <Content Include="categoriaABML.aspx" />
     <Content Include="Buscar.aspx" />
     <Content Include="Carrito.aspx" />
@@ -255,6 +256,13 @@
     </Compile>
     <Compile Include="AdminPerfil.aspx.designer.cs">
       <DependentUpon>AdminPerfil.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="AgregarProductoAdmin.aspx.cs">
+      <DependentUpon>AgregarProductoAdmin.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AgregarProductoAdmin.aspx.designer.cs">
+      <DependentUpon>AgregarProductoAdmin.aspx</DependentUpon>
     </Compile>
     <Compile Include="categoriaABML.aspx.cs">
       <DependentUpon>categoriaABML.aspx</DependentUpon>
