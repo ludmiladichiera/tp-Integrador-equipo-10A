@@ -209,9 +209,9 @@ SELECT SCOPE_IDENTITY();";
             AccesoDatos datos = new AccesoDatos();
             try
             {
-                datos.setearConsulta("UPDATE Producto SET codigo = @Codigo, nombre = @Nombre, descripcion = @Descripcion, id_categoria = @IdCategoria, precio = @Precio, stock = @Stock, unidad_venta = @UnidadVenta, estado = @Estado WHERE id_producto = @Id");
+                datos.setearConsulta("UPDATE Producto SET nombre = @Nombre, descripcion = @Descripcion, id_categoria = @IdCategoria, precio = @Precio, stock = @Stock, unidad_venta = @UnidadVenta, estado = @Estado WHERE id_producto = @Id");
 
-                datos.setearParametro("@Codigo", modificar.Codigo);
+                //datos.setearParametro("@Codigo", modificar.Codigo);
                 datos.setearParametro("@Nombre", modificar.Nombre);
                 datos.setearParametro("@Descripcion", modificar.Descripcion);
                 datos.setearParametro("@IdCategoria", modificar.Categoria.Id);
@@ -413,7 +413,8 @@ SELECT SCOPE_IDENTITY();";
             P.stock AS Stock,
             P.unidad_venta AS UnidadVenta,
             C.descripcion AS Categoria,
-            MIN(I.imagen_url) AS ImagenesUrl
+            MIN(I.imagen_url) AS ImagenesUrl,
+P.estado AS Estado
         FROM Producto P
         JOIN Categoria C ON P.id_categoria = C.id_categoria
         LEFT JOIN Imagen I ON P.id_producto = I.id_producto
@@ -425,7 +426,7 @@ SELECT SCOPE_IDENTITY();";
             AND C.estado = 1
         GROUP BY 
             P.id_producto, P.codigo, P.nombre, P.descripcion, P.precio, P.stock, 
-            P.unidad_venta, C.descripcion";
+            P.unidad_venta, C.descripcion, P.estado";
 
                 datos.setearConsulta(consulta);
                 datos.setearParametro("@texto", "%" + texto + "%");
@@ -442,6 +443,7 @@ SELECT SCOPE_IDENTITY();";
                     aux.Stock = (int)datos.Lector["Stock"];
                     aux.UnidadVenta = datos.Lector["UnidadVenta"].ToString();
                     aux.Categoria = new Categoria { Descripcion = datos.Lector["Categoria"].ToString() };
+                    aux.Estado = datos.Lector["Estado"] != DBNull.Value && Convert.ToBoolean(datos.Lector["Estado"]);
 
                     aux.Imagenes = new List<Imagen>();
                     if (!(datos.Lector["ImagenesUrl"] is DBNull))
@@ -528,42 +530,41 @@ GROUP BY
 
         public Producto buscarXcodigo(string cod)
         {
+            AccesoDatos datos = new AccesoDatos();
+            try
             {
-                AccesoDatos datos = new AccesoDatos();
-                try
-                {
-                    datos.setearConsulta("SELECT id_producto,codigo,nombre,descripcion,precio,stock,unidad_venta,id_categoria from Producto WHERE codigo=@cod");
-                    datos.setearParametro("@cod", cod);
-                    datos.ejecutarLectura();
+                datos.setearConsulta("SELECT id_producto, codigo, nombre, descripcion, precio, stock, unidad_venta, id_categoria, estado FROM Producto WHERE codigo=@cod");
+                datos.setearParametro("@cod", cod);
+                datos.ejecutarLectura();
 
-                    if (datos.Lector.Read())
-                    {
-                        Producto aux = new Producto();
-                        aux.Id = (int)datos.Lector["id_producto"];
-                        aux.Codigo = datos.Lector["codigo"].ToString();
-                        aux.Nombre = datos.Lector["nombre"].ToString();
-                        aux.Descripcion = datos.Lector["descripcion"].ToString();
-                        aux.Precio = (decimal)datos.Lector["precio"];
-                        aux.Stock = (int)datos.Lector["stock"];
-                        aux.UnidadVenta = datos.Lector["unidad_venta"].ToString();
-                        aux.Categoria = new Categoria { Id = (int)datos.Lector["id_categoria"] };
-
-                        return aux;
-                    }
-
-                    return null; 
-                }
-                catch (Exception ex)
+                if (datos.Lector.Read())
                 {
-                    throw ex;
+                    Producto aux = new Producto();
+                    aux.Id = (int)datos.Lector["id_producto"];
+                    aux.Codigo = datos.Lector["codigo"].ToString();
+                    aux.Nombre = datos.Lector["nombre"].ToString();
+                    aux.Descripcion = datos.Lector["descripcion"].ToString();
+                    aux.Precio = (decimal)datos.Lector["precio"];
+                    aux.Stock = (int)datos.Lector["stock"];
+                    aux.UnidadVenta = datos.Lector["unidad_venta"].ToString();
+                    aux.Categoria = new Categoria { Id = (int)datos.Lector["id_categoria"] };
+                    aux.Estado = (bool)datos.Lector["estado"];
+                    return aux;
                 }
-                finally
-                {
-                    datos.cerrarConexion();
-                }
+
+                return null;
             }
-        }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
 
+
+        }
     }
 }
 

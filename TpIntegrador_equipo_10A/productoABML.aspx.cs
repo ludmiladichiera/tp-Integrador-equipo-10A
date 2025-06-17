@@ -11,58 +11,21 @@ namespace TpIntegrador_equipo_10A
 {
     public partial class productoABML : System.Web.UI.Page
     {
-        bool guardo = false;
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
             {
-                if (!guardo)
-                    ocultarTodo();
-                btnEliminar.Text = "Eliminar";
+                ocultarTodo();
+                cargarDDLcat();
+                CargarGridProductos();
+                btnAgregarProducto.Visible = true;
+                btnVolverLista.Visible = false;
             }
-
         }
-        protected void txtCodigo_TextChanged(object sender, EventArgs e)
-        {
 
-            try
-            {
-                ProductoNegocio negocio = new ProductoNegocio();
-                Producto prod = new Producto();
-                prod.Categoria = new Categoria();
 
-                prod = negocio.buscarXcodigo(txtCodigo.Text);
-
-                if (prod == null || prod.Id == 0)
-                {
-                    mostrarTodo();
-                    lblExistente.Text = "Producto inexistente,llene todos los campos para darlo de alta";
-                    btnGuardar.Text = "Agregar";
-                    btnEliminar.Text = "Cancelar";
-
-                }
-                else
-                {
-                    mostrarTodo();
-                    lblExistente.Text = "Producto existente";
-                    txtNombre.Text = prod.Nombre;
-                    txtDescripcion.Text = prod.Descripcion;
-                    txtPrecio.Text = prod.Precio.ToString();
-                    txtStock.Text = prod.Stock.ToString();
-                    txtUnidadVenta.Text = prod.UnidadVenta;
-                    ddlCategoria.SelectedValue = prod.Categoria.Id.ToString();
-                    btnGuardar.Text = "Modificar";
-                }
-            }
-            catch (Exception ex)
-            {
-                lblExito.Text = ex.Message;
-            }
-
-        }
         protected void cargarDDLcat()
         {
-
             CategoriaNegocio negocio = new CategoriaNegocio();
             List<Categoria> categorias = negocio.listar();
             ddlCategoria.DataSource = categorias;
@@ -70,127 +33,122 @@ namespace TpIntegrador_equipo_10A
             ddlCategoria.DataValueField = "Id";
             ddlCategoria.DataBind();
         }
+
+
+
+        private void LimpiarFormulario()
+        {
+            txtCodigo.Text = "";
+            txtNombre.Text = "";
+            txtDescripcion.Text = "";
+            txtPrecio.Text = "";
+            txtStock.Text = "";
+            txtUnidadVenta.Text = "";
+            ddlCategoria.SelectedIndex = 0;
+            ddlEstado.SelectedIndex = 0;
+            ViewState["IdProductoSeleccionado"] = null;
+            ViewState["ModoEdicion"] = null;
+        }
+
         protected void btnGuardar_Click(object sender, EventArgs e)
+        {
+            if (!ValidarCampos()) return;
+
+            ProductoNegocio negocioP = new ProductoNegocio();
+
+            // Obtener el ID del producto a modificar desde ViewState
+            int idProducto = ViewState["IdProductoSeleccionado"] != null ? (int)ViewState["IdProductoSeleccionado"] : 0;
+            if (idProducto == 0)
+            {
+
+                lblMensaje.Text = "No se ha seleccionado un producto para modificar.";
+                lblMensaje.ForeColor = System.Drawing.Color.Red;
+                lblMensaje.Visible = true;
+                return;
+            }
+
+
+            Producto modificado = new Producto
+            {
+                Id = idProducto,
+                Codigo = txtCodigo.Text.Trim(),  //  no se modifica en DB
+                Nombre = txtNombre.Text.Trim(),
+                Descripcion = txtDescripcion.Text.Trim(),
+                Precio = decimal.Parse(txtPrecio.Text.Trim()),
+                Stock = int.Parse(txtStock.Text.Trim()),
+                UnidadVenta = txtUnidadVenta.Text.Trim(),
+                Categoria = new Categoria
+                {
+                    Id = int.Parse(ddlCategoria.SelectedValue),
+                    Descripcion = ddlCategoria.SelectedItem.Text
+                },
+                Estado = ddlEstado.SelectedValue == "1"
+            };
+
+            try
+            {
+                negocioP.modificarProducto(modificado);
+
+                lblMensaje.Text = "Producto modificado con éxito.";
+                lblMensaje.ForeColor = System.Drawing.Color.Green;
+                lblMensaje.Visible = true;
+
+
+                Producto actualizado = negocioP.ObtenerProductoId(idProducto);
+                gvProductos.DataSource = new List<Producto> { actualizado };
+                gvProductos.DataBind();
+            }
+            catch (Exception ex)
+            {
+                lblMensaje.Text = "Error al modificar el producto: " + ex.Message;
+                lblMensaje.ForeColor = System.Drawing.Color.Red;
+                lblMensaje.Visible = true;
+            }
+        }
+
+
+
+        private bool ValidarCampos()
         {
             decimal precio;
             int stock;
-            ProductoNegocio negocioP = new ProductoNegocio();
-            Producto nuevoProducto = new Producto();
-            nuevoProducto.Categoria = new Categoria();
 
-            if (txtCodigo.Text == null || txtNombre.Text == null || txtDescripcion.Text == null || txtPrecio.Text == null || txtStock.Text == null || txtUnidadVenta.Text == null)
+            if (string.IsNullOrWhiteSpace(txtCodigo.Text) ||
+                string.IsNullOrWhiteSpace(txtNombre.Text) ||
+                string.IsNullOrWhiteSpace(txtDescripcion.Text) ||
+                string.IsNullOrWhiteSpace(txtPrecio.Text) ||
+                string.IsNullOrWhiteSpace(txtStock.Text) ||
+                string.IsNullOrWhiteSpace(txtUnidadVenta.Text))
             {
-                lblExito.Text = "Complete todos los campos";
-                lblExito.Visible = true;
-                return;
-            }
-            nuevoProducto.Codigo = txtCodigo.Text;
-            nuevoProducto.Descripcion = txtDescripcion.Text;
-            nuevoProducto.Nombre = txtNombre.Text;
-
-
-            if (decimal.TryParse(txtPrecio.Text, out precio))
-            {
-                nuevoProducto.Precio = precio;
-            }
-            else
-            {
-                lblExito.Text = "Ingrese un valor numérico válido";
-                lblExito.Visible = true;
-                return;
+                lblMensaje.Text = "Por favor complete todos los campos.";
+                lblMensaje.ForeColor = System.Drawing.Color.Red;
+                return false;
             }
 
-
-            if (int.TryParse(txtStock.Text, out stock))
+            if (!decimal.TryParse(txtPrecio.Text, out precio))
             {
-                nuevoProducto.Stock = stock;
-            }
-            else
-            {
-                lblExito.Text = "Ingrese un valor numérico válido";
-                lblExito.Visible = true;
-                return;
+                lblMensaje.Text = "Ingrese un precio válido.";
+                lblMensaje.ForeColor = System.Drawing.Color.Red;
+                return false;
             }
 
-            nuevoProducto.UnidadVenta = txtUnidadVenta.Text;
-
-            nuevoProducto.Categoria.Id = int.Parse(ddlCategoria.SelectedValue);
-            nuevoProducto.Categoria.Descripcion = ddlCategoria.SelectedItem.Text;
-
-            //nuevoProducto.Estado=int.Parse(ddlEstado.SelectedValue); para cuando este el estado en producto
-            if (btnGuardar.Text == "Agregar")
+            if (!int.TryParse(txtStock.Text, out stock))
             {
-                int id = negocioP.agregarProductoYDevolverId(nuevoProducto);
-                lblExito.Visible = true;
-                lblExito.Text = "Exito al agregar nuevo producto";
-                inhabilitarCambios();
-
-            }
-            else if (btnGuardar.Text == "Modificar")
-            {
-                Producto aux = negocioP.buscarXcodigo(txtCodigo.Text);
-                if (txtCodigo.Text == null || txtNombre.Text == null || txtDescripcion.Text == null || txtPrecio.Text == null || txtStock.Text == null || txtUnidadVenta.Text == null)
-                {
-                    lblExito.Text = "Complete todos los campos";
-                    lblExito.Visible = true;
-                    return;
-                }
-                habillitarCambios();
-                txtCodigo.AutoPostBack = false;
-                nuevoProducto.Codigo = txtCodigo.Text;
-                nuevoProducto.Descripcion = txtDescripcion.Text;
-                nuevoProducto.Nombre = txtNombre.Text;
-
-
-                if (decimal.TryParse(txtPrecio.Text, out precio))
-                {
-                    nuevoProducto.Precio = precio;
-                }
-                else
-                {
-                    lblExito.Text = "Ingrese un valor numérico válido";
-                    lblExito.Visible = true;
-                    return;
-                }
-
-
-                if (int.TryParse(txtStock.Text, out stock))
-                {
-                    nuevoProducto.Stock = stock;
-                }
-                else
-                {
-                    lblExito.Text = "Ingrese un valor numérico válido";
-                    lblExito.Visible = true;
-                    return;
-                }
-
-                nuevoProducto.UnidadVenta = txtUnidadVenta.Text;
-
-                nuevoProducto.Categoria.Id = int.Parse(ddlCategoria.SelectedValue);
-                nuevoProducto.Categoria.Descripcion = ddlCategoria.DataTextField;
-                //nuevoProducto.Estado = int.Parse(ddlEstado.SelectedValue); para cuando este el estado en producto
-
-                if (negocioP.existeCodigoEnOtroProducto(nuevoProducto.Codigo, aux.Id))
-                {
-                    lblExito.Text = "El código ingresado ya existe para otro producto. Por favor, ingrese un código único.";
-                    lblExito.Visible = true;
-                    return;
-                }
-                negocioP.modificarProducto(nuevoProducto);
-                lblExito.Visible = true;
-                lblExito.Text = "Exito al modificar";
-                guardo = true;
-                inhabilitarCambios();
-                btnEliminar.Visible = true;
-                btnEliminar.Text = "Volver";
+                lblMensaje.Text = "Ingrese un stock válido.";
+                lblMensaje.ForeColor = System.Drawing.Color.Red;
+                return false;
             }
 
+            lblMensaje.Text = "";
+            return true;
         }
+
 
         protected void ocultarTodo()
         {
-            lblExistente.Visible = false;
+            lblCodigo.Visible = false;
+            txtCodigo.Visible = false;
+
             lblNombre.Visible = false;
             txtNombre.Visible = false;
             lblDescripcion.Visible = false;
@@ -201,43 +159,35 @@ namespace TpIntegrador_equipo_10A
             txtStock.Visible = false;
             lblUnidadVenta.Visible = false;
             txtUnidadVenta.Visible = false;
+            lblCategoria.Visible = false;
             ddlCategoria.Visible = false;
+            lblEstado.Visible = false;
             ddlEstado.Visible = false;
             btnGuardar.Visible = false;
-            btnEliminar.Visible = false;
+
         }
+
         protected void mostrarTodo()
         {
-            lblExistente.Visible = true;
+            lblCodigo.Visible = true;
+            txtCodigo.Visible = true;
 
             lblNombre.Visible = true;
             txtNombre.Visible = true;
-            txtNombre.Text = null;
-
             lblDescripcion.Visible = true;
             txtDescripcion.Visible = true;
-            txtDescripcion.Text = null;
-
             lblPrecio.Visible = true;
             txtPrecio.Visible = true;
-            txtPrecio.Text = null;
-
             lblStock.Visible = true;
             txtStock.Visible = true;
-            txtStock.Text = null;
-
             lblUnidadVenta.Visible = true;
             txtUnidadVenta.Visible = true;
-            txtUnidadVenta.Text = null;
-
+            lblCategoria.Visible = true;
+            lblEstado.Visible = true;
             ddlCategoria.Visible = true;
-            cargarDDLcat();
-
             ddlEstado.Visible = true;
-
-            btnGuardar.Visible = true;
-            btnEliminar.Visible = true;
         }
+
         protected void inhabilitarCambios()
         {
             txtCodigo.Enabled = false;
@@ -249,11 +199,12 @@ namespace TpIntegrador_equipo_10A
             ddlCategoria.Enabled = false;
             ddlEstado.Enabled = false;
             btnGuardar.Visible = false;
-            btnEliminar.Visible = false;
+
         }
-        protected void habillitarCambios()
+
+        protected void habilitarCambios()
         {
-            txtCodigo.Enabled = true;
+            txtCodigo.Enabled = false; // El código no se puede modificar
             txtNombre.Enabled = true;
             txtDescripcion.Enabled = true;
             txtPrecio.Enabled = true;
@@ -262,14 +213,141 @@ namespace TpIntegrador_equipo_10A
             ddlCategoria.Enabled = true;
             ddlEstado.Enabled = true;
             btnGuardar.Visible = true;
-            btnEliminar.Visible = true;
-
+            btnAgregarProducto.Visible = true;
         }
 
-        protected void btnEliminar_Click(object sender, EventArgs e)
+        private void CargarGridProductos()
         {
-            guardo = false;
-            txtCodigo.Text = null;
+            ProductoNegocio negocio = new ProductoNegocio();
+            gvProductos.DataSource = negocio.listar(true);
+            gvProductos.DataBind();
+
+            btnVolverLista.Visible = false;
+        }
+
+        protected void gvProductos_RowCommand(object sender, GridViewCommandEventArgs e)
+        {
+
+            if (e.CommandName == "SeleccionarProducto")
+            {
+                int index = Convert.ToInt32(e.CommandArgument);
+                int idProducto = Convert.ToInt32(gvProductos.DataKeys[index].Value);
+
+                try
+                {
+                    Producto producto = new ProductoNegocio().ObtenerProductoId(idProducto);
+
+                    if (producto == null)
+                    {
+                        lblMensaje.Text = "No se encontró el producto seleccionado.";
+                        lblMensaje.ForeColor = System.Drawing.Color.Red;
+                        return;
+                    }
+
+                    // Cargo datos en el formulario
+                    txtCodigo.Text = producto.Codigo;
+                    txtNombre.Text = producto.Nombre;
+                    txtDescripcion.Text = producto.Descripcion;
+                    txtPrecio.Text = producto.Precio.ToString("0.00");
+                    txtStock.Text = producto.Stock.ToString();
+                    txtUnidadVenta.Text = producto.UnidadVenta;
+                    ddlCategoria.SelectedValue = producto.Categoria.Id.ToString();
+                    ddlEstado.SelectedValue = producto.Estado ? "1" : "0";
+
+                    mostrarTodo();
+                    habilitarCambios();
+
+                    // Código no editable
+                    txtCodigo.Enabled = false;
+
+                    // Mostrar solo el producto seleccionado en el GridView
+                    gvProductos.DataSource = new List<Producto> { producto };
+                    gvProductos.DataBind();
+
+                    btnVolverLista.Visible = true;
+
+                    // Guardar modo edición para modificar
+                    ViewState["ModoEdicion"] = "Modificar";
+                    ViewState["IdProductoSeleccionado"] = producto.Id;
+
+                    lblMensaje.Text = "";
+                }
+                catch (Exception ex)
+                {
+                    lblMensaje.Text = "Error al cargar producto: " + ex.Message;
+                    lblMensaje.ForeColor = System.Drawing.Color.Red;
+                }
+            }
+        }
+
+
+        protected void btnBuscarClave_Click(object sender, EventArgs e)
+        {
+            ocultarTodo();
+            LimpiarFormulario();
+            ViewState["IdProductoSeleccionado"] = null;
+
+            string texto = txtBusquedaClave.Text.Trim();
+
+            ProductoNegocio negocio = new ProductoNegocio();
+
+            if (string.IsNullOrEmpty(texto))
+            {
+                gvProductos.DataSource = negocio.listar(true);
+            }
+            else
+            {
+                gvProductos.DataSource = negocio.buscarRapido(texto);
+                btnVolverLista.Visible = true;
+            }
+
+            gvProductos.DataBind();
+        }
+
+        protected void btnBuscarCodigo_Click(object sender, EventArgs e)
+        {
+            ocultarTodo();
+            LimpiarFormulario();
+            ViewState["IdProductoSeleccionado"] = null;
+
+            string codigo = txtBusquedaCodigo.Text.Trim();
+            ProductoNegocio negocio = new ProductoNegocio();
+
+            if (string.IsNullOrEmpty(codigo))
+            {
+                gvProductos.DataSource = negocio.listar(true);
+            }
+            else
+            {
+                // buscarXcodigo devuelve un solo producto, así que para el GridView necesitamos una lista
+                Producto prod = negocio.buscarXcodigo(codigo);
+
+                if (prod == null || prod.Id == 0)
+                {
+                    gvProductos.DataSource = new List<Producto>(); // lista vacía, nada para mostrar
+                }
+                else
+                {
+                    gvProductos.DataSource = new List<Producto> { prod };
+                    btnVolverLista.Visible = true;
+                }
+            }
+
+            gvProductos.DataBind();
+
+
+        }
+        protected void btnVolverLista_Click(object sender, EventArgs e)
+        {
+            lblMensaje.Text = "";
+            LimpiarFormulario();
+            ocultarTodo();
+            btnVolverLista.Visible = false;
+
+            CargarGridProductos();
+
+            ViewState["ModoEdicion"] = null;
+            ViewState["IdProductoSeleccionado"] = null;
         }
     }
 }
