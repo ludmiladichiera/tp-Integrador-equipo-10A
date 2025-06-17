@@ -45,49 +45,56 @@
 
         <!-- 🧁 SECCIÓN CARRUSEL DE TORTAS -->
 
-        <article class="mt-4">
+               <article class="mt-4">
+    <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
+        
+        <!-- 🔘 Indicadores -->
+        <div class="carousel-indicators">
+            <asp:Literal ID="litIndicadores" runat="server" />
+        </div>
 
-            <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
-                <div class="carousel-inner rounded">
-                    <div class="carousel-item active">
-                        <asp:Image ID="ImageCarrusel1" runat="server" ImageUrl="https://cdn0.uncomo.com/es/posts/1/4/2/como_hacer_tarta_selva_negra_52241_orig.jpg" CssClass="d-block w-100 imgCarrusel" AlternateText="Torta 1" />
-                    </div>
-                    <div class="carousel-item">
-                        <asp:Image ID="ImageCarrusel2" runat="server" ImageUrl="https://www.southernliving.com/thmb/_qXEROnwaluQ3Q3XjPIhpM0yM1U=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/2675801_SaveR_23326-2000-761aee90da684686816cf9e8fafd67d1-7fda54d01a594eaba1a296409addc689.jpg" CssClass="d-block w-100 imgCarrusel" AlternateText="Torta 2" />
-                    </div>
-                    <div class="carousel-item">
-                        <asp:Image ID="ImageCarrusel3" runat="server" ImageUrl="https://i.blogs.es/45c847/15-recetas-de-tartas-que-siempre-quisiste-hacer-en-su-version-mas-facil-/1366_2000.jpeg" CssClass="d-block w-100 imgCarrusel" AlternateText="Torta 3" />
-                    </div>
-                </div>
-                <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
-                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                </button>
-                <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
-                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                </button>
-            </div>
-        </article>
+        <!-- 🖼️ Carrusel dinámico -->
+        <div class="carousel-inner rounded" runat="server" id="carouselInner"></div>
+
+        <!-- ◀️ ▶️ Controles -->
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        </button>
+    </div>
+</article>
 
         <!-- 🎂 SECCIÓN DE PRODUCTOS DESTACADOS -->
-        <article class="text-center mt-5">
-            <h2 class="titulo">Productos Destacados</h2>
-            <div class="row mt-4">
-                <%-- Producto 1 --%>
-                <div class="col-md-3 mb-4">
-                    <div class="card border-0 shadow-sm">
-                        <asp:Image ID="Image4" runat="server" CssClass="card-img-top" AlternateText="image" />
-                        <div class="card-body">
-                            <asp:Label ID="LblTituloProducto1" runat="server" CssClass="card-title titulo" />
-                            <asp:Label ID="LblPrecioProducto1" runat="server" CssClass="card-text d-block mb-2" />
-                            <a href="#" class="btn btn-red">Ver más</a>
-                        </div>
+<article class="text-center mt-5">
+    <h2 class="titulo">Productos Destacados</h2>
+
+    <asp:Repeater ID="repProductos" runat="server">
+        <ItemTemplate>
+            <%-- Abrimos fila cada 3 productos --%>
+            <%# Container.ItemIndex % 3 == 0 ? "<div class='row mt-4'>" : "" %>
+
+            <div class="col-md-4 mb-4">
+                <div class="card border-0 shadow-sm">
+                    <asp:Image ID="ImageProducto" runat="server" CssClass="card-img-top" ImageUrl='<%# ObtenerUrlImagen(Container.DataItem) %>' AlternateText="image" />
+                    <div class="card-body">
+                        <h5 class="card-title titulo"><%# Eval("Nombre") %></h5>
+                        <p class="card-text d-block mb-2"><%# Eval("Precio", "{0:C}") %></p>
+                       <a href='<%# Eval("Id", "ProductDetail.aspx?id={0}") %>' class="btn btn-red" style="margin-top:10px; display:inline-block;">
+    Ver más
+</a>
                     </div>
                 </div>
-                <%-- --%>
             </div>
-        </article>
 
+            <%-- Cerramos fila cada 3 productos --%>
+            <%# (Container.ItemIndex + 1) % 3 == 0 ? "</div>" : "" %>
+        </ItemTemplate>
+    </asp:Repeater>
+</article>
 
+        <%-- 
         <!-- 🍽️ SECCIÓN ESPECIALIDAD DE LA CASA -->
         <article class="text-center mt-5">
             <h2 class="titulo">Especialidad de la casa</h2>
@@ -110,7 +117,7 @@
             <h2 class="titulo">Nuestros chefs</h2>
             <div class="row mt-4">
                 <%-- Chef 1 --%>
-                <div class="col-md-4 mb-4">
+              <%--   <div class="col-md-4 mb-4">
                     <div class="card border-0 shadow-sm">
                         <asp:Image ID="ImgChef1" runat="server" CssClass="card-img-top rounded-circle w-50 mx-auto mt-4" AlternateText="Chef 1" />
                         <div class="card-body">
@@ -121,7 +128,7 @@
                 </div>
 
                 <%-- Chef 2 --%>
-                <div class="col-md-4 mb-4">
+              <%--   <div class="col-md-4 mb-4">
                     <div class="card border-0 shadow-sm">
                         <asp:Image ID="ImgChef2" runat="server" CssClass="card-img-top rounded-circle w-50 mx-auto mt-4" AlternateText="Chef 2" />
                         <div class="card-body">
@@ -132,7 +139,7 @@
                 </div>
 
                 <%-- Chef 3 --%>
-                <div class="col-md-4 mb-4">
+             <%--    <div class="col-md-4 mb-4">
                     <div class="card border-0 shadow-sm">
                         <asp:Image ID="ImgChef3" runat="server" CssClass="card-img-top rounded-circle w-50 mx-auto mt-4" AlternateText="Chef 3" />
                         <div class="card-body">
@@ -142,7 +149,7 @@
                     </div>
                 </div>
             </div>
-        </article>
+        </article> --%>
 
 
     </main>

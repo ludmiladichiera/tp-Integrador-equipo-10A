@@ -156,6 +156,37 @@ namespace Negocio
                 datos.cerrarConexion();
             }
         }
+
+        public List<string> obtenerImagenesAleatorias(int cantidad)
+        {
+            List<string> lista = new List<string>();
+            AccesoDatos datos = new AccesoDatos();
+
+            try
+            {
+                datos.setearConsulta(@"
+            SELECT TOP (@cantidad) imagen_url 
+            FROM Imagen 
+            ORDER BY NEWID()");
+                datos.setearParametro("@cantidad", cantidad);
+                datos.ejecutarLectura();
+
+                while (datos.Lector.Read())
+                {
+                    lista.Add(datos.Lector["imagen_url"].ToString());
+                }
+
+                return lista;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
+        }
     }
 }
 
