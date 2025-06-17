@@ -72,8 +72,8 @@
         </div>
         <asp:DropDownList ID="ddlEstado" runat="server" CssClass="form-select">
             <asp:ListItem Text="Seleccione un estado" />
-            <asp:ListItem Text="Inactivo" Value=0 />
-            <asp:ListItem Text="Activo" Value=1 />
+            <asp:ListItem Text="Inactivo" Value="0" />
+            <asp:ListItem Text="Activo" Value="1" />
         </asp:DropDownList>
         <div>
             <asp:Label ID="lblEstadoError" runat="server" CssClass="text-danger" Text="" />

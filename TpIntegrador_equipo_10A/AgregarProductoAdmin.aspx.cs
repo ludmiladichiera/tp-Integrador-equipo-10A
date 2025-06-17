@@ -157,16 +157,7 @@ namespace TpIntegrador_equipo_10A
                 producto.Categoria.Id = ddlCategoria.SelectedIndex;
                 lblCategoriaError.Text = "";
             }
-            if (bool.TryParse(ddlEstado.SelectedValue, out estado))
-            {
-                lblEstadoError.Text = "Ingrese un estado válido";
-                return;
-            }
-            else
-            {
-                producto.Estado = estado;
-                lblEstadoError.Text = "";
-            }
+            producto.Estado=ddlEstado.SelectedValue == "1" ? true : false;
             id = productoNegocio.agregarProductoYDevolverId(producto);
             if (id != 0)
             {
