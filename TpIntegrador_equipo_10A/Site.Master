@@ -48,7 +48,10 @@
                 <!-- Centro: logo y texto -->
                 <div class="text-center mx-3 flex-grow-1">
                     <i class="fas fa-birthday-cake fa-lg text-light"></i>
+                    <a style="" href="default.aspx">
                     <span class="navbar-text text-light fw-bold ms-2">Ludmila Gastronomía</span>
+
+                    </a>
                 </div>
 
                 <!-- Derecha: usuario y carrito -->
@@ -104,7 +107,7 @@
                     </li>
                     <asp:Panel ID="pnlAdminMenu" runat="server" Visible="false">
                         <li class="nav-item">
-                            <a class="nav-link text-light" href="/AltaModificacion.aspx">Administrador</a>
+                            <a class="nav-link text-light" href="/MenuAdmin.aspx">Administrador</a>
                         </li>
                     </asp:Panel>
 

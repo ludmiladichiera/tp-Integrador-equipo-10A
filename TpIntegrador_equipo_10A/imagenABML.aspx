@@ -12,6 +12,7 @@
             <div class="col-md-6">
                 <div>
                     <h1><i class="bi bi-plus-circle"></i> Alta o Modificación de Imágenes</h1>
+                     <a href="MenuAdmin.aspx" class="btn btn-outline-danger mb-2" style="margin-top: 10px; display: inline-block;">Volver al menu admin</a> <br />
                 </div>
 
                 <div class="mb-3">

@@ -23,13 +23,13 @@
                     <asp:LinkButton ID="btnPerfiles" runat="server" CssClass="nav-link btn btn-outline-secondary me-2 mb-1" OnClick="btnPerfiles_Click">
                         <i class="bi bi-person-lines-fill me-1"></i> Perfiles
                     </asp:LinkButton>
-                    <asp:LinkButton ID="btnABMLProducto" runat="server" CssClass="nav-link btn btn-outline-secondary me-2 mb-1">
+                    <asp:LinkButton href="productoABML.aspx" ID="btnABMLProducto" runat="server" CssClass="nav-link btn btn-outline-secondary me-2 mb-1">
                         <i class="bi bi-receipt-cutoff me-1"></i> ABML Producto
                     </asp:LinkButton>
-                    <asp:LinkButton ID="btnABMLCategoria" runat="server" CssClass="nav-link btn btn-outline-secondary me-2 mb-1">
+                    <asp:LinkButton href="categoriaABML.aspx" ID="btnABMLCategoria" runat="server" CssClass="nav-link btn btn-outline-secondary me-2 mb-1">
                         <i class="bi bi-folder2-open me-1"></i> ABML Categoría
                     </asp:LinkButton>
-                    <asp:LinkButton ID="btnABMLImagen" runat="server" CssClass="nav-link btn btn-outline-secondary me-2 mb-1">
+                    <asp:LinkButton href="imagenABML.aspx" ID="btnABMLImagen" runat="server" CssClass="nav-link btn btn-outline-secondary me-2 mb-1">
                         <i class="bi bi-image me-1"></i> ABML Imagen
                     </asp:LinkButton>
                 </div>

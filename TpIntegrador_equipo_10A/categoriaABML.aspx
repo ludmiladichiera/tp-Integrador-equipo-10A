@@ -4,15 +4,20 @@
 <asp:Content ID="BodyContent" ContentPlaceHolderID="MainContent" runat="server">
     <head>
         <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
+        <style>
+            .btn{
+                margin:2px;
+            }
+        </style>
     </head>
 
     <div class="container mt-3">
         <h1><i class="bi bi-tags-fill"></i> Gestión de Categorías</h1>
-
+        <a href="MenuAdmin.aspx" class="btn btn-outline-danger mb-2" style="margin-top: 10px; display: inline-block;">Volver al menu admin</a> <br />
         <asp:Button ID="btnNuevaCategoria" runat="server" CssClass="btn btn-success mb-3" Text="Nueva Categoría" OnClick="btnNuevaCategoria_Click" />
         <asp:TextBox ID="txtBuscarDescripcion" runat="server" CssClass="form-control me-2" Placeholder="Buscar por descripción..." Width="250px" AutoPostBack="false" />
 
-    <asp:Button ID="btnBuscar" runat="server" CssClass="btn btn-primary" Text="Buscar" OnClick="btnBuscar_Click" />
+    <asp:Button ID="btnBuscar" runat="server" CssClass="btn btn-primary m-2 " Text="Buscar" OnClick="btnBuscar_Click" />
         <asp:GridView ID="gvCategorias" runat="server" AutoGenerateColumns="false" GridLines="Both"
             CssClass="table table-striped table-bordered" DataKeyNames="Id" 
             OnRowCommand="gvCategorias_RowCommand" EmptyDataText="No hay categorías registradas.">
