@@ -396,7 +396,7 @@ SELECT SCOPE_IDENTITY();";
             }
         }
 
-        public List<Producto> buscarRapido(string texto)
+        public List<Producto> buscarRapido(string texto, bool mostrarTodos = false)
         {
             List<Producto> lista = new List<Producto>();
             AccesoDatos datos = new AccesoDatos();
@@ -404,29 +404,34 @@ SELECT SCOPE_IDENTITY();";
             try
             {
                 string consulta = @"
-        SELECT 
-            P.id_producto AS Id, 
-            P.codigo AS Codigo, 
-            P.nombre AS Nombre, 
-            P.descripcion AS Descripcion, 
-            P.precio AS Precio,
-            P.stock AS Stock,
-            P.unidad_venta AS UnidadVenta,
-            C.descripcion AS Categoria,
-            MIN(I.imagen_url) AS ImagenesUrl,
-P.estado AS Estado
-        FROM Producto P
-        JOIN Categoria C ON P.id_categoria = C.id_categoria
-        LEFT JOIN Imagen I ON P.id_producto = I.id_producto
-        WHERE 
-            (P.nombre LIKE @texto OR 
-            P.descripcion LIKE @texto OR 
-            C.descripcion LIKE @texto)
-            AND P.estado = 1
-            AND C.estado = 1
-        GROUP BY 
-            P.id_producto, P.codigo, P.nombre, P.descripcion, P.precio, P.stock, 
-            P.unidad_venta, C.descripcion, P.estado";
+            SELECT 
+                P.id_producto AS Id, 
+                P.codigo AS Codigo, 
+                P.nombre AS Nombre, 
+                P.descripcion AS Descripcion, 
+                P.precio AS Precio,
+                P.stock AS Stock,
+                P.unidad_venta AS UnidadVenta,
+                C.descripcion AS Categoria,
+                MIN(I.imagen_url) AS ImagenesUrl,
+                P.estado AS Estado
+            FROM Producto P
+            JOIN Categoria C ON P.id_categoria = C.id_categoria
+            LEFT JOIN Imagen I ON P.id_producto = I.id_producto
+            WHERE 
+                (P.nombre LIKE @texto OR 
+                P.descripcion LIKE @texto OR 
+                C.descripcion LIKE @texto)";
+
+                if (!mostrarTodos)
+                {
+                    consulta += " AND P.estado = 1 AND C.estado = 1";
+                }
+
+                consulta += @"
+            GROUP BY 
+                P.id_producto, P.codigo, P.nombre, P.descripcion, P.precio, P.stock, 
+                P.unidad_venta, C.descripcion, P.estado";
 
                 datos.setearConsulta(consulta);
                 datos.setearParametro("@texto", "%" + texto + "%");
@@ -463,7 +468,6 @@ P.estado AS Estado
                 datos.cerrarConexion();
             }
         }
-
 
         public List<Producto> ListarPorCategoria(string categoria)
         {

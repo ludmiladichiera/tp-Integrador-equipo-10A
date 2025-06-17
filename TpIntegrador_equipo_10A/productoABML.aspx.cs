@@ -297,7 +297,7 @@ namespace TpIntegrador_equipo_10A
             }
             else
             {
-                gvProductos.DataSource = negocio.buscarRapido(texto);
+                gvProductos.DataSource = negocio.buscarRapido(texto, true);
                 btnVolverLista.Visible = true;
             }
 

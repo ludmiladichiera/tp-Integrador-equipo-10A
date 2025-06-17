@@ -14,7 +14,7 @@ namespace TpIntegrador_equipo_10A
         private void CargarProductos(string texto)
         {
             ProductoNegocio negocio = new ProductoNegocio(); 
-            List<Producto> productos = negocio.buscarRapido(texto);
+            List<Producto> productos = negocio.buscarRapido(texto, false);
 
             if (productos != null && productos.Count > 0)
             {
