@@ -20,9 +20,10 @@
                     <asp:LinkButton ID="btnEnvios" runat="server" CssClass="nav-link btn btn-outline-secondary me-2 mb-1">
                         <i class="bi bi-truck me-1"></i> Envíos
                     </asp:LinkButton>
-                    <asp:LinkButton ID="btnPerfiles" runat="server" CssClass="nav-link btn btn-outline-secondary me-2 mb-1" OnClick="btnPerfiles_Click">
-                        <i class="bi bi-person-lines-fill me-1"></i> Perfiles
-                    </asp:LinkButton>
+                     <asp:LinkButton ID="btnPerfiles" runat="server" CssClass="nav-link btn btn-outline-secondary me-2 mb-1" OnClick="btnPerfiles_Click">
+                <i class="bi bi-person-lines-fill me-1"></i> Perfiles
+            </asp:LinkButton>
+
                     <asp:LinkButton href="productoABML.aspx" ID="btnABMLProducto" runat="server" CssClass="nav-link btn btn-outline-secondary me-2 mb-1">
                         <i class="bi bi-receipt-cutoff me-1"></i> ABML Producto
                     </asp:LinkButton>

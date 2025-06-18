@@ -34,8 +34,7 @@ namespace TpIntegrador_equipo_10A
 
         protected void btnPerfiles_Click(object sender, EventArgs e)
         {
-            ViewState["ControlActual"] = "MenuAdminPerfiles.ascx";
-            CargarControl("MenuAdminPerfiles.ascx");
+            Response.Redirect("AdminPerfil.aspx");
         }
 
         private void CargarControl(string controlPath)
