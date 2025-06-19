@@ -42,6 +42,24 @@ namespace TpIntegrador_equipo_10A
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl badgeCarrito;
 
         /// <summary>
+        /// Control liCerrarSesion.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl liCerrarSesion;
+
+        /// <summary>
+        /// Control btnCerrarSesion.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton btnCerrarSesion;
+
+        /// <summary>
         /// Control pnlAdminMenu.
         /// </summary>
         /// <remarks>

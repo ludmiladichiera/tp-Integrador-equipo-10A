@@ -24,6 +24,7 @@ namespace TpIntegrador_equipo_10A
             {
                 pnlAdminMenu.Visible = false; // ocultar admin
             }
+            liCerrarSesion.Visible = Session["Usuario"] != null;
         }
         protected void btnBuscar_Click(object sender, EventArgs e)
         {
@@ -52,7 +53,11 @@ namespace TpIntegrador_equipo_10A
             // Actualizar 
             badgeCarrito.InnerText = cantidadTotal.ToString();
         }
-
+        protected void btnCerrarSesion_Click(object sender, EventArgs e)
+        {
+            Session.Clear();
+            Response.Redirect("Default.aspx?mensaje=logout");
+        }
     }
 }
     
