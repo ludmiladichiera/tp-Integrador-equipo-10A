@@ -110,3 +110,7 @@ VALUES ('admin@miapp.com', 'admin123', 2, '12345678', 'Admin', 'Principal', 'Cal
 
 -- solo si no borraron la bd 
 ---DROP TABLE Envio;
+
+--solo si no borraron la bd
+ALTER TABLE Carrito
+ADD fecha_creacion DATETIME NOT NULL DEFAULT GETDATE();

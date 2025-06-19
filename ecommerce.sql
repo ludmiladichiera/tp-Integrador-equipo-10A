@@ -58,6 +58,7 @@ CREATE TABLE Imagen (
 CREATE TABLE Carrito (
     id_carrito INT PRIMARY KEY IDENTITY(1,1),
     id_usuario INT NULL,
+	fecha_creacion DATETIME NOT NULL DEFAULT GETDATE(),
     FOREIGN KEY (id_usuario) REFERENCES Usuario(id_usuario)
 );
 
