@@ -22,11 +22,11 @@ namespace Dominio
         public int Id { get; set; }
         public Usuario Usuario { get; set; }
         public DateTime FechaPedido { get; set; }
-        public string MetodoEntrega { get; set; } // 'envio' o 'retiro'
+        public string MetodoEntrega { get; set; } // 'envio' o 'retiro' //hace un enum o un bool
         public DateTime FechaEntrega { get; set; }
         public decimal PrecioTotal { get; set; }
         public List<PedidoItem> Items { get; set; }
-        public Pago Pago { get; set; }
+        public Pago Pago { get; set; } //borrar la tablapago y hacer un enum
        
         public EstadoPedido EstadoPedido { get; set; } 
     }
