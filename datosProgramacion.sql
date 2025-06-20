@@ -114,3 +114,35 @@ VALUES ('admin@miapp.com', 'admin123', 2, '12345678', 'Admin', 'Principal', 'Cal
 --solo si no borraron la bd
 ALTER TABLE Carrito
 ADD fecha_creacion DATETIME NOT NULL DEFAULT GETDATE();
+
+
+--DROP TABLE Pago;
+
+--DROP TABLE Pedido_Item;
+--DROP TABLE Pedido;
+
+
+CREATE TABLE Pedido (
+    id_pedido INT PRIMARY KEY IDENTITY(1,1),
+    id_usuario INT NOT NULL,
+    fecha_pedido DATETIME DEFAULT GETDATE() NOT NULL,
+    metodo_entrega INT NOT NULL, -- 1: Retiro, 2: Envío
+    fecha_entrega DATE NOT NULL,
+    precio_total DECIMAL(10,2) NOT NULL,
+    metodo_pago INT NOT NULL,     -- 1: MercadoPago, 2: Transferencia, 3: Efectivo
+    estado_pago INT NOT NULL,     -- 1: Pendiente, 2: Abonado
+    estado_pedido INT NOT NULL,   -- 1 a 8 según enum EstadoPedido
+    FOREIGN KEY (id_usuario) REFERENCES Usuario(id_usuario)
+    
+    );
+
+-- Ítems del pedido
+CREATE TABLE Pedido_Item (
+    id_pedido INT NOT NULL,
+    id_producto INT NOT NULL,
+    cantidad INT NOT NULL,
+    precio DECIMAL(10,2) NOT NULL,
+    PRIMARY KEY (id_pedido, id_producto),
+    FOREIGN KEY (id_pedido) REFERENCES Pedido(id_pedido),
+    FOREIGN KEY (id_producto) REFERENCES Producto(id_producto)
+);

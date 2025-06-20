@@ -17,17 +17,34 @@ namespace Dominio
         Entregado = 7,
         Cancelado = 8
     }
-    public class Pedido 
+    public enum MetodoEntrega
+    {
+        Retiro = 1,
+        Envio = 2
+    }
+    public enum MetodoPago
+    {
+        MercadoPago = 1,
+        Transferencia = 2,
+        Efectivo = 3
+    }
+    public enum EstadoPago
+    {
+        Pendiente = 1,
+        Abonado = 2
+    }
+    public class Pedido
     {
         public int Id { get; set; }
         public Usuario Usuario { get; set; }
         public DateTime FechaPedido { get; set; }
-        public string MetodoEntrega { get; set; } // 'envio' o 'retiro' //hace un enum o un bool
+        public MetodoEntrega MetodoEntrega { get; set; }
         public DateTime FechaEntrega { get; set; }
         public decimal PrecioTotal { get; set; }
         public List<PedidoItem> Items { get; set; }
-        public Pago Pago { get; set; } //borrar la tablapago y hacer un enum
-       
-        public EstadoPedido EstadoPedido { get; set; } 
+        public MetodoPago MetodoPago { get; set; }
+        public EstadoPago EstadoPago { get; set; }
+
+        public EstadoPedido EstadoPedido { get; set; }
     }
 }

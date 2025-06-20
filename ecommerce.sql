@@ -72,40 +72,31 @@ CREATE TABLE Carrito_Item (
     FOREIGN KEY (id_producto) REFERENCES Producto(id_producto)
 );
 
-
--- Pedido
+--pedido
 CREATE TABLE Pedido (
     id_pedido INT PRIMARY KEY IDENTITY(1,1),
     id_usuario INT NOT NULL,
     fecha_pedido DATETIME DEFAULT GETDATE() NOT NULL,
-    metodo_entrega VARCHAR(20) NOT NULL, -- 'envio' o 'retiro' o tendria que ser int?
+    metodo_entrega INT NOT NULL, -- 1: Retiro, 2: Envío
     fecha_entrega DATE NOT NULL,
     precio_total DECIMAL(10,2) NOT NULL,
-	estado_pedido INT NOT NULL, --lo agregue dsps, ver dominio
+    metodo_pago INT NOT NULL,     -- 1: MercadoPago, 2: Transferencia, 3: Efectivo
+    estado_pago INT NOT NULL,     -- 1: Pendiente, 2: Abonado
+    estado_pedido INT NOT NULL,   -- 1 a 8 según enum EstadoPedido
     FOREIGN KEY (id_usuario) REFERENCES Usuario(id_usuario)
-);
+    
+    );
 
 -- Ítems del pedido
 CREATE TABLE Pedido_Item (
-    id_item_pedido INT PRIMARY KEY IDENTITY(1,1),
     id_pedido INT NOT NULL,
     id_producto INT NOT NULL,
     cantidad INT NOT NULL,
     precio DECIMAL(10,2) NOT NULL,
+    PRIMARY KEY (id_pedido, id_producto),
     FOREIGN KEY (id_pedido) REFERENCES Pedido(id_pedido),
     FOREIGN KEY (id_producto) REFERENCES Producto(id_producto)
 );
-
--- Pago
-CREATE TABLE Pago (
-    id_pago INT PRIMARY KEY IDENTITY(1,1),
-    id_pedido INT NOT NULL,
-    fecha_pago DATE NOT NULL,
-    metodo_pago VARCHAR(50) NOT NULL,
-    monto DECIMAL(10,2) NOT NULL,
-    FOREIGN KEY (id_pedido) REFERENCES Pedido(id_pedido)
-);
-
 
 -- Presupuesto 
 CREATE TABLE Presupuesto (
