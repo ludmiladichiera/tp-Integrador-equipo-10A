@@ -34,6 +34,21 @@ namespace TpIntegrador_equipo_10A
                 Session["usuario"] = usuario;
                 Session["IdTipoUsuario"] = usuario.TipoUsuario.Id;
 
+                // restaurar carrito del usuario si tiene
+                CarritoNegocio carritoNegocio = new CarritoNegocio();
+                int idCarrito = carritoNegocio.ObtenerUltimoCarritoIdPorUsuario(usuario.Id);
+
+                if (idCarrito != 0)
+                {
+                    Session["IdCarrito"] = idCarrito;
+                }
+                else
+                {
+                    // No tiene carrito creado, no hacemos nada. Se crea al agregar producto en productdetail
+                    Session["IdCarrito"] = null;
+                }
+                //hasta aca lo de recargar el carritosi tiene
+
                 // Mensaje y redirigir a otra página
                 Response.Redirect("Default.aspx");
             }

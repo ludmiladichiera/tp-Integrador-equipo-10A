@@ -51,8 +51,20 @@ namespace Negocio
                 datos.cerrarConexion();
             }
         }
-        public void AgregarOActualizarItem(int idCarrito, int idProducto, int cantidad)
+        public bool AgregarOActualizarItem(int idCarrito, int idProducto, int cantidad)
         {
+            ProductoNegocio productoNegocio = new ProductoNegocio();
+            int stockDisponible = productoNegocio.ObtenerStockProducto(idProducto);
+
+            int cantidadActual = ObtenerCantidad(idCarrito, idProducto);
+            int nuevaCantidad = cantidadActual + cantidad;
+
+            if (nuevaCantidad > stockDisponible)
+            {
+                // No hay stock suficiente, false para que la UI lo maneje
+                return false;
+            }
+
             if (ExisteItem(idCarrito, idProducto))
             {
                 ModificarCantidad(idCarrito, idProducto, cantidad);
@@ -61,6 +73,8 @@ namespace Negocio
             {
                 AgregarItem(idCarrito, idProducto, cantidad);
             }
+
+            return true;
         }
 
         public bool ExisteItem(int idCarrito, int idProducto)

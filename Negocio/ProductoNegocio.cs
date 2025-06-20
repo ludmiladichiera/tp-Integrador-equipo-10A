@@ -569,6 +569,29 @@ GROUP BY
 
 
         }
+        public int ObtenerStockProducto(int idProducto) //para chequear stock en el carrito
+        {
+            AccesoDatos datos = new AccesoDatos();
+            try
+            {
+                datos.setearConsulta("SELECT stock FROM Producto WHERE id_producto = @idProducto");
+                datos.setearParametro("@idProducto", idProducto);
+                datos.ejecutarLectura();
+
+                if (datos.Lector.Read())
+                    return (int)datos.Lector["stock"];
+                else
+                    throw new Exception("Producto no encontrado");
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error al obtener stock del producto", ex);
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
+        }
     }
 }
 

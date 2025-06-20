@@ -56,6 +56,15 @@ namespace TpIntegrador_equipo_10A
         {
             try
             {
+                // Validación de login
+                if (Session["Usuario"] == null)
+                {
+                    // Redirige al login con returnUrl opcional
+                    Response.Redirect("Login.aspx?ReturnUrl=" + Server.UrlEncode(Request.RawUrl));
+                    return;
+                }
+
+                // Validar ID de producto
                 int idProducto = int.Parse(Request.QueryString["id"]);
                 int cantidad = 1;
 
@@ -69,18 +78,31 @@ namespace TpIntegrador_equipo_10A
                     }
                 }
 
+                // Recuperar usuario logueado
+                Usuario usuario = (Usuario)Session["Usuario"];
+
+                // Verificar si ya tiene carrito en sesión
                 if (Session["IdCarrito"] == null)
                 {
                     CarritoNegocio carritoNegocio = new CarritoNegocio();
-                    int nuevoIdCarrito = carritoNegocio.CrearCarrito();
+                    int nuevoIdCarrito = carritoNegocio.CrearCarrito(usuario.Id); // ← IMPORTANTE: pasar el id del usuario
                     Session["IdCarrito"] = nuevoIdCarrito;
                 }
 
                 int idCarrito = (int)Session["IdCarrito"];
-                CarritoItemNegocio itemNegocio = new CarritoItemNegocio();
-                itemNegocio.AgregarOActualizarItem(idCarrito, idProducto, cantidad);
 
-                ((SiteMaster)this.Master).ActualizarCantidadCarrito();
+                // Agregar o actualizar item
+                CarritoItemNegocio itemNegocio = new CarritoItemNegocio();
+                bool ok = itemNegocio.AgregarOActualizarItem(idCarrito, idProducto, cantidad);
+
+                if (!ok)
+                {
+                    lblError.ForeColor = System.Drawing.Color.Red;
+                    lblError.Text = "No hay stock suficiente para este producto.";
+                    return;
+                }
+
+         ((SiteMaster)this.Master).ActualizarCantidadCarrito();
 
                 lblError.ForeColor = System.Drawing.Color.Green;
                 lblError.Text = "Producto agregado al carrito correctamente.";
@@ -94,4 +116,4 @@ namespace TpIntegrador_equipo_10A
         }
     }
 }
-  
+
