@@ -47,7 +47,26 @@ namespace TpIntegrador_equipo_10A
                 }
             }
         }
+        protected string ObtenerUrlImagen(object dataItem)
+        {
+            var producto = (Producto)dataItem;
 
+            if (producto.Imagenes != null &&
+                producto.Imagenes.Count > 0 &&
+                !string.IsNullOrEmpty(producto.Imagenes[0].Url))
+            {
+                string url = producto.Imagenes[0].Url;
+
+                if (url.StartsWith("/"))
+                    url = url.Substring(1);
+
+                return ResolveUrl("~/" + url);
+            }
+            else
+            {
+                return "https://via.placeholder.com/200x150?text=Sin+Imagen";
+            }
+        }
 
     }
 }

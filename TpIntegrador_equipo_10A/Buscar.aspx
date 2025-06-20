@@ -13,7 +13,7 @@
         <div class="card mb-3" style="max-width: 540px;">
             <div class="row g-0">
                 <div class="col-md-4">
-                    <img src='<%# Eval("Imagenes[0].Url") ?? "images/no-image.png" %>' class="img-fluid rounded-start" alt="Imagen Producto" />
+                   <img src='<%# ObtenerUrlImagen(Container.DataItem) %>' class="img-fluid rounded-start" alt="Imagen Producto" />
                 </div>
                 <div class="col-md-8">
                     <div class="card-body">

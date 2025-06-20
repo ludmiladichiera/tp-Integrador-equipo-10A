@@ -413,7 +413,7 @@ SELECT SCOPE_IDENTITY();";
                 P.stock AS Stock,
                 P.unidad_venta AS UnidadVenta,
                 C.descripcion AS Categoria,
-                MIN(I.imagen_url) AS ImagenesUrl,
+                MIN(I.imagen_url) AS ImagenUrl,
                 P.estado AS Estado
             FROM Producto P
             JOIN Categoria C ON P.id_categoria = C.id_categoria
@@ -451,8 +451,8 @@ SELECT SCOPE_IDENTITY();";
                     aux.Estado = datos.Lector["Estado"] != DBNull.Value && Convert.ToBoolean(datos.Lector["Estado"]);
 
                     aux.Imagenes = new List<Imagen>();
-                    if (!(datos.Lector["ImagenesUrl"] is DBNull))
-                        aux.Imagenes.Add(new Imagen(datos.Lector["ImagenesUrl"].ToString()));
+                    if (!(datos.Lector["ImagenUrl"] is DBNull))
+                        aux.Imagenes.Add(new Imagen(datos.Lector["ImagenUrl"].ToString()));
 
                     lista.Add(aux);
                 }
