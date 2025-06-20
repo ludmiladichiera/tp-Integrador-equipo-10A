@@ -30,7 +30,7 @@ namespace Negocio
                             Id = (int)datos.Lector["id_usuario"]
                         },
                         FechaPedido = (DateTime)datos.Lector["fecha_pedido"],
-                        MetodoEntrega = datos.Lector["metodo_entrega"].ToString(),
+                       // MetodoEntrega = datos.Lector["metodo_entrega"].ToString(),
                         FechaEntrega = (DateTime)datos.Lector["fecha_entrega"],
                         PrecioTotal = (decimal)datos.Lector["precio_total"],
                     };

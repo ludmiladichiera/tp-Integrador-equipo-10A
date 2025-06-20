@@ -28,7 +28,7 @@ namespace TpIntegrador_equipo_10A
             pedido.Usuario = new Usuario { Nombre = "pepe", Apellido = "perez", Dni = "12345678", Direccion = "calle falsa 123", Ciudad = "caba", CodigoPostal = 1234, Telefono = "123456789", Mail = "pepe@ejemplo.com" };
             pedido.Id = 001;
             pedido.FechaPedido = DateTime.Now;
-            pedido.MetodoEntrega = "envio";
+           // pedido.MetodoEntrega = "envio";
             pedido.FechaEntrega = DateTime.Now.AddDays(3);
             pedido.PrecioTotal = 100.00m;
             pedido.EstadoPedido = EstadoPedido.Cancelado;

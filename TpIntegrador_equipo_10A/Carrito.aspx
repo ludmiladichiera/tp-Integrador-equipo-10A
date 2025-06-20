@@ -25,6 +25,12 @@
             </ItemTemplate>
         </asp:Repeater>
     </ol>
+
+    <asp:Panel ID="pnlCarritoVacio" runat="server" Visible="false" CssClass="alert alert-info mt-3">
+    Tu carrito está vacío. Agregá productos para verlos aquí.
+</asp:Panel>
+
+
     <h3>Total de la compra: $<asp:Label ID="lblTotal" runat="server" /></h3>
 
     

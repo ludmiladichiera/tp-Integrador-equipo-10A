@@ -24,6 +24,15 @@ namespace TpIntegrador_equipo_10A
         protected global::System.Web.UI.WebControls.Repeater rptCarrito;
 
         /// <summary>
+        /// Control pnlCarritoVacio.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel pnlCarritoVacio;
+
+        /// <summary>
         /// Control lblTotal.
         /// </summary>
         /// <remarks>
