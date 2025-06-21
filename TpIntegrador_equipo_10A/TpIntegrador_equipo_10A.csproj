@@ -171,6 +171,7 @@
     <Content Include="MenuAdminPedidos.ascx" />
     <Content Include="MenuAdminPerfiles.ascx" />
     <Content Include="MiPerfil.aspx" />
+    <Content Include="OrdenPedido.aspx" />
     <Content Include="ProductDetail.aspx" />
     <Content Include="productoABML.aspx" />
     <Content Include="Registrarse.aspx" />
@@ -373,6 +374,13 @@
     </Compile>
     <Compile Include="MiPerfil.aspx.designer.cs">
       <DependentUpon>MiPerfil.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="OrdenPedido.aspx.cs">
+      <DependentUpon>OrdenPedido.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="OrdenPedido.aspx.designer.cs">
+      <DependentUpon>OrdenPedido.aspx</DependentUpon>
     </Compile>
     <Compile Include="ProductDetail.aspx.cs">
       <DependentUpon>ProductDetail.aspx</DependentUpon>
