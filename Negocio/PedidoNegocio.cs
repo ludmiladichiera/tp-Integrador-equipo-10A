@@ -91,12 +91,13 @@ namespace Negocio
                         idPedido = Convert.ToInt32(cmd.ExecuteScalar());
                     }
 
-                    // Insertar ítems
+                    // Insertar ítems y actualizar stock dentro del mismo foreach
                     foreach (var item in nuevoPedido.Items)
                     {
                         if (!item.Producto.Estado || item.Producto.Stock < item.Cantidad)
                             throw new Exception($"Producto '{item.Producto.Nombre}' no disponible o sin stock suficiente.");
 
+                        // Insertar ítem
                         string insertItem = @"
                     INSERT INTO Pedido_Item (id_pedido, id_producto, cantidad, precio)
                     VALUES (@idPedido, @idProducto, @cantidad, @precio)";
@@ -107,8 +108,20 @@ namespace Negocio
                             cmdItem.Parameters.AddWithValue("@idProducto", item.Producto.Id);
                             cmdItem.Parameters.AddWithValue("@cantidad", item.Cantidad);
                             cmdItem.Parameters.AddWithValue("@precio", item.Precio);
-
                             cmdItem.ExecuteNonQuery();
+                        }
+
+                        // Actualizar stock del producto
+                        string updateStock = @"
+                    UPDATE Producto 
+                    SET stock = stock - @cantidad 
+                    WHERE id_producto = @idProducto";
+
+                        using (SqlCommand cmdStock = new SqlCommand(updateStock, conexion, transaccion))
+                        {
+                            cmdStock.Parameters.AddWithValue("@cantidad", item.Cantidad);
+                            cmdStock.Parameters.AddWithValue("@idProducto", item.Producto.Id);
+                            cmdStock.ExecuteNonQuery();
                         }
                     }
 
