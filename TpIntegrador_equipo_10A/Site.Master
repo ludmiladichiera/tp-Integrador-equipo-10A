@@ -100,10 +100,10 @@
                     </li>
 
                     <li class="nav-item">
-                        <a class="nav-link text-light" href="~/Contacto.aspx">Contacto</a>
+                        <a class="nav-link text-light" href="/Contacto.aspx" >Contacto</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link text-light" href="~/ComoComprar.aspx">Cómo comprar</a>
+                        <a class="nav-link text-light" href="/ComoComprar.aspx">Cómo comprar</a>
                     </li>
 
                     
