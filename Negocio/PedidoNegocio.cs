@@ -5,6 +5,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Dominio;
+
+
 namespace Negocio
 {
     public class PedidoNegocio
@@ -16,7 +18,10 @@ namespace Negocio
 
             try
             {
-                datos.setearConsulta("SELECT id_pedido, id_usuario, fecha_pedido, metodo_entrega, fecha_entrega, precio_total FROM Pedido");
+                datos.setearConsulta(@"
+            SELECT id_pedido, id_usuario, fecha_pedido, metodo_entrega, fecha_entrega, 
+                   precio_total, metodo_pago, estado_pago, estado_pedido
+            FROM Pedido");
 
                 datos.ejecutarLectura();
 
@@ -30,9 +35,12 @@ namespace Negocio
                             Id = (int)datos.Lector["id_usuario"]
                         },
                         FechaPedido = (DateTime)datos.Lector["fecha_pedido"],
-                       // MetodoEntrega = datos.Lector["metodo_entrega"].ToString(),
+                        MetodoEntrega = (MetodoEntrega)(int)datos.Lector["metodo_entrega"],
                         FechaEntrega = (DateTime)datos.Lector["fecha_entrega"],
                         PrecioTotal = (decimal)datos.Lector["precio_total"],
+                        MetodoPago = (MetodoPago)(int)datos.Lector["metodo_pago"],
+                        EstadoPago = (EstadoPago)(int)datos.Lector["estado_pago"],
+                        EstadoPedido = (EstadoPedido)(int)datos.Lector["estado_pedido"]
                     };
 
                     lista.Add(pedido);
