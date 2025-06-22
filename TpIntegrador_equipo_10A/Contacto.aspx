@@ -44,11 +44,13 @@
                     <div class="col-md-6">
                         <!-- COMENTARIOS -->
                         <div class="mb-3">
-                            <asp:Label ID="lblComentarios" runat="server" AssociatedControlID="txtComentarios" Text="Mensaje" CssClass="form-label text-uppercase small fw-bold" />
-                            <asp:TextBox ID="txtComentarios" runat="server" TextMode="MultiLine" Rows="10" CssClass="form-control h-100" Placeholder="Tu mensaje..." />
+                            <asp:Label ID="lblComentarios" runat="server" AssociatedControlID="lblComentarios" Text="Mensaje" CssClass="form-label text-uppercase small fw-bold" />
+                            <asp:TextBox ID="txtMensaje" runat="server" TextMode="MultiLine" Rows="10" CssClass="form-control h-100" Placeholder="Tu mensaje..." />
                         </div>
                         <!-- BOTÓN -->
-                        <asp:Button ID="btnEnviar" runat="server" Text="Enviar" CssClass="btn btn-dark w-100 fw-bold mt-3" />
+                        <asp:Button ID="btnEnviar" runat="server" Text="Enviar" CssClass="btn btn-dark w-100 fw-bold mt-3" OnClick="btnEnviar_Click" />
+                        <asp:Label ID="lblError" runat="server" AssociatedControlID="lblError" Text="" CssClass="form-label text-uppercase small fw-bold text-danger" view="false"/>
+                        <asp:Label ID="lblSucess" runat="server" AssociatedControlID="lblSucess" Text="" CssClass="form-label text-uppercase small fw-bold text-success" view="false"/>
                     </div>
                 </div>
             </div>
