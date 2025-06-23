@@ -177,7 +177,7 @@ namespace Negocio
                 datos.cerrarConexion();
             }
         }
-        public void EliminarItem(int idCarrito, int idProducto)
+        public void EliminarItem(int idCarrito, int idProducto) //no confundir con el otro, este es para eliminar un producto del carrito
         {
             AccesoDatos datos = new AccesoDatos();
 
@@ -197,6 +197,23 @@ namespace Negocio
                 datos.cerrarConexion();
             }
         }
-
+        public void EliminarItems(int idCarrito) //ojo este metodo es para eliminar TODOS los items asociados a un carrito, no es igual al anterior
+        {
+            AccesoDatos datos = new AccesoDatos();
+            try
+            {
+                datos.setearConsulta("DELETE FROM Carrito_Item WHERE id_carrito = @idCarrito");
+                datos.setearParametro("@idCarrito", idCarrito);
+                datos.ejecutarAccion();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error al eliminar los ítems del carrito", ex);
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
+        }
     }
 }

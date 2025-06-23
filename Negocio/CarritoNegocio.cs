@@ -174,6 +174,23 @@ namespace Negocio
                 datos.cerrarConexion();
             }
         }
-
+        public void EliminarCarrito(int idCarrito) //metodo nuevo
+        {
+            AccesoDatos datos = new AccesoDatos();
+            try
+            {
+                datos.setearConsulta("DELETE FROM Carrito WHERE id_carrito = @idCarrito");
+                datos.setearParametro("@idCarrito", idCarrito);
+                datos.ejecutarAccion();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error al eliminar el carrito", ex);
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
+        }
     }
 }

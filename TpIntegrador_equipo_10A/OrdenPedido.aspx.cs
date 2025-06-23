@@ -143,8 +143,12 @@ namespace TpIntegrador_equipo_10A
             {
                 int idPedido = pedidoNegocio.CrearPedido(nuevoPedido);
 
-                // Aquí podrías limpiar carrito, sesión o lo que necesites
-                Session["IdCarrito"] = null;
+                // eliminar el carrito y sus items de la bd si se efectiviza el pedido
+
+                carritoItemNegocio.EliminarItems(idCarrito);
+                CarritoNegocio carritoNegocio = new CarritoNegocio(); 
+                carritoNegocio.EliminarCarrito(idCarrito);
+                Session["IdCarrito"] = null;//nose
 
                 lblMensaje.Text = $"Pedido creado con éxito. Número de pedido: {idPedido}";
                 lblMensaje.CssClass = "text-success";
