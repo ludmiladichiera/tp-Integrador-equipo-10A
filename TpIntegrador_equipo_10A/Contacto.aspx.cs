@@ -17,16 +17,15 @@ namespace TpIntegrador_equipo_10A
             {
                 Usuario usuario = Session["usuario"] as Usuario;
 
-                if (usuario == null)
+              
+                if (usuario != null)
                 {
-                    // Redirecciona al login si no hay sesión activa
-                    Response.Redirect("Login.aspx");
-                    return;
+                    txtNombre.Text = usuario.Nombre;
+                    txtApellido.Text = usuario.Apellido;
+                    txtEmail.Text = usuario.Mail;
                 }
 
-                txtNombre.Text = usuario.Nombre;
-                txtApellido.Text = usuario.Apellido;
-                txtEmail.Text = usuario.Mail;
+
             }
         }
         protected void btnEnviar_Click(object sender, EventArgs e)
