@@ -37,109 +37,6 @@ namespace Negocio
             }
         }
 
-        /*public Carrito ObtenerCarrito(int idCarrito)
-         {
-             Carrito carrito = null;
-             AccesoDatos datos = new AccesoDatos();
-
-             try
-             {
-                 datos.setearConsulta(@"
-     SELECT c.id_carrito, c.id_usuario, c.fecha_creacion,
-            u.id_usuario, u.mail, u.nombre, u.apellido,
-            ci.id_producto, ci.cantidad,
-            p.id_producto, p.nombre AS nombreProducto, p.precio
-     FROM Carrito c
-     LEFT JOIN Usuario u ON c.id_usuario = u.id_usuario
-     LEFT JOIN Carrito_Item ci ON c.id_carrito = ci.id_carrito
-     LEFT JOIN Producto p ON ci.id_producto = p.id_producto
-     WHERE c.id_carrito = @idCarrito
- ");
-                 datos.setearParametro("@idCarrito", idCarrito);
-                 datos.ejecutarLectura();
-
-                 carrito = new Carrito();
-                 carrito.Items = new List<CarritoItem>();
-
-                 while (datos.Lector.Read())
-                 {
-                     if (carrito.Id == 0)
-                     {
-                         carrito.Id = (int)datos.Lector["id_carrito"];
-                         carrito.FechaCreacion = (DateTime)datos.Lector["fecha_creacion"];
-
-                         if (datos.Lector["id_usuario"] != DBNull.Value)
-                         {
-                             carrito.Usuario = new Usuario
-                             {
-                                 Id = (int)datos.Lector["id_usuario"],
-                                 Mail = datos.Lector["mail"].ToString(),
-                                 Nombre = datos.Lector["nombre"].ToString(),
-                                 Apellido = datos.Lector["apellido"].ToString()
-                             };
-                         }
-                     }
-
-
-                     if (datos.Lector["id_producto"] != DBNull.Value)
-                     {
-                         carrito.Items.Add(new CarritoItem
-                         {
-                             Producto = new Producto
-                             {
-                                 Id = (int)datos.Lector["id_producto"],
-                                 Nombre = datos.Lector["nombreProducto"].ToString(),
-                                 Precio = (decimal)datos.Lector["precio"]
-                             },
-                             Cantidad = (int)datos.Lector["cantidad"]
-                         });
-                     }
-                 }
-
-                 return carrito;
-             }
-             catch (Exception ex)
-             {
-                 throw new Exception("Error al obtener carrito", ex);
-             }
-             finally
-             {
-                 datos.cerrarConexion();
-             }
-         }/*
-
-         /*public void GuardarItems(int idCarrito, List<CarritoItem> items)
-         {
-             AccesoDatos datos = new AccesoDatos();
-
-             try
-             {
-                 // Primero, eliminar items actuales para reemplazar
-                 datos.setearConsulta("DELETE FROM Carrito_Item WHERE id_carrito = @idCarrito");
-                 datos.setearParametro("@idCarrito", idCarrito);
-                 datos.ejecutarAccion();
-
-                 // Insertar cada item nuevo
-                 foreach (var item in items)
-                 {
-                     datos.setearConsulta("INSERT INTO Carrito_Item (id_carrito, id_producto, cantidad) VALUES (@idCarrito, @idProducto, @cantidad)");
-                     datos.setearParametro("@idCarrito", idCarrito);
-                     datos.setearParametro("@idProducto", item.Producto.Id);
-                     datos.setearParametro("@cantidad", item.Cantidad);
-                     datos.ejecutarAccion();
-                 }
-             }
-             catch (Exception ex)
-             {
-                 throw new Exception("Error al guardar items del carrito", ex);
-             }
-             finally
-             {
-                 datos.cerrarConexion();
-             }
-         }
-        */
-
         public int ObtenerUltimoCarritoIdPorUsuario(int idUsuario)//para que me cargue el ultimo carrito del usuario si es q tiene
         {
             AccesoDatos datos = new AccesoDatos();
@@ -174,7 +71,7 @@ namespace Negocio
                 datos.cerrarConexion();
             }
         }
-        public void EliminarCarrito(int idCarrito) //metodo nuevo
+        public void EliminarCarrito(int idCarrito) //metodo nuevo, al hacer el pedido se borra ese carrito
         {
             AccesoDatos datos = new AccesoDatos();
             try
@@ -192,5 +89,67 @@ namespace Negocio
                 datos.cerrarConexion();
             }
         }
+        public List<Carrito> ListarCarritosMayoresA4Dias() //metodo para q el admin pueda ver carritos viejos
+        {
+            List<Carrito> lista = new List<Carrito>();
+            AccesoDatos datos = new AccesoDatos();
+            DateTime fechaLimite = DateTime.Now.AddDays(-4);
+
+            try
+            {
+                datos.setearConsulta(@"
+SELECT c.id_carrito, c.id_usuario, c.fecha_creacion,
+       u.mail, u.nombre, u.apellido
+FROM Carrito c
+LEFT JOIN Usuario u ON u.id_usuario = c.id_usuario
+WHERE c.fecha_creacion < @fechaLimite
+ORDER BY c.fecha_creacion ASC");
+
+                datos.setearParametro("@fechaLimite", fechaLimite);
+                datos.ejecutarLectura();
+
+                while (datos.Lector.Read())
+                {
+                    Carrito carrito = new Carrito
+                    {
+                        Id = (int)datos.Lector["id_carrito"],
+                        FechaCreacion = (DateTime)datos.Lector["fecha_creacion"],
+                        Usuario = new Usuario
+                        {
+                            Id = (int)datos.Lector["id_usuario"],
+                            Mail = datos.Lector["mail"].ToString(),
+                            Nombre = datos.Lector["nombre"].ToString(),
+                            Apellido = datos.Lector["apellido"].ToString()
+                        }
+                    };
+
+                    lista.Add(carrito);
+                }
+
+                return lista;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error al listar carritos con más de 4 días", ex);
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
+        }
+
+        public void EliminarCarritosViejos() //metodo para q el admin elimine esos carritos viejos
+        {
+            CarritoItemNegocio itemNegocio = new CarritoItemNegocio();
+            List<Carrito> carritosViejos = ListarCarritosMayoresA4Dias();
+
+            foreach (var carrito in carritosViejos)
+            {
+                itemNegocio.EliminarItems(carrito.Id);     // borrar los ítems del carrito
+                EliminarCarrito(carrito.Id);               //  borrar el carrito
+            }
+        }
     }
 }
+
+ 

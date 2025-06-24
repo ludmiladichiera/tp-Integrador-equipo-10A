@@ -100,6 +100,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="About.aspx" />
+    <Content Include="AdminCarrito.aspx" />
     <Content Include="AdminEnvio.aspx" />
     <Content Include="AdminPedidos.aspx" />
     <Content Include="AdminPerfil.aspx" />
@@ -239,6 +240,13 @@
     <Content Include="Site.Mobile.Master" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AdminCarrito.aspx.cs">
+      <DependentUpon>AdminCarrito.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AdminCarrito.aspx.designer.cs">
+      <DependentUpon>AdminCarrito.aspx</DependentUpon>
+    </Compile>
     <Compile Include="AdminEnvio.aspx.cs">
       <DependentUpon>AdminEnvio.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
