@@ -91,6 +91,50 @@ namespace Negocio
                 datos.cerrarConexion();
             }
         }
+
+        public List<PedidoItem> ListarPorPedido(int idPedido)
+        {
+            List<PedidoItem> listaItems = new List<PedidoItem>();
+            AccesoDatos datos = new AccesoDatos();
+
+            try
+            {
+                datos.setearConsulta(@"
+            SELECT pi.id_producto, pi.cantidad, pi.precio, p.nombre
+            FROM Pedido_Item pi
+            INNER JOIN Producto p ON pi.id_producto = p.id_producto
+            WHERE pi.id_pedido = @idPedido");
+                datos.setearParametro("@idPedido", idPedido);
+                datos.ejecutarLectura();
+
+                while (datos.Lector.Read())
+                {
+                    PedidoItem item = new PedidoItem
+                    {
+                        Cantidad = (int)datos.Lector["cantidad"],
+                        Precio = (decimal)datos.Lector["precio"],
+                        Producto = new Producto
+                        {
+                            Id = (int)datos.Lector["id_producto"],
+                            Nombre = datos.Lector["nombre"].ToString()
+                        }
+                    };
+
+                    listaItems.Add(item);
+                }
+
+                return listaItems;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error al listar items del pedido", ex);
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
+        }
+
     }
 }
 

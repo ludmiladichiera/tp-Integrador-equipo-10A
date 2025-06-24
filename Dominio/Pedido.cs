@@ -46,5 +46,11 @@ namespace Dominio
         public EstadoPago EstadoPago { get; set; }
 
         public EstadoPedido EstadoPedido { get; set; }
+
+        // para mostrar nombres de enums
+        public string MetodoEntregaNombre => MetodoEntrega.ToString();
+        public string MetodoPagoNombre => MetodoPago.ToString();
+        public string EstadoPagoNombre => EstadoPago.ToString();
+        public string EstadoPedidoNombre => EstadoPedido.ToString();
     }
 }
