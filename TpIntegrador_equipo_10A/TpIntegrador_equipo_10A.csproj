@@ -131,6 +131,7 @@
     <Content Include="favicon.ico" />
     <Content Include="FiltroCategoria.aspx" />
     <Content Include="Global.asax" />
+    <Content Include="HistorialPedidos.aspx" />
     <Content Include="imagenABML.aspx" />
     <Content Include="img\alf_coco.jpg" />
     <Content Include="img\alf_nuez.jpg" />
@@ -333,6 +334,13 @@
     </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="HistorialPedidos.aspx.cs">
+      <DependentUpon>HistorialPedidos.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="HistorialPedidos.aspx.designer.cs">
+      <DependentUpon>HistorialPedidos.aspx</DependentUpon>
     </Compile>
     <Compile Include="imagenABML.aspx.cs">
       <DependentUpon>imagenABML.aspx</DependentUpon>

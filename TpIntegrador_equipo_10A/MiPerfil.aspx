@@ -10,14 +10,22 @@
             <div class="card mb-4">
                 <div class="card-header fw-bold">Datos personales</div>
                 <div class="card-body">
-                    <p><strong>DNI:</strong> <asp:Label ID="lblDNI" runat="server" /></p>
-                    <p><strong>Nombre:</strong> <asp:Label ID="lblNombre" runat="server" /></p>
-                    <p><strong>Apellido:</strong> <asp:Label ID="lblApellido" runat="server" /></p>
-                    <p><strong>Email:</strong> <asp:Label ID="lblEmail" runat="server" /></p>
-                    <p><strong>Teléfono:</strong> <asp:Label ID="lblTelefono" runat="server" /></p>
-                    <p><strong>Código Postal:</strong> <asp:Label ID="lblCP" runat="server" /></p>
-                    <p><strong>Ciudad:</strong> <asp:Label ID="lblCiudad" runat="server" /></p>
-                    <p><strong>Dirección:</strong> <asp:Label ID="lblDireccion" runat="server" /></p>
+                    <p><strong>DNI:</strong>
+                        <asp:Label ID="lblDNI" runat="server" /></p>
+                    <p><strong>Nombre:</strong>
+                        <asp:Label ID="lblNombre" runat="server" /></p>
+                    <p><strong>Apellido:</strong>
+                        <asp:Label ID="lblApellido" runat="server" /></p>
+                    <p><strong>Email:</strong>
+                        <asp:Label ID="lblEmail" runat="server" /></p>
+                    <p><strong>Teléfono:</strong>
+                        <asp:Label ID="lblTelefono" runat="server" /></p>
+                    <p><strong>Código Postal:</strong>
+                        <asp:Label ID="lblCP" runat="server" /></p>
+                    <p><strong>Ciudad:</strong>
+                        <asp:Label ID="lblCiudad" runat="server" /></p>
+                    <p><strong>Dirección:</strong>
+                        <asp:Label ID="lblDireccion" runat="server" /></p>
                 </div>
             </div>
         </div>
@@ -27,18 +35,11 @@
             <div class="w-75">
 
                 <!-- Botones -->
-                <asp:LinkButton ID="btnVerCarrito" runat="server" CssClass="btn btn-secondary w-100 mb-2">
-                    <i class="bi bi-cart-fill me-2"></i>Ver Carrito
-                </asp:LinkButton>
-                <asp:LinkButton ID="btnHistorialPedidos" runat="server" CssClass="btn btn-secondary w-100 mb-2">
+
+                <a href="HistorialPedidos.aspx" class="btn btn-secondary w-100 mb-2">
                     <i class="bi bi-clock-history me-2"></i>Historial de Pedidos
-                </asp:LinkButton>
-                <asp:LinkButton ID="btnEstadoPedido" runat="server" CssClass="btn btn-secondary w-100 mb-2">
-                    <i class="bi bi-hourglass-split me-2"></i>Estado del Pedido
-                </asp:LinkButton>
-                <asp:LinkButton ID="btnEstadoEnvio" runat="server" CssClass="btn btn-success w-100 mb-2">
-                    <i class="bi bi-truck me-2"></i>Estado del Envío
-                </asp:LinkButton>
+                </a>
+
 
                 <!-- Btn Darse de baja -->
                 <asp:LinkButton ID="btnDarseBaja" runat="server" CssClass="btn btn-danger w-100 mb-4"
@@ -47,7 +48,7 @@
                 </asp:LinkButton>
 
                 <!-- Panel Confirmación Baja, oculto por CSS (display:none) -->
-                <asp:Panel ID="pnlConfirmarBaja" runat="server" CssClass="card p-3 mt-3 border-danger" Style="display:none;">
+                <asp:Panel ID="pnlConfirmarBaja" runat="server" CssClass="card p-3 mt-3 border-danger" Style="display: none;">
                     <h5 class="text-danger">¿Estás segura de que querés darte de baja?</h5>
                     <p class="text-muted">Esta acción desactivará tu cuenta. No podrás volver a iniciar sesión.</p>
 
@@ -66,8 +67,8 @@
                 </asp:Panel>
 
                 <!-- Botones Modificar -->
-               <asp:Button ID="btnModificar" runat="server" Text="Modificar Datos" CssClass="btn btn-secondary w-100 mb-4" OnClick="btnModificar_Click" />
-<asp:Button ID="btnMostrarCambiarContrasenia" runat="server" Text="Cambiar Contraseña" CssClass="btn btn-outline-danger w-100 mb-4" OnClick="btnMostrarCambiarContrasenia_Click" />
+                <asp:Button ID="btnModificar" runat="server" Text="Modificar Datos" CssClass="btn btn-secondary w-100 mb-4" OnClick="btnModificar_Click" />
+                <asp:Button ID="btnMostrarCambiarContrasenia" runat="server" Text="Cambiar Contraseña" CssClass="btn btn-outline-danger w-100 mb-4" OnClick="btnMostrarCambiarContrasenia_Click" />
             </div>
         </div>
     </div>
@@ -98,9 +99,9 @@
         </div>
 
         <div class="d-flex justify-content-end gap-2 mt-3">
-    <asp:Button ID="btnGuardarDatos" runat="server" Text="Guardar Cambios" CssClass="btn btn-primary flex-fill" OnClick="btnGuardarDatos_Click" />
-    <asp:Button ID="btnCancelarModificar" runat="server" Text="Cancelar" CssClass="btn btn-secondary flex-fill" OnClick="btnCancelarModificar_Click" />
-</div>
+            <asp:Button ID="btnGuardarDatos" runat="server" Text="Guardar Cambios" CssClass="btn btn-primary flex-fill" OnClick="btnGuardarDatos_Click" />
+            <asp:Button ID="btnCancelarModificar" runat="server" Text="Cancelar" CssClass="btn btn-secondary flex-fill" OnClick="btnCancelarModificar_Click" />
+        </div>
     </asp:Panel>
 
     <!-- Panel cambiar contraseña debajo, centrado -->
