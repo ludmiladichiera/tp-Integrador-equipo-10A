@@ -105,6 +105,11 @@
                     <li class="nav-item">
                         <a class="nav-link text-light" href="/ComoComprar.aspx">Cómo comprar</a>
                     </li>
+                    <li class="nav-item">
+    <a class="nav-link text-light" href="/FiltrosComplejos.aspx">
+        <i class="bi bi-search me-1"></i> Búsqueda Avanzada
+    </a>
+</li>
 
                     
                         <li id="liCerrarSesion" runat="server" class="nav-item">
