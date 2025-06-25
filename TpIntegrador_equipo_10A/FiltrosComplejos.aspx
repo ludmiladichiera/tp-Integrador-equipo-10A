@@ -1,7 +1,6 @@
-﻿<%@ Page Title="Listado de Productos" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="ListadoProducto.aspx.cs" Inherits="TpIntegrador_equipo_10A.ListadoProducto" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="FiltrosComplejos.aspx.cs" Inherits="TpIntegrador_equipo_10A.FiltrosComplejos" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
-
     <style>
         .contenedor-productos {
             display: flex;
@@ -45,9 +44,25 @@
             }
         }
     </style>
+    <asp:Label ID="lblCampo" runat="server" Text="Campo:" />
+    <asp:DropDownList ID="ddlCampo" runat="server" AutoPostBack="true" OnSelectedIndexChanged="ddlCampo_SelectedIndexChanged">
+    </asp:DropDownList>
+
+    <asp:Label ID="lblCriterio" runat="server" Text="Criterio:" />
+    <asp:DropDownList ID="ddlCriterio" runat="server">
+    </asp:DropDownList>
+
+    <asp:Label ID="lblFiltro" runat="server" Text="Filtro:" />
+    <asp:TextBox ID="txtFiltro" runat="server" />
+
+    <asp:Button ID="btnBuscar" runat="server" Text="Buscar" OnClick="btnBuscar_Click" />
+
+    <br />
+    <br />
+
 
     <div class="contenedor-productos">
-        <asp:Repeater ID="repProductos" runat="server">
+        <asp:Repeater ID="rptResultados" runat="server">
             <ItemTemplate>
                 <div class="producto">
                     <h3><%# Eval("Nombre") %></h3>
