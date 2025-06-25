@@ -19,9 +19,12 @@ namespace Negocio
             try
             {
                 datos.setearConsulta(@"
-            SELECT id_pedido, id_usuario, fecha_pedido, metodo_entrega, fecha_entrega, 
-                   precio_total, metodo_pago, estado_pago, estado_pedido
-            FROM Pedido");
+            SELECT p.id_pedido AS idPedido, p.id_usuario AS idUsuario,u.apellido AS apellido,u.nombre AS nombre,
+            p.fecha_pedido AS fechaPedido, p.metodo_entrega AS metodoEntrega, p.fecha_entrega AS fechaEntrega, 
+            p.precio_total AS precioTotal, p.metodo_pago AS metodoPago, p.estado_pago AS estadoPago, p.estado_pedido AS estadoPedido
+            FROM Pedido p 
+            inner join Usuario u on u.id_usuario=p.id_usuario
+            ORDER BY fecha_entrega ASC");
 
                 datos.ejecutarLectura();
 
@@ -29,18 +32,20 @@ namespace Negocio
                 {
                     Pedido pedido = new Pedido
                     {
-                        Id = (int)datos.Lector["id_pedido"],
+                        Id = (int)datos.Lector["idPedido"],
                         Usuario = new Usuario
                         {
-                            Id = (int)datos.Lector["id_usuario"]
+                            Id = (int)datos.Lector["idUsuario"],
+                            Apellido = datos.Lector["apellido"].ToString(),
+                            Nombre = datos.Lector["nombre"].ToString()
                         },
-                        FechaPedido = (DateTime)datos.Lector["fecha_pedido"],
-                        MetodoEntrega = (MetodoEntrega)(int)datos.Lector["metodo_entrega"],
-                        FechaEntrega = (DateTime)datos.Lector["fecha_entrega"],
-                        PrecioTotal = (decimal)datos.Lector["precio_total"],
-                        MetodoPago = (MetodoPago)(int)datos.Lector["metodo_pago"],
-                        EstadoPago = (EstadoPago)(int)datos.Lector["estado_pago"],
-                        EstadoPedido = (EstadoPedido)(int)datos.Lector["estado_pedido"]
+                        FechaPedido = (DateTime)datos.Lector["fechaPedido"],
+                        MetodoEntrega = (MetodoEntrega)(int)datos.Lector["metodoEntrega"],
+                        FechaEntrega = (DateTime)datos.Lector["fechaEntrega"],
+                        PrecioTotal = (decimal)datos.Lector["precioTotal"],
+                        MetodoPago = (MetodoPago)(int)datos.Lector["metodoPago"],
+                        EstadoPago = (EstadoPago)(int)datos.Lector["estadoPago"],
+                        EstadoPedido = (EstadoPedido)(int)datos.Lector["estadoPedido"]
                     };
 
                     lista.Add(pedido);
@@ -143,10 +148,13 @@ namespace Negocio
             try
             {
                 datos.setearConsulta(@"
-            SELECT id_pedido, id_usuario, fecha_pedido, metodo_entrega, fecha_entrega, 
-                   precio_total, metodo_pago, estado_pago, estado_pedido
-            FROM Pedido
-            WHERE id_usuario = @idUsuario");
+            SELECT p.id_pedido AS idPedido, p.id_usuario AS IDUsuario,u.apellido AS apellido,u.nombre AS nombre,
+            p.fecha_pedido AS fechaPedido, p.metodo_entrega AS metodoEntrega, p.fecha_entrega AS fechaEntrega, 
+            p.precio_total AS precioTotal, p.metodo_pago AS metodoPago, p.estado_pago AS estadoPago, p.estado_pedido AS estadoPedido
+            FROM Pedido p 
+            inner join Usuario u on u.id_usuario=p.id_usuario
+            WHERE u.id_usuario = @idUsuario
+            ORDER BY fecha_entrega ASC");
                 datos.setearParametro("@idUsuario", idUsuario);
                 datos.ejecutarLectura();
 
@@ -154,18 +162,20 @@ namespace Negocio
                 {
                     Pedido pedido = new Pedido
                     {
-                        Id = (int)datos.Lector["id_pedido"],
+                        Id = (int)datos.Lector["idPedido"],
                         Usuario = new Usuario
                         {
-                            Id = (int)datos.Lector["id_usuario"]
+                            Id = (int)datos.Lector["IDUsuario"],
+                            Apellido = datos.Lector["apellido"].ToString(),
+                            Nombre = datos.Lector["nombre"].ToString()
                         },
-                        FechaPedido = (DateTime)datos.Lector["fecha_pedido"],
-                        MetodoEntrega = (MetodoEntrega)(int)datos.Lector["metodo_entrega"],
-                        FechaEntrega = (DateTime)datos.Lector["fecha_entrega"],
-                        PrecioTotal = (decimal)datos.Lector["precio_total"],
-                        MetodoPago = (MetodoPago)(int)datos.Lector["metodo_pago"],
-                        EstadoPago = (EstadoPago)(int)datos.Lector["estado_pago"],
-                        EstadoPedido = (EstadoPedido)(int)datos.Lector["estado_pedido"]
+                        FechaPedido = (DateTime)datos.Lector["fechaPedido"],
+                        MetodoEntrega = (MetodoEntrega)(int)datos.Lector["metodoEntrega"],
+                        FechaEntrega = (DateTime)datos.Lector["fechaEntrega"],
+                        PrecioTotal = (decimal)datos.Lector["precioTotal"],
+                        MetodoPago = (MetodoPago)(int)datos.Lector["metodoPago"],
+                        EstadoPago = (EstadoPago)(int)datos.Lector["estadoPago"],
+                        EstadoPedido = (EstadoPedido)(int)datos.Lector["estadoPedido"]
                     };
 
                     lista.Add(pedido);
@@ -192,10 +202,13 @@ namespace Negocio
             try
             {
                 datos.setearConsulta(@"
-            SELECT id_pedido, id_usuario, fecha_pedido, metodo_entrega, fecha_entrega, 
-                   precio_total, metodo_pago, estado_pago, estado_pedido
-            FROM Pedido
-            WHERE id_pedido = @idPedido");
+            SELECT p.id_pedido AS IDPedido, p.id_usuario AS IDUsuario,u.apellido AS apellido,u.nombre AS nombre,
+            p.fecha_pedido AS fechaPedido, p.metodo_entrega AS metodoEntrega, p.fecha_entrega AS fechaEntrega, 
+            p.precio_total AS precioTotal, p.metodo_pago AS metodoPago, p.estado_pago AS estadoPago, p.estado_pedido AS estadoPedido
+            FROM Pedido p 
+            inner join Usuario u on u.id_usuario=p.id_usuario
+            WHERE p.id_pedido = @idPedido
+            ORDER BY fecha_entrega ASC");
                 datos.setearParametro("@idPedido", idPedido);
                 datos.ejecutarLectura();
 
@@ -203,18 +216,20 @@ namespace Negocio
                 {
                     pedido = new Pedido
                     {
-                        Id = (int)datos.Lector["id_pedido"],
+                        Id = (int)datos.Lector["IDPedido"],
                         Usuario = new Usuario
                         {
-                            Id = (int)datos.Lector["id_usuario"]
+                            Id = (int)datos.Lector["IDUsuario"],
+                            Apellido = datos.Lector["apellido"].ToString(),
+                            Nombre = datos.Lector["nombre"].ToString()
                         },
-                        FechaPedido = (DateTime)datos.Lector["fecha_pedido"],
-                        MetodoEntrega = (MetodoEntrega)(int)datos.Lector["metodo_entrega"],
-                        FechaEntrega = (DateTime)datos.Lector["fecha_entrega"],
-                        PrecioTotal = (decimal)datos.Lector["precio_total"],
-                        MetodoPago = (MetodoPago)(int)datos.Lector["metodo_pago"],
-                        EstadoPago = (EstadoPago)(int)datos.Lector["estado_pago"],
-                        EstadoPedido = (EstadoPedido)(int)datos.Lector["estado_pedido"],
+                        FechaPedido = (DateTime)datos.Lector["fechaPedido"],
+                        MetodoEntrega = (MetodoEntrega)(int)datos.Lector["metodoEntrega"],
+                        FechaEntrega = (DateTime)datos.Lector["fechaEntrega"],
+                        PrecioTotal = (decimal)datos.Lector["precioTotal"],
+                        MetodoPago = (MetodoPago)(int)datos.Lector["metodoPago"],
+                        EstadoPago = (EstadoPago)(int)datos.Lector["estadoPago"],
+                        EstadoPedido = (EstadoPedido)(int)datos.Lector["estadoPedido"],
                         Items = pedidoItemNegocio.ListarPorPedido(idPedido) // Este método debería devolver los items del pedido
                     };
                 }
@@ -248,6 +263,144 @@ namespace Negocio
             {
                 datos.cerrarConexion();
             }
+        }
+        public void modificarEstadoPago(Pedido pedido)
+        {
+            AccesoDatos datos = new AccesoDatos();
+            try
+            {
+                datos.setearConsulta("UPDATE Pedido SET estado_pago = @estadoPago WHERE id_pedido = @idPedido");
+                datos.setearParametro("@estadoPago", (int)pedido.EstadoPago);
+                datos.setearParametro("@idPedido", pedido.Id);
+                datos.ejecutarAccion();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error al actualizar el estado de pago del pedido", ex);
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
+
+        }
+        public void modificarEstadoPedido(Pedido pedido)
+        {
+            AccesoDatos datos = new AccesoDatos();
+            try
+            {
+                datos.setearConsulta("UPDATE Pedido SET estado_pedido = @estadoPedido WHERE id_pedido = @idPedido");
+                datos.setearParametro("@estadoPedido", (int)pedido.EstadoPedido);
+                datos.setearParametro("@idPedido", pedido.Id);
+                datos.ejecutarAccion();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error al actualizar el estado del pedido", ex);
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
+        }
+        public List<Pedido> obtenerPedidoPorEstadoPedido(int estado)
+        {
+            AccesoDatos datos = new AccesoDatos();
+            List<Pedido> pedidos = new List<Pedido>();
+            PedidoItemNegocio pedidoItemNegocio = new PedidoItemNegocio();
+            try
+            {
+                datos.setearConsulta(@"
+            SELECT p.id_pedido AS IDPedido, p.id_usuario AS IDUsuario,u.apellido AS apellido,u.nombre AS nombre,
+            p.fecha_pedido AS fechaPedido, p.metodo_entrega AS metodoEntrega, p.fecha_entrega AS fechaEntrega, 
+            p.precio_total AS precioTotal, p.metodo_pago AS metodoPago, p.estado_pago AS estadoPago, p.estado_pedido AS estadoPedido
+            FROM Pedido p 
+            inner join Usuario u on u.id_usuario=p.id_usuario
+            WHERE p.estado_pedido = @estadoPedido
+            ORDER BY fecha_entrega ASC");
+                datos.setearParametro("@estadoPedido", estado);
+                datos.ejecutarLectura();
+                while (datos.Lector.Read())
+                {
+                    Pedido pedido = new Pedido
+                    {
+                        Id = (int)datos.Lector["IDPedido"],
+                        Usuario = new Usuario
+                        {
+                            Id = (int)datos.Lector["IDUsuario"],
+                            Apellido = datos.Lector["apellido"].ToString(),
+                            Nombre = datos.Lector["nombre"].ToString()
+                        },
+                        FechaPedido = (DateTime)datos.Lector["fechaPedido"],
+                        MetodoEntrega = (MetodoEntrega)(int)datos.Lector["metodoEntrega"],
+                        FechaEntrega = (DateTime)datos.Lector["fechaEntrega"],
+                        PrecioTotal = (decimal)datos.Lector["precioTotal"],
+                        MetodoPago = (MetodoPago)(int)datos.Lector["metodoPago"],
+                        EstadoPago = (EstadoPago)(int)datos.Lector["estadoPago"],
+                        EstadoPedido = (EstadoPedido)(int)datos.Lector["estadoPedido"]
+                    };
+                    pedidos.Add(pedido);
+                }
+                return pedidos;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error al obtener pedidos por estado", ex);
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
+        }
+        public List<Pedido> obtenerPedidoPorEstadoPago(int estado)
+        {
+            AccesoDatos datos = new AccesoDatos();
+            List<Pedido> pedidos = new List<Pedido>();
+            PedidoItemNegocio pedidoItemNegocio = new PedidoItemNegocio();
+            try
+            {
+                datos.setearConsulta(@"
+            SELECT p.id_pedido AS IDPedido, p.id_usuario AS IDUsuario,u.apellido AS apellido,u.nombre AS nombre,
+            p.fecha_pedido AS fechaPedido, p.metodo_entrega AS metodoEntrega, p.fecha_entrega AS fechaEntrega, 
+            p.precio_total AS precioTotal, p.metodo_pago AS metodoPago, p.estado_pago AS estadoPago, p.estado_pedido AS estadoPedido
+            FROM Pedido p 
+            inner join Usuario u on u.id_usuario=p.id_usuario
+            WHERE p.estado_pago = @estadoPago
+            ORDER BY fecha_entrega ASC");
+                datos.setearParametro("@estadoPago", estado);
+                datos.ejecutarLectura();
+                while (datos.Lector.Read())
+                {
+                    Pedido pedido = new Pedido
+                    {
+                        Id = (int)datos.Lector["IDPedido"],
+                        Usuario = new Usuario
+                        {
+                            Id = (int)datos.Lector["IDUsuario"],
+                            Apellido = datos.Lector["apellido"].ToString(),
+                            Nombre = datos.Lector["nombre"].ToString()
+                        },
+                        FechaPedido = (DateTime)datos.Lector["fechaPedido"],
+                        MetodoEntrega = (MetodoEntrega)(int)datos.Lector["metodoEntrega"],
+                        FechaEntrega = (DateTime)datos.Lector["fechaEntrega"],
+                        PrecioTotal = (decimal)datos.Lector["precioTotal"],
+                        MetodoPago = (MetodoPago)(int)datos.Lector["metodoPago"],
+                        EstadoPago = (EstadoPago)(int)datos.Lector["estadoPago"],
+                        EstadoPedido = (EstadoPedido)(int)datos.Lector["estadoPedido"]
+                    };
+                    pedidos.Add(pedido);
+                }
+                return pedidos;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error al obtener pedidos por estado", ex);
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
+
         }
     }
 }
