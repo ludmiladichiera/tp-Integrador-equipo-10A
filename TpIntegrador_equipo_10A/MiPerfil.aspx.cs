@@ -47,6 +47,11 @@ namespace TpIntegrador_equipo_10A
 
             // Mostrar panel y precargar datos
             pnlModificarDatos.Visible = true;
+
+            pnlCambiarContrasenia.Visible = false;
+            pnlConfirmarBaja.Style["display"] = "none";
+
+
             lblErrorModificar.Visible = false;
 
             txtDireccion.Text = usuario.Direccion;
@@ -104,6 +109,10 @@ namespace TpIntegrador_equipo_10A
         protected void btnMostrarCambiarContrasenia_Click(object sender, EventArgs e)
         {
             pnlCambiarContrasenia.Visible = true;
+
+            pnlModificarDatos.Visible = false;
+            pnlConfirmarBaja.Style["display"] = "none";
+
             lblErrorContrasenia.Visible = false;
         }
 

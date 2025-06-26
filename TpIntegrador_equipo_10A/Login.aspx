@@ -17,6 +17,14 @@
     </div>
 
     <asp:Button ID="btnLogin" runat="server" Text="Iniciar sesión" OnClick="btnLogin_Click" CssClass="btn btn-primary" />
+    <div class="mt-3">
+    <small>
+        Si alguna vez estuviste registrado, perdiste tu contraseña o acceso a tu mail, 
+        <a href="Contacto.aspx">contactanos</a>.
+    </small>
+</div>
+
+
     <asp:Label ID="Label1" runat="server" Visible="false" CssClass="text-success"></asp:Label>
 
 </asp:Content>

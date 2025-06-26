@@ -11,6 +11,18 @@ namespace TpIntegrador_equipo_10A
 {
     public partial class Login : System.Web.UI.Page
     {
+        protected void Page_Load(object sender, EventArgs e)
+        {
+            if (!IsPostBack)
+            {
+                // Si ya hay usuario en sesión, redirigir a MiPerfil
+                if (Session["usuario"] != null)
+                {
+                    Response.Redirect("MiPerfil.aspx");
+                    return;
+                }
+            }
+        }
         protected void btnLogin_Click(object sender, EventArgs e)
         {
             string email = txtEmail.Text.Trim();

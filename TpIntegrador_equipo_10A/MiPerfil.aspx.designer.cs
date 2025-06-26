@@ -87,6 +87,87 @@ namespace TpIntegrador_equipo_10A
         protected global::System.Web.UI.WebControls.Label lblDireccion;
 
         /// <summary>
+        /// Control pnlCambiarContrasenia.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel pnlCambiarContrasenia;
+
+        /// <summary>
+        /// Control lblErrorContrasenia.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblErrorContrasenia;
+
+        /// <summary>
+        /// Control txtContraseniaActual.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtContraseniaActual;
+
+        /// <summary>
+        /// Control txtNuevaContrasenia.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtNuevaContrasenia;
+
+        /// <summary>
+        /// Control txtConfirmarContrasenia.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtConfirmarContrasenia;
+
+        /// <summary>
+        /// Control btnCambiarContrasenia.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnCambiarContrasenia;
+
+        /// <summary>
+        /// Control btnCancelarCambioContrasenia.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnCancelarCambioContrasenia;
+
+        /// <summary>
+        /// Control LinkButton1.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton LinkButton1;
+
+        /// <summary>
+        /// Control LinkButton2.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton LinkButton2;
+
+        /// <summary>
         /// Control btnDarseBaja.
         /// </summary>
         /// <remarks>
@@ -111,7 +192,16 @@ namespace TpIntegrador_equipo_10A
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.CheckBox chkConfirmacionBaja;
+        protected global::System.Web.UI.HtmlControls.HtmlInputCheckBox chkConfirmacionBaja;
+
+        /// <summary>
+        /// Control lblChkConfirmacion.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblChkConfirmacion;
 
         /// <summary>
         /// Control lblErrorBaja.
@@ -139,24 +229,6 @@ namespace TpIntegrador_equipo_10A
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btnCancelarBaja;
-
-        /// <summary>
-        /// Control btnModificar.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnModificar;
-
-        /// <summary>
-        /// Control btnMostrarCambiarContrasenia.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnMostrarCambiarContrasenia;
 
         /// <summary>
         /// Control pnlModificarDatos.
@@ -229,68 +301,5 @@ namespace TpIntegrador_equipo_10A
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btnCancelarModificar;
-
-        /// <summary>
-        /// Control pnlCambiarContrasenia.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Panel pnlCambiarContrasenia;
-
-        /// <summary>
-        /// Control lblErrorContrasenia.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblErrorContrasenia;
-
-        /// <summary>
-        /// Control txtContraseniaActual.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtContraseniaActual;
-
-        /// <summary>
-        /// Control txtNuevaContrasenia.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtNuevaContrasenia;
-
-        /// <summary>
-        /// Control txtConfirmarContrasenia.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtConfirmarContrasenia;
-
-        /// <summary>
-        /// Control btnCambiarContrasenia.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnCambiarContrasenia;
-
-        /// <summary>
-        /// Control btnCancelarCambioContrasenia.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnCancelarCambioContrasenia;
     }
 }
