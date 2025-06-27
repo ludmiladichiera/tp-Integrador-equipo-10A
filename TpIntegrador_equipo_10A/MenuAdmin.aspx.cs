@@ -13,7 +13,7 @@ namespace TpIntegrador_equipo_10A
         { 
             
             // Siempre se intenta recrear el control si hay uno guardado
-            if (ViewState["ControlActual"] != null)
+            /*if (ViewState["ControlActual"] != null)
             {
                 string controlPath = ViewState["ControlActual"].ToString();
                 CargarControl(controlPath);
@@ -23,15 +23,10 @@ namespace TpIntegrador_equipo_10A
                 // Primera carga por defecto
                 ViewState["ControlActual"] = "MenuAdminPedidos.ascx";
                 CargarControl("MenuAdminPedidos.ascx");
-            }
+            }*/
         }
 
-        protected void btnPedidos_Click(object sender, EventArgs e)
-        {
-            ViewState["ControlActual"] = "MenuAdminPedidos.ascx";
-            CargarControl("MenuAdminPedidos.ascx");
-        }
-
+       
         protected void btnPerfiles_Click(object sender, EventArgs e)
         {
             Response.Redirect("AdminPerfil.aspx");

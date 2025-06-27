@@ -14,12 +14,18 @@
             <span class="navbar-brand fw-bold">Panel del Administrador</span>
             <div class="collapse navbar-collapse justify-content-end">
                 <div class="navbar-nav">
-                    <asp:LinkButton ID="btnPedidos" runat="server" CssClass="nav-link btn btn-outline-secondary me-2 mb-1" OnClick="btnPedidos_Click">
-                        <i class="bi bi-box-seam me-1"></i> Pedidos
-                    </asp:LinkButton>
-                    <asp:LinkButton ID="btnEnvios" runat="server" CssClass="nav-link btn btn-outline-secondary me-2 mb-1">
-                        <i class="bi bi-truck me-1"></i> Envíos
-                    </asp:LinkButton>
+
+                                        <asp:HyperLink ID="lnkPedidos"
+               runat="server"
+               NavigateUrl="~/AdminPedidos.aspx"
+               CssClass="nav-link btn btn-outline-secondary me-2 mb-1">
+    <i class="bi bi-box-seam me-1"></i> Pedidos
+</asp:HyperLink>
+
+                    <asp:HyperLink ID="lnkCarritos" runat="server" NavigateUrl="~/AdminCarrito.aspx" CssClass="nav-link btn btn-outline-secondary me-2 mb-1">
+    <i class="bi bi-cart4 me-1"></i> Carritos
+</asp:HyperLink>
+
                      <asp:LinkButton ID="btnPerfiles" runat="server" CssClass="nav-link btn btn-outline-secondary me-2 mb-1" OnClick="btnPerfiles_Click">
                 <i class="bi bi-person-lines-fill me-1"></i> Perfiles
             </asp:LinkButton>

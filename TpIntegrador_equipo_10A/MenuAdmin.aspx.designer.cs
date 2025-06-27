@@ -15,22 +15,22 @@ namespace TpIntegrador_equipo_10A
     {
 
         /// <summary>
-        /// Control btnPedidos.
+        /// Control lnkPedidos.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton btnPedidos;
+        protected global::System.Web.UI.WebControls.HyperLink lnkPedidos;
 
         /// <summary>
-        /// Control btnEnvios.
+        /// Control lnkCarritos.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton btnEnvios;
+        protected global::System.Web.UI.WebControls.HyperLink lnkCarritos;
 
         /// <summary>
         /// Control btnPerfiles.
