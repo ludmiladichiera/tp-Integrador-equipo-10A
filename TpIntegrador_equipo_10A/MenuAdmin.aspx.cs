@@ -10,8 +10,17 @@ namespace TpIntegrador_equipo_10A
     public partial class MenuAdmin : System.Web.UI.Page
     {
         protected void Page_Load(object sender, EventArgs e)
-        { 
-            
+        {
+
+            //ver si hay sesión y si es admin, queda comentado ahora q hacemos pruebas
+            /*if (Session["IdTipoUsuario"] == null || (int)Session["IdTipoUsuario"] != 2)
+            {
+                Response.Redirect("~/Default.aspx"); 
+                return;
+            }*/
+
+
+
             // Siempre se intenta recrear el control si hay uno guardado
             /*if (ViewState["ControlActual"] != null)
             {
@@ -26,7 +35,7 @@ namespace TpIntegrador_equipo_10A
             }*/
         }
 
-       
+
         protected void btnPerfiles_Click(object sender, EventArgs e)
         {
             Response.Redirect("AdminPerfil.aspx");

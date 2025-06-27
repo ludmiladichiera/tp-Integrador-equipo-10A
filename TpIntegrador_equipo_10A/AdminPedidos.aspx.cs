@@ -13,6 +13,12 @@ namespace TpIntegrador_equipo_10A
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            //ver si hay sesión y si es admin, queda comentado ahora q hacemos pruebas
+            /*if (Session["IdTipoUsuario"] == null || (int)Session["IdTipoUsuario"] != 2)
+            {
+                Response.Redirect("~/Default.aspx"); 
+                return;
+            }*/
             if (!IsPostBack)
             {
                 ocultarTodo();

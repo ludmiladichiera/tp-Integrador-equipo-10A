@@ -1,5 +1,13 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="AdminCarrito.aspx.cs" Inherits="TpIntegrador_equipo_10A.AdminCarrito" %>
+
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
+   
+     <div class="mb-3">
+    <a href="MenuAdmin.aspx" class="btn btn-outline-danger">
+        <i class="bi bi-arrow-left-circle me-1"></i> Volver al menú admin
+    </a>
+</div>
+
     <h2>Carritos con más de 4 días</h2>
 
     <asp:Label ID="lblMensaje" runat="server" CssClass="fw-bold d-block mb-3"></asp:Label>

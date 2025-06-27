@@ -2,6 +2,13 @@
 
 
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
+
+    <div class="mb-3">
+    <a href="MenuAdmin.aspx" class="btn btn-outline-danger">
+        <i class="bi bi-arrow-left-circle me-1"></i> Volver al menú admin
+    </a>
+</div>
+
     <asp:Label ID="lblFiltro" runat="server" Text="Buscar por DNI o Mail:" AssociatedControlID="txtFiltro" />
     <asp:TextBox ID="txtFiltro" runat="server" Width="200px" />
     <asp:Button ID="btnBuscar" runat="server" Text="Buscar" OnClick="btnBuscar_Click" />
