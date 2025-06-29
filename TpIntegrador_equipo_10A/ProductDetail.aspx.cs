@@ -114,6 +114,43 @@ namespace TpIntegrador_equipo_10A
                                 (ex.InnerException != null ? " Detalle: " + ex.InnerException.Message : "");
             }
         }
+
+        protected void btnComprarAhora_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                // Validación de login
+                if (Session["Usuario"] == null)
+                {
+                    Response.Redirect("Login.aspx?ReturnUrl=" + Server.UrlEncode(Request.RawUrl));
+                    return;
+                }
+
+                // Validación de existencia de carrito e items
+                if (Session["IdCarrito"] == null)
+                {
+                    ScriptManager.RegisterStartupScript(this, GetType(), "sinCarrito", "alert('No hay un carrito activo.');", true);
+                    return;
+                }
+
+                int idCarrito = (int)Session["IdCarrito"];
+                CarritoItemNegocio itemNegocio = new CarritoItemNegocio();
+                var items = itemNegocio.ObtenerItems(idCarrito);
+
+                if (items == null || items.Count == 0)
+                {
+                    ScriptManager.RegisterStartupScript(this, GetType(), "carritoVacio", "alert('Tu carrito está vacío. Agregá productos antes de continuar.');", true);
+                    return;
+                }
+
+                // Redirigir a la página del carrito
+                Response.Redirect("Carrito.aspx");
+            }
+            catch (Exception ex)
+            {
+                ScriptManager.RegisterStartupScript(this, GetType(), "error", $"alert('Error: {ex.Message}');", true);
+            }
+        }
     }
 }
 

@@ -107,7 +107,7 @@
                 <!-- Botones de acción -->
                 <div class="d-flex gap-2 mb-2">
                     <asp:Button ID="btnAgregarCarrito" runat="server" CssClass="btn btn-outline-primary" OnClick="btnAgregarCarrito_Click" Text="Agregar al carrito" />
-                    <asp:Button ID="btnComprarAhora" runat="server" Text="Comprar ahora" CssClass="btn btn-primary" />
+                     <asp:Button ID="btnComprarAhora" runat="server" Text="Comprar ahora" CssClass="btn btn-primary" OnClick="btnComprarAhora_Click" />
                 </div>
 
                 <!-- Error -->
