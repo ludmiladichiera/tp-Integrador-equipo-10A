@@ -139,19 +139,31 @@ namespace TpIntegrador_equipo_10A
 
             PedidoNegocio pedidoNegocio = new PedidoNegocio();
 
+            
             try
             {
                 int idPedido = pedidoNegocio.CrearPedido(nuevoPedido);
-
-                // eliminar el carrito y sus items de la bd si se efectiviza el pedido
-
+                               
+                // eliminar el carrito y sus items de la bd 
                 carritoItemNegocio.EliminarItems(idCarrito);
-                CarritoNegocio carritoNegocio = new CarritoNegocio(); 
+                CarritoNegocio carritoNegocio = new CarritoNegocio();
                 carritoNegocio.EliminarCarrito(idCarrito);
-                Session["IdCarrito"] = null;//nose
+                Session["IdCarrito"] = null;
 
                 lblMensaje.Text = $"Pedido creado con éxito. Número de pedido: {idPedido}";
                 lblMensaje.CssClass = "text-success";
+
+                // Si el método de pago es MercadoPago → Redirige al checkout
+                if (nuevoPedido.MetodoPago == MetodoPago.MercadoPago)
+                {
+                    nuevoPedido.Id = idPedido; // importante: por si se usa como external_reference después
+                    string urlPago = MercadoPagoHelper.CrearPreferencia(nuevoPedido);
+                    Response.Redirect(urlPago);
+                    return;
+                }
+
+
+
             }
             catch (Exception ex)
             {

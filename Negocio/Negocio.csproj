@@ -31,7 +31,14 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="MercadoPago, Version=2.1.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\mercadopago-sdk.2.1.0\lib\net461\MercadoPago.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.12.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -47,6 +54,7 @@
     <Compile Include="CategoriaNegocio.cs" />
     <Compile Include="EmailService.cs" />
     <Compile Include="ImagenNegocio.cs" />
+    <Compile Include="MercadoPagoHelper.cs" />
     <Compile Include="PedidoItemNegocio.cs" />
     <Compile Include="PedidoNegocio.cs" />
     <Compile Include="ProductoNegocio.cs" />
@@ -59,6 +67,9 @@
       <Project>{8f16e6f9-0c09-424f-a837-a32dfbfa59dd}</Project>
       <Name>Dominio</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
