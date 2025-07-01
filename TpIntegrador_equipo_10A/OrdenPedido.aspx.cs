@@ -152,6 +152,7 @@ namespace TpIntegrador_equipo_10A
 
                 lblMensaje.Text = $"Pedido creado con éxito. Número de pedido: {idPedido}";
                 lblMensaje.CssClass = "text-success";
+                Session["IdPedido"] = idPedido;
 
                 // Si el método de pago es MercadoPago → Redirige al checkout
                 if (nuevoPedido.MetodoPago == MetodoPago.MercadoPago)
