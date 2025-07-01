@@ -34,9 +34,9 @@ namespace Negocio
             // Configurar URLs de retorno
             var backUrls = new PreferenceBackUrlsRequest
             {
-                Success = "https://localhost:44300/PagoExitoso.aspx",
-                Failure = "https://localhost:44300/PagoFallido.aspx",
-                Pending = "https://localhost:44300/PagoPendiente.aspx"
+                Success = "https://localhost:44379/PagoExitoso.aspx",
+                Failure = "https://localhost:44379/PagoFallido.aspx",
+                Pending = "https://localhost:44379/PagoPendiente.aspx"
             };
 
             // Crear preferencia
