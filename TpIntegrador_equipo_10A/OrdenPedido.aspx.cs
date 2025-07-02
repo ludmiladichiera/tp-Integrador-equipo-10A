@@ -76,6 +76,14 @@ namespace TpIntegrador_equipo_10A
                 return;
             }
 
+            // Validar que la fecha de entrega sea al menos 48 horas después de ahora
+            if (fechaEntrega <= DateTime.Now.AddHours(48))
+            {
+                lblMensaje.Text = "La fecha de entrega debe ser al menos 48 horas posterior a la fecha y hora actual.";
+                lblMensaje.CssClass = "text-danger";
+                return;
+            }
+
             // Obtener usuario de sesión
             var usuario = (Usuario)Session["usuario"];
             if (usuario == null)

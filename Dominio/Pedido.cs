@@ -31,7 +31,8 @@ namespace Dominio
     public enum EstadoPago
     {
         Pendiente = 1,
-        Abonado = 2
+        Abonado = 2,
+        Rechazado = 3
     }
     public class Pedido
     {
