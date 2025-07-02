@@ -17,6 +17,7 @@
     </div>
 
     <asp:Button ID="btnLogin" runat="server" Text="Iniciar sesión" OnClick="btnLogin_Click" CssClass="btn btn-primary" />
+    <a href="Registrarse.aspx" class="btn btn-primary">Registrarse</a>
     <div class="mt-3">
     <small>
         Si alguna vez estuviste registrado, perdiste tu contraseña o acceso a tu mail, 
