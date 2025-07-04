@@ -119,6 +119,9 @@ namespace TpIntegrador_equipo_10A
                 CargarPedidos(usuario.Id);
                 gvDetalleItems.Visible = false;
                 btnVolver.Visible = false;
+                btnCancelarPedido.Visible = false;
+                lblMensaje.Visible = false;
+                //lblMensaje.Text = "";
             }
         }
 

@@ -98,51 +98,13 @@ VALUES
 INSERT INTO TipoUsuario (descripcion) 
 VALUES ('Cliente'), ('Administrador');
 
---el otro admin no va porq tiene null
+
 
 INSERT INTO Usuario (mail, pass, id_tipo_usuario, dni, nombre, apellido, direccion, ciudad, codigo_postal, telefono,estado)
 VALUES ('admin@miapp.com', 'admin123', 2, '12345678', 'Admin', 'Principal', 'Calle Falsa 123', 'Buenos Aires', 1000, '1234567890',1);
 
---ejecutar esto solo si no quieren borrar la base de datos entera
---ALTER TABLE Usuario ADD estado BIT NOT NULL DEFAULT 1;
---ALTER TABLE Categoria ADD estado BIT NOT NULL DEFAULT 1;
---ALTER TABLE Producto ADD estado BIT NOT NULL DEFAULT 1;
-
--- solo si no borraron la bd 
----DROP TABLE Envio;
-
---solo si no borraron la bd
-ALTER TABLE Carrito
-ADD fecha_creacion DATETIME NOT NULL DEFAULT GETDATE();
 
 
---DROP TABLE Pago;
-
---DROP TABLE Pedido_Item;
---DROP TABLE Pedido;
 
 
-CREATE TABLE Pedido (
-    id_pedido INT PRIMARY KEY IDENTITY(1,1),
-    id_usuario INT NOT NULL,
-    fecha_pedido DATETIME DEFAULT GETDATE() NOT NULL,
-    metodo_entrega INT NOT NULL, -- 1: Retiro, 2: Envío
-    fecha_entrega DATE NOT NULL,
-    precio_total DECIMAL(10,2) NOT NULL,
-    metodo_pago INT NOT NULL,     -- 1: MercadoPago, 2: Transferencia, 3: Efectivo
-    estado_pago INT NOT NULL,     -- 1: Pendiente, 2: Abonado
-    estado_pedido INT NOT NULL,   -- 1 a 8 según enum EstadoPedido
-    FOREIGN KEY (id_usuario) REFERENCES Usuario(id_usuario)
-    
-    );
 
--- Ítems del pedido
-CREATE TABLE Pedido_Item (
-    id_pedido INT NOT NULL,
-    id_producto INT NOT NULL,
-    cantidad INT NOT NULL,
-    precio DECIMAL(10,2) NOT NULL,
-    PRIMARY KEY (id_pedido, id_producto),
-    FOREIGN KEY (id_pedido) REFERENCES Pedido(id_pedido),
-    FOREIGN KEY (id_producto) REFERENCES Producto(id_producto)
-);

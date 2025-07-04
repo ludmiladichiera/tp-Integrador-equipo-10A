@@ -4,7 +4,7 @@
     <asp:Label ID="lblUsuario" runat="server" CssClass="mb-3 fw-bold"></asp:Label>
 
     <asp:GridView ID="gvPedidos" runat="server" AutoGenerateColumns="false" CssClass="table table-striped"
-        OnSelectedIndexChanged="gvPedidos_SelectedIndexChanged" DataKeyNames="Id" AllowPaging="true" PageSize="10">
+        OnSelectedIndexChanged="gvPedidos_SelectedIndexChanged" DataKeyNames="Id" AllowPaging="false">
         <Columns>
             <asp:BoundField DataField="Id" HeaderText="ID Pedido" />
             <asp:BoundField DataField="FechaPedido" HeaderText="Fecha Pedido" DataFormatString="{0:dd/MM/yyyy}" />
